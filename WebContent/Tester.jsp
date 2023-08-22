@@ -1,3 +1,4 @@
+<%@page import="com.smartvalue.html.Renderer"%>
 <%@page import="com.smartvalue.apigee.configuration.ApigeeConfig"%>
 <%@page import="com.smartvalue.apigee.configuration.infra.*"%>
 <%@page import="com.smartvalue.apigee.configuration.infra.*"%>
@@ -26,34 +27,43 @@
 <title>Insert title here</title>
 </head>
 <body>
-<% 
-
-ApigeeConfig ac = new ApigeeConfig("E:\\MasterWorks\\Eclipse-WS\\ResourceManagerWeb\\WebContent\\config.json" ) ; 
-
-Infra infra = ac.getInfra("MasterWorks" , "MOJ" , "Stage") ;
-String orgName = "stg" ; 
-String envName = "cert-protected" ; 
-String proxyName = "oidc-core" ; 
-
-ManagementServer ms = new ManagementServer(infra) ; 
-Organization org = ms.getOrgs().get(orgName) ;  
-Environment env = org.getEnvs().get(envName);
-out.print(env.toString()); 
-
-ProductsServices   productServices = ms.getProductServices() ; 
-//ArrayList<String>  productsWithoutProxies  =productServices.getProductsWithoutProxies(org) ;  
-//out.print(productsWithoutProxies.toString()); 
-
-List<MPServer> envMpServers = env.getMessageProcesors() ;
+<%
+	ApigeeConfig ac = new ApigeeConfig("E:\\MasterWorks\\Eclipse-WS\\ResourceManagerWeb\\WebContent\\config.json" ) ; 
+		
+		Infra infra = ac.getInfra("MasterWorks" , "MOJ" , "Stage") ;
+		String orgName = "stg" ; 
+		String envName = "cert-protected" ; 
+		String proxyName = "oidc-core" ; 
+		
+		ManagementServer ms = new ManagementServer(infra) ; 
+		HashMap<String , Object > orgs =  ms.getOrgs() ;
+		
+		
+		//out.print(Renderer.hashMaptoHtmlTable(orgs) )  ;
+		Organization org = (Organization) orgs.get(orgName) ;
+		 
+		out.print(Renderer.objectToHtmlTable(org));
+		
+		
+		
+		Environment env = (Environment) org.getEnvs().get(envName);
+		out.print(Renderer.objectToHtmlTable(env)); 
+		
+		Proxy proxy = org.getProxy(proxyName);
+		out.print(Renderer.objectToHtmlTable(proxy));
+		
+		ProductsServices   productServices = ms.getProductServices(orgName) ; 
+		//ArrayList<String>  productsWithoutProxies  =productServices.getProductsWithoutProxies(org) ;  
+		//out.print(productsWithoutProxies.toString()); 
+		
+		List<MPServer> envMpServers = env.getMessageProcesors("dc-1") ;
 		//envMpServers.get(0).healthCheck() ;
-		ArrayList<String> result = envMpServers.get(0).removeFromEnvironmnt(org , env ) ; 
-		result = envMpServers.get(0).addToEnvironmnt(org , env ) ; 
+		//ArrayList<String> result = envMpServers.get(0).removeFromEnvironmnt(org , env ) ; 
+		//result = envMpServers.get(0).addToEnvironmnt(org , env ) ; 
 		System.out.println(envMpServers);
 		
-		result = env.removeMessageProcessor(envMpServers.get(0)) ; 
-		result = env.addMessageProcessor(envMpServers.get(0)) ;
-		
-		
+		//result = env.removeMessageProcessor(envMpServers.get(0)) ; 
+		//result = env.addMessageProcessor(envMpServers.get(0)) ;
 %>
 </body>
 </html>
