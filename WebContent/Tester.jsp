@@ -64,6 +64,12 @@
 		
 		//result = env.removeMessageProcessor(envMpServers.get(0)) ; 
 		//result = env.addMessageProcessor(envMpServers.get(0)) ;
+		
+		String[] aa = {"FC-ELK-Logger" ,  "ELK-Logger" ,  "FC-Elk-Logger" } ; 
+		HashMap<String , ArrayList<Object>>  result =  ms.getProxyServices(orgName).getProxiesWithoutPolices(aa, true) ;
+		
+		out.print(Renderer.hashMapWithArraylisttoHtmlTable(result));
+		
 %>
 </body>
 </html>

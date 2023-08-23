@@ -10,6 +10,28 @@ import java.util.List;
 
 public class Renderer {
 	
+	public static String hashMapWithArraylisttoHtmlTable(HashMap<String , ArrayList<Object>> m_object)
+	{
+		StringBuffer result = new StringBuffer() ;
+		result.append("<table border = 1>") ;
+		
+		for (String key : m_object.keySet() )
+		{
+			result.append("<tr>") ; 
+				result.append("<td>") ; 
+				result.append(key) ;
+				result.append("</td>") ;
+				
+				result.append("<td>") ;
+				ArrayList<Object> obj = m_object.get(key) ; 
+				result.append(arrayListToHtmlTable(obj)) ; 
+				result.append("</td>") ;
+ 			result.append("</tr>") ;
+		}
+		result.append("</table>") ;
+		return result.toString();
+	}
+	
 	public static String hashMaptoHtmlTable(HashMap<String , Object> m_object)
 	{
 		StringBuffer result = new StringBuffer() ;
