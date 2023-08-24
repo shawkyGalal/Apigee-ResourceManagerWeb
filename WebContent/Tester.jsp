@@ -1,4 +1,4 @@
-<%@page import="com.smartvalue.html.Renderer"%>
+<%@page import="com.smartvalue.apigee.resourceManager.Renderer"%>
 <%@page import="com.smartvalue.apigee.configuration.ApigeeConfig"%>
 <%@page import="com.smartvalue.apigee.configuration.infra.*"%>
 <%@page import="com.smartvalue.apigee.configuration.infra.*"%>
@@ -55,8 +55,9 @@
 		ProductsServices   productServices = ms.getProductServices(orgName) ; 
 		//ArrayList<String>  productsWithoutProxies  =productServices.getProductsWithoutProxies(org) ;  
 		//out.print(productsWithoutProxies.toString()); 
-		
-		List<MPServer> envMpServers = env.getMessageProcesors("dc-1") ;
+		 
+		List<Object> envMpServers = env.getMessageProcesors("dc-1") ;
+		out.print(Renderer.arrayListToHtmlTable(envMpServers));
 		//envMpServers.get(0).healthCheck() ;
 		//ArrayList<String> result = envMpServers.get(0).removeFromEnvironmnt(org , env ) ; 
 		//result = envMpServers.get(0).addToEnvironmnt(org , env ) ; 
