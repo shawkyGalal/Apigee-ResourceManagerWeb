@@ -1,6 +1,7 @@
 <%@page import="com.smartvalue.apigee.resourceManager.Renderer"%>
 <%@page import="com.smartvalue.apigee.configuration.ApigeeConfig"%>
-<%@page import="com.smartvalue.apigee.configuration.infra.*"%>
+<%@page import="com.smartvalue.apigee.configuration.Partner"%>
+<%@page import="com.smartvalue.apigee.configuration.Customer"%>
 <%@page import="com.smartvalue.apigee.configuration.infra.*"%>
 
 <%@page import ="com.smartvalue.apigee.rest.schema.environment.Environment"%>
@@ -28,61 +29,90 @@
 </head>
 <body>
 <%
-	ApigeeConfig ac = new ApigeeConfig("E:\\MasterWorks\\Eclipse-WS\\ResourceManagerWeb\\WebContent\\config.json" ) ; 
-		String infraName = request.getParameter("infraName") ; //"Emergency" ; 
-		Infra infra = ac.getInfra("MasterWorks" , "MOJ" , infraName) ;
-		String orgName = request.getParameter("orgName") ; //"moj-prod" ; 
+	ApigeeConfig ac = new ApigeeConfig("G:\\My Drive\\SmartValue\\Sources\\app\\ResourceManagerWeb\\WebContent\\config.json" ) ; 
+	String jsonData = ac.getFileContent();
+	%>
+	<script>
+		function populateCustomer (jsonData , partnerIndex)
+		{
+			const partner = jsonData.Partners[partnerIndex];
+			customerSelect.innerHTML = "";
+	        for (const index in partner.Customers) {
+	            const option = document.createElement("option");
+	            option.value = index;
+	            option.textContent = partner.Customers[index].Name;
+	            customerSelect.appendChild(option);
+	        }
+		}
 		
-		
-		ManagementServer ms = new ManagementServer(infra) ; 
-		
-		HashMap<String, Infra> customer = ac.getCustomer("MasterWorks", "MOJ") ;  // getPartnersMap().get("MasterWorks").get("MOJ")
-%> 
-		<form >
-			<select  id="infra">
-				<% for (String custInfra : customer.keySet())
-					{ %><option><%=custInfra%></option> <% } %> 
-			
-			</select>
-		</form>
-<%
-		
-		ArrayList<String> regions = ms.getRegions() ; 
-		Organization org = ms.getOrgByName(orgName) ; 
-		List<String> envs = org.getEnvironments(); 
-%>
-	<br>Apigee Infrastructure (<%=infraName %>)  
-	<br>Active Message Processors For Environments of Organization ( <%=org.getName() %> ) 
-	<Table border = 1>
-		<tr><td rowspan = 2 >Environments</td><td colspan = <%=regions.size()%> >Regions</td></tr>
-		<tr>
-		<% 
-			for (String  region : regions)
-			{
-				out.print ("<td>" + region + "</td>" ) ;  
-			}
-		%>
-		
-		</tr>
-		<% for (String env : envs) { %>
-			<tr>
-				<td><%=env%></td>
-				<% 
-					for (String  region : regions)
-					{	%> <td><table border = 1 name = "Region Message Processors "> 
-							<tr> <td>MP IP </td> <td>Heath Check </td> </tr>
-						<% 
-							List<MPServer> mpServers = org.getEnvByName(env).getMessageProcesors(region) ; 
-							for ( MPServer mpServer : mpServers )
-							{	
-								%><tr><td><%=mpServer.getInternalIP()%></td> <td>mpServer.healthCheck()</td></tr><% 
-							}
-							%> </table></td> <%
-					}
-					
-				%>
-			</tr>
-		<%}%>
-	</Table>
+		function populateInfra(jsonData , selectedPartner , selectedCustomer )
+		{
+			const customer = jsonData.Partners[selectedPartner].Customers[selectedCustomer];
+	        infraSelect.innerHTML = "";
+	        for (const index in customer.Infras) {
+	            const option = document.createElement("option");
+	            option.value = index;
+	            option.textContent = customer.Infras[index].Name;
+	            infraSelect.appendChild(option);
+	        }
+		}
+		const selectedPartner = 0 ;
+		const selectedCustomer = 0 ; 
+		document.addEventListener("DOMContentLoaded", function() {
+	    const partnerSelect = document.getElementById("partnerSelect");
+	    const customerSelect = document.getElementById("customerSelect");
+	    const infraSelect = document.getElementById("infraSelect");
+
+	    const jsonData = <%=jsonData%> ;
+	 
+	    // Populate partner options
+	    for (const index in jsonData.Partners) {
+	        const option = document.createElement("option");
+	        option.value = index;
+	        option.textContent = jsonData.Partners[index].Name;
+	        partnerSelect.appendChild(option);
+	    }
+	    populateCustomer (jsonData , 0); 
+	    populateInfra(jsonData , 0 , 0 )
+	    
+	 
+	    // Populate customer options based on the selected partner
+	    partnerSelect.addEventListener("change", function() {
+	        const selectedPartner = partnerSelect.value;
+	        populateCustomer(jsonData , selectedPartner) ;
+	        populateInfra(jsonData , selectedPartner , 0 )
+	    });
+	    
+	    // Populate infrastructure options based on the selected customer
+	    customerSelect.addEventListener("change", function() {
+	        const selectedPartner = partnerSelect.value;
+	        const selectedCustomer = customerSelect.value;
+	        populateInfra(jsonData , selectedPartner , selectedCustomer ) ; 
+	        
+	    });
+	});
+	</script>
+	<form action="MessageProcessorsResult.jsp" method="post" >
+		<label for="partnerSelect">Select Partner:</label>
+		<select id="partnerSelect" name = "partnerSelect">
+	        <!-- Add more partners here -->
+	    </select>
+	    
+	    <br><br>
+	    
+	    <label for="customerSelect"  >Select Customer:</label>
+	    <select id="customerSelect"  name = "customerSelect"  >
+	        <!-- Options will be populated based on the selected partner -->
+	    </select>
+	    
+	    <br><br>
+	    
+	    <label for="infraSelect">Select Infrastructure:</label>
+	    <select id="infraSelect" name = "infraSelect" >
+	        <!-- Options will be populated based on the selected customer -->
+	    </select>
+	    <button type="submit">Submit</button>
+	</form>
+    
 </body>
 </html>

@@ -36,11 +36,10 @@
 		String proxyName = "oidc-core" ; 
 		
 		ManagementServer ms = new ManagementServer(infra) ; 
-		HashMap<String , Object > orgs =  ms.getOrgs() ;
-		
+	
 		
 		//out.print(Renderer.hashMaptoHtmlTable(orgs) )  ;
-		Organization org = (Organization) orgs.get(orgName) ;
+		Organization org = ms.getOrgByName(orgName) ;
 		 
 		out.print(Renderer.objectToHtmlTable(org));
 		
@@ -56,7 +55,7 @@
 		//ArrayList<String>  productsWithoutProxies  =productServices.getProductsWithoutProxies(org) ;  
 		//out.print(productsWithoutProxies.toString()); 
 		 
-		List<Object> envMpServers = env.getMessageProcesors("dc-1") ;
+		List<MPServer> envMpServers = env.getMessageProcesors("dc-1") ;
 		out.print(Renderer.arrayListToHtmlTable(envMpServers));
 		//envMpServers.get(0).healthCheck() ;
 		//ArrayList<String> result = envMpServers.get(0).removeFromEnvironmnt(org , env ) ; 
