@@ -18,6 +18,7 @@
 <%@page import ="com.smartvalue.apigee.rest.schema.virtualHost.VirtualHost"%>
 <%@page import ="com.smartvalue.apigee.resourceManager.ManagementServer"%>
 <%@page import ="java.util.*"%>
+<%@page import ="java.io.InputStream"%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -29,7 +30,13 @@
 </head>
 <body>
 <%
-	ApigeeConfig ac = new ApigeeConfig("E:\\MasterWorks\\Eclipse-WS\\ResourceManagerWeb\\WebContent\\config.json" ) ; 
+	//Get the ServletContext
+	ServletContext serveletContext = request.getServletContext();
+	
+	// Get the input stream of the JSON resource
+	InputStream inputStream = serveletContext.getResourceAsStream("/WEB-INF/classes/config.json");
+	
+	ApigeeConfig ac = new ApigeeConfig(inputStream);
 
 		out.print(request.getParameter("partnerSelect")) ; 
 		int partnerSelect = Integer.parseInt(request.getParameter("partnerSelect")) ; 

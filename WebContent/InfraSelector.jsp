@@ -27,10 +27,10 @@
 
 <%
 	//Get the ServletContext
-	ServletContext context = request.getServletContext();
+	ServletContext serveletContext = request.getServletContext();
 	
 	// Get the input stream of the JSON resource
-	InputStream inputStream = context.getResourceAsStream("/WEB-INF/classes/config.json");
+	InputStream inputStream = serveletContext.getResourceAsStream("/WEB-INF/classes/config.json");
 	
 	ApigeeConfig ac = new ApigeeConfig(inputStream);
 	
