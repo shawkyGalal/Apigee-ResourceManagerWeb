@@ -11,12 +11,11 @@
 </head>
 <body>
 
-<h2>Select Apigee Infrastructure to Display Message Processors associations with Environment for all available Regions </h2> 
+<h2>Select Apigee Infrastructure to Display All Routers </h2> 
 <br> 
-
     
-<jsp:include page="InfraSelector.jsp" >
-  <jsp:param name="targetPage" value="MessageProcessorsResult.jsp" />
+<jsp:include page="../InfraSelector.jsp" >
+  <jsp:param name="targetPage" value="routersResult.jsp" />
 </jsp:include>
  
 </body>

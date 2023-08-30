@@ -1,10 +1,6 @@
-<%@page import="com.smartvalue.apigee.resourceManager.Renderer"%>
-<%@page import="com.smartvalue.apigee.configuration.ApigeeConfig"%>
-<%@page import="com.smartvalue.apigee.configuration.Partner"%>
-<%@page import="com.smartvalue.apigee.configuration.Customer"%>
-<%@page import="com.smartvalue.apigee.configuration.infra.*"%>
 
-<%@page import ="com.smartvalue.apigee.rest.schema.environment.Environment"%>
+
+<%@page import ="com.smartvalue.apigee.rest.schema.application.Application"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.organization.Organization"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.product.ProductsServices"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.proxy.Proxy"%>
@@ -26,17 +22,35 @@
 </head>
 <body>
 <%@include file="../intialize.jsp" %>
-<%
-		
-		%> <br>Apigee Infrastructure (<%=infra.getName() %>) <br> <br> <br> <%
+
+		<br>Apigee Infrastructure (<%=infra.getName() %>) <br> <br> <br> <%
 		for ( String orgName : orgs.keySet())
 		{ 
 			out.print ("<br>Developers for Organization " + orgName ) ; 
 			try {
 			Organization org = orgs.get(orgName) ;  
-			List<String> envs = org.getEnvironments(); 
-			ArrayList<String> developers = org.getDeveloperNames() ; 
-			out.print(Renderer.arrayListToHtmlTable(developers)) ;
+			ArrayList<Application> apps = org.getAllApps() ;
+			int counter = 0 ; 
+			%>
+			<table border = 1 > 
+			<tr><td> <%=counter%><td>App Name </td> <td>DeveloperId</td></tr>
+			<%
+			
+			for (Application app  : apps)
+			{
+				counter++ ; 
+				%> <tr>
+						<td><%=counter%></td>
+						<td><%=app.getName()%> </td> 
+						<td><%=app.getDeveloperId()%></td>
+						<td><a href = "appDetails.jsp?org=<%=orgName%>&appId=<%=app.getAppId()%>" > Details</a></td>
+				</tr> 
+				<%
+			}
+			%>
+			</table>
+			<%
+			//out.print(Renderer.arrayListToHtmlTable(applications)) ;
 			}
 			catch ( Exception e) 
 			{

@@ -28,30 +28,12 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
+<%@include file="../intialize.jsp" %>
 <body>
 <%
-	//Get the ServletContext
-	ServletContext serveletContext = request.getServletContext();
 	
-	// Get the input stream of the JSON resource
-	InputStream inputStream = serveletContext.getResourceAsStream("/WEB-INF/classes/config.json");
-	
-	ApigeeConfig ac = new ApigeeConfig(inputStream);
-
-		out.print(request.getParameter("partnerSelect")) ; 
-		int partnerSelect = Integer.parseInt(request.getParameter("partnerSelect")) ; 
-		int customerSelect = Integer.parseInt( request.getParameter("customerSelect"))  ;
-		int infraSelect = Integer.parseInt(request.getParameter("infraSelect")) ;
-		
-		Partner partnr =  (Partner) ac.getPartners().get(partnerSelect) ; 
-		Customer customer = partnr.getCustomers().get(customerSelect) ; 
-		Infra infra = customer.getInfras().get(infraSelect) ; //.getInfra("MasterWorks" , "MOJ" , infraName) ;
-		 
-			
-		ManagementServer ms = new ManagementServer(infra) ; 
-
+				
 		ArrayList<String> regions = ms.getRegions() ;
-		HashMap<String , Organization > orgs = ms.getOrgs() ;
 		%> <br>Apigee Infrastructure (<%=infra.getName() %>) <br> <br> <br> <%
 		for ( String orgName : orgs.keySet())
 		{ 

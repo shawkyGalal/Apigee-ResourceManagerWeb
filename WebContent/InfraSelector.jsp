@@ -31,6 +31,8 @@
 	
 	// Get the input stream of the JSON resource
 	InputStream inputStream = serveletContext.getResourceAsStream("/WEB-INF/classes/config.json");
+	boolean includeOrgSelect = request.getParameter("includeOrgSelect")!= null  ; 
+	boolean includeEnvSelect = request.getParameter("includeEnvSelect")!= null  ;
 	
 	ApigeeConfig ac = new ApigeeConfig(inputStream);
 	
@@ -94,6 +96,14 @@
 	        populateInfra(jsonData , selectedPartner , selectedCustomer ) ; 
 	        
 	    });
+	    <% if ( includeOrgSelect) { %>
+		// Populate Organization options based on the selected infra
+		    orgSelect.addEventListener("change", function() {
+		        const selectedPartner = partnerSelect.value;
+		        const selectedCustomer = customerSelect.value;
+		        populateInfra(jsonData , selectedPartner , selectedCustomer ) ; 
+		    });
+	 	<% } %>
 	});
 	</script>
 	<form action="<%= request.getParameter("targetPage") %>" method="post" >
@@ -115,6 +125,27 @@
 	    <select id="infraSelect" name = "infraSelect" >
 	        <!-- Options will be populated based on the selected customer -->
 	    </select>
+	    
+	    <br><br>
+	    
+	    <% if ( includeOrgSelect) { %>
+	     <label for="orgSelect">Select Organization:</label>
+	    <select id="orgSelect" name = "orgSelect" >
+	        <!-- Options will be populated based on the selected Infa -->
+	    </select>
+	    <% } %>
+	    
+	    <br><br>
+	    
+	    <% if ( includeEnvSelect) { %>
+	     <label for="envSelect">Select Environment:</label>
+	    <select id="envSelect" name = "envSelect" >
+	        <!-- Options will be populated based on the selected organization -->
+	    </select>
+	    <% } %>
+	    
+	    <br><br>
+	    
 	    <button type="submit">Submit</button>
 	</form>
     
