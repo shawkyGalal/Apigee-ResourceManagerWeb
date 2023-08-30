@@ -129,16 +129,18 @@
 						}, 
 						{	"Name" : "Dev", 
 							"MgmServerUrl" : "http://192.168.56.103:8080" , 
+							"AuthType" : "Basic" , 
 							"sysadminCred" : {
-								"Username" : "jenkins@smart-value.com" , 
-								"Password" : "Smart@123"
+								"Username" : "sfoda@master-works.net" , 
+								"Password" : "Master@123"
 							}  
 						}, 
 						{	"Name" : "Stage" , 
 							"MgmServerUrl" : "http://192.168.56.103:8080" , 
+							"AuthType" : "Basic" , 
 							"sysadminCred" : {
-								"Username" : "jenkins@smart-value.com" , 
-								"Password" : "Smart@123"
+								"Username" : "sfoda@master-works.net" , 
+								"Password" : "Master@123"
 							}  
 						}
 					]

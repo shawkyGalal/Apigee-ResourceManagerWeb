@@ -34,7 +34,7 @@
 						<td><%=counter%></td>
 						<td><%=env%></td>
 						<td><%=kvmName%></td>
-						<td><a href = "kvmDetails.jsp?org=<%=orgName%>&envName=<%=env%>&kvmName=<%=kvmName%>"> Details</a> </td> 
+						<td><a href = "kvmDetails.jsp?org=<%=orgName%>&env=<%=env%>&kvm=<%=kvmName%>"> Details</a> </td> 
 				</tr> 
 				<%
 				}

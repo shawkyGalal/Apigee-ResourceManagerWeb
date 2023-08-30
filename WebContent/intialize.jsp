@@ -25,17 +25,36 @@
 </head>
 <body>
 <%
-		ServletContext serveletContext = request.getServletContext();
-		InputStream inputStream = serveletContext.getResourceAsStream("/WEB-INF/classes/config.json");
-		ApigeeConfig ac = new ApigeeConfig(inputStream);
-		int partnerSelect = Integer.parseInt(request.getParameter("partnerSelect")) ; 
-		int customerSelect = Integer.parseInt( request.getParameter("customerSelect"))  ;
-		int infraSelect = Integer.parseInt(request.getParameter("infraSelect")) ;
-		Partner partnr =  (Partner) ac.getPartners().get(partnerSelect) ; 
-		Customer customer = partnr.getCustomers().get(customerSelect) ; 
-		Infra infra = customer.getInfras().get(infraSelect) ; //.getInfra("MasterWorks" , "MOJ" , infraName) ;
-		ManagementServer ms = new ManagementServer(infra) ; 
-		HashMap<String , Organization > orgs = ms.getOrgs() ;
+		Infra infra ; 
+		HashMap<String , Organization > orgs ; 
+		ManagementServer ms = (ManagementServer) session.getAttribute("ms") ;
+		String xx = request.getParameter("refreshSessionInfo") ; 
+		boolean refreshSessionInfo = xx != null && xx.equalsIgnoreCase("true") ; 
+ 		if (ms == null || refreshSessionInfo )
+ 		{
+			ServletContext serveletContext = request.getServletContext();
+			InputStream inputStream = serveletContext.getResourceAsStream("/WEB-INF/classes/config.json");
+			ApigeeConfig ac = new ApigeeConfig(inputStream);
+			int partnerSelect = Integer.parseInt(request.getParameter("partnerSelect")) ; 
+			int customerSelect = Integer.parseInt( request.getParameter("customerSelect"))  ;
+			int infraSelect = Integer.parseInt(request.getParameter("infraSelect")) ;
+			Partner partnr =  (Partner) ac.getPartners().get(partnerSelect) ; 
+			Customer customer = partnr.getCustomers().get(customerSelect) ; 
+			infra = customer.getInfras().get(infraSelect) ; //.getInfra("MasterWorks" , "MOJ" , infraName) ;
+			ms = new ManagementServer(infra) ;
+			orgs = ms.getOrgs() ;
+			//HashMap<String , Object > userSessionVars = new HashMap() ; 
+			//userSessionVars.put("ms" , ms) ; 
+			session.setAttribute("ms", ms) ;
+			session.setAttribute("infra", infra) ;
+			session.setAttribute("orgs", orgs) ;
+ 		}
+ 		else 
+ 		{
+ 			infra = (Infra) session.getAttribute("infra") ;
+ 			orgs = (HashMap<String , Organization>) session.getAttribute("orgs") ;
+ 		}
+		
 %>
 </body>
 </html>

@@ -145,6 +145,7 @@
 	    <% } %>
 	    
 	    <br><br>
+	    <input type="hidden" id="refreshSessionInfo" name="refreshSessionInfo" value="true">
 	    
 	    <button type="submit">Submit</button>
 	</form>
