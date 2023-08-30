@@ -50,11 +50,11 @@
 		%> <br>Apigee Infrastructure (<%=infra.getName() %>) <br> <br> <br> <%
 		for ( String orgName : orgs.keySet())
 		{ 
-			out.print ("<br>Developers for Organization " + orgName ) ; 
+			out.print ("<br>Products for Organization " + orgName ) ; 
 			try {
 			Organization org = orgs.get(orgName) ;  
 			List<String> envs = org.getEnvironments(); 
-			ArrayList<String> developers = org.getDeveloperNames() ; 
+			ArrayList<String> developers = org.getAllProductsNames() ; 
 			out.print(Renderer.arrayListToHtmlTable(developers)) ;
 			}
 			catch ( Exception e) 
