@@ -20,13 +20,17 @@
 						"Ansible_hosts_file" : "/etc/apigee/ansible/ansible_hosts/moj/prod/hosts" , 
 						"DevPortal" : {"basePath" : "/var/www/html/moj-int" , "dataBaseName" :"moj_int"}
 					}, 
-					{	"Name" : "Prod-DR", 
-						"MgmServerUrl" : "http://10.169.3.142:8383" , 
+					{	"Name" : "Prod-DR",
+						"OauthMgmServerUrl" : "http://prod-dr.apigee.moj.gov.local:9001/api-management" , 
+						"MgmServerUrl" : "http://prod-dr.apigee.moj.gov.local:9001/api-management" , 
+						"tokenUrl" : "http://prod.apigee.moj.gov.local:9001/v1/authorize/access-token" , 
+						"AuthType" : "OAuth" , 
 						"sysadminCred" : {
 							"Username" : "devops@moj.gov.sa" , 
-							"Password" : "Moj@1357"
-						}, 
-						"Ansible_hosts_file" : "/etc/apigee/ansible/ansible_hosts/moj/dr/hosts" , 
+							"Password" : "Moj@1357" , 
+							"clientId" : "u0iC4EnKDdVLQvud1GUSzSgwUMhxwyXP" , 
+							"clientSecret" : "UKLBn325ZIX1mulU"
+							}, 
 						"DevPortal" : {"basePath" : "/var/www/html/moj-int" , "dataBaseName" :"moj_int"}
 					}, 
 					{	"Name" : "Dev" , 

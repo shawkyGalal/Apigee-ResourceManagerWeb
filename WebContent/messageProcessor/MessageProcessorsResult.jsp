@@ -56,15 +56,20 @@
 				<% for (String env : envs) { %>
 					<tr>
 						<td><%=env%></td>
-						<% 
+						<%  Environment envObj = org.getEnvByName(env) ; 
 							for (String  region : regions)
 							{	%> <td><table border = 1 name = "Region Message Processors "> 
 									<tr> <td>MP IP </td> <td>Heath Check </td> </tr>
 								<% 
-									List<MPServer> mpServers = org.getEnvByName(env).getMessageProcesors(region) ; 
+									try { List<MPServer> mpServers = envObj.getMessageProcesors(region) ;
 									for ( MPServer mpServer : mpServers )
-									{	
-										%><tr><td><%=mpServer.getInternalIP()%></td> <td>mpServer.healthCheck()</td></tr><% 
+									{
+										String mpIP = mpServer.getInternalIP() ;
+										%><tr><td><%=mpIP%></td> <td>mpServer.healthCheck()</td></tr><% 
+									}
+									} catch (Exception e )
+									{
+										%><tr><td>Failed to get MPs for Environment <%=envObj.getName() %>  or region <%=region %> Due to : <%=e.getMessage() %></td></tr><%
 									}
 									%> </table></td> <%
 							}

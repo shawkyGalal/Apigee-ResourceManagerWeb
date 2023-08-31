@@ -4,7 +4,7 @@
 <%@page import ="com.smartvalue.apigee.rest.schema.organization.Organization"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.product.ProductsServices"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.proxy.Proxy"%>
-<%@page import ="com.smartvalue.apigee.rest.schema.server.MPServer"%>
+<%@page import ="com.smartvalue.apigee.rest.schema.developer.Developer"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.server.Postgres"%>
 
 <%@page import ="com.smartvalue.apigee.rest.schema.TargetServer"%>
@@ -26,31 +26,37 @@
 		<br>Apigee Infrastructure (<%=infra.getName() %>) <br> <br> <br> <%
 		for ( String orgName : orgs.keySet())
 		{ 
-			out.print ("<br>Developers for Organization " + orgName ) ; 
+			out.print ("<br>Applications for Organization " + orgName ) ; 
 			try {
-			Organization org = orgs.get(orgName) ;  
-			ArrayList<Application> apps = org.getAllApps() ;
-			int counter = 0 ; 
-			%>
-			<table border = 1 > 
-			<tr><td> <%=counter%><td>App Name </td> <td>DeveloperId</td></tr>
-			<%
-			
-			for (Application app  : apps)
-			{
-				counter++ ; 
-				%> <tr>
-						<td><%=counter%></td>
-						<td><%=app.getName()%> </td> 
-						<td><%=app.getDeveloperId()%></td>
-						<td><a href = "appDetails.jsp?org=<%=orgName%>&appId=<%=app.getAppId()%>" > Details</a></td>
-				</tr> 
+				Organization org = orgs.get(orgName) ;  
+				ArrayList<Application> apps = org.getAllApps() ;
+				int counter = 0 ; 
+				%>
+				<table border = 1 > 
+				<tr><td> <%=counter%><td>App Name </td>  <td>Developer</td> <td>Details</td></tr>
 				<%
-			}
-			%>
-			</table>
-			<%
-			//out.print(Renderer.arrayListToHtmlTable(applications)) ;
+				
+				for (Application app  : apps)
+				{ 
+					String developerEmail = "xxxxxxUnknownxxxxxx"; 
+					if (app.getDeveloperId() != null )
+					{
+						Developer developer = org.getDeveloper( app.getDeveloperId() ) ;
+						developerEmail = developer.getEmail() ;
+					}
+					counter++ ; 
+					%> <tr>
+							<td><%=counter%></td>
+							<td><%=app.getName()%> </td> 
+							<td><a href = "../developers/devDetails.jsp?org=<%=orgName %>&developerId=<%=developerEmail%>" > <%=developerEmail%></a></td>
+							<td><a href = "appDetails.jsp?org=<%=orgName%>&appId=<%=app.getAppId()%>" > Details</a></td>
+					</tr> 
+					<%
+				}
+				%>
+				</table>
+				<%
+				//out.print(Renderer.arrayListToHtmlTable(applications)) ;
 			}
 			catch ( Exception e) 
 			{

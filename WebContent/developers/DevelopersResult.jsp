@@ -35,8 +35,12 @@
 			try {
 			Organization org = orgs.get(orgName) ;  
 			List<String> envs = org.getEnvironments(); 
-			ArrayList<String> developers = org.getDeveloperNames() ; 
-			out.print(Renderer.arrayListToHtmlTable(developers)) ;
+			ArrayList<String> developers = org.getDeveloperNames() ;
+			HashMap<String , String > extrLinks = new HashMap<String , String >() ; 
+			extrLinks.put ("devDetails.jsp?org="+orgName+"&developerId=" , "Details") ;
+			extrLinks.put ("xxxxx.jsp?org="+orgName+"&developerId=" , "xxxx") ;
+			
+			out.print(Renderer.arrayListToHtmlTable(developers , extrLinks)) ;
 			}
 			catch ( Exception e) 
 			{
