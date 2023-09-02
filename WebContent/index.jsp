@@ -15,6 +15,18 @@
 		<tr><td><a href = "kvms/kvms.jsp" target = "kvms">Key value Maps  </a></td></tr>
 	
 	</table>
+	
+	<h1> Special Queries </h1>
+	<table border = 1>
+		<tr><td><a href = "specialQueries/ProxiesUsingTargetServer.jsp" target = "listProxiesUsingTargetServer" >listProxiesUsingTargetServer </a></td></tr>
+		<tr><td><a href = "specialQueries/listProxiesNotDeployed.jsp" target = "listProxiesNotDeployed">listProxiesNotDeployed  </a></td></tr>
+		<tr><td><a href = "specialQueries/productsWithoutProxies.jsp" target = "productsWithoutProxies">productsWithoutProxies  </a></td></tr>
+		<tr><td><a href = "specialQueries/ProxiesWithoutPolices.jsp" target = "ProxiesWithoutPolices">ProxiesWithoutPolices  </a></td></tr>
+		<tr><td><a href = "specialQueries/ProxiesWithoutPolices.jsp" target = "ProxiesWithoutPolices">ProxiesWithoutPolices  </a></td></tr>
+	
+	</table>
+	
+	
 	<h1> Apigee Administration Tasks </h1>
 	<table border = 1>
 		<tr><td><a href = "messageProcessor/MessageProcessors.jsp"  target = "messageProcessors">message Processors  </a></td></tr>

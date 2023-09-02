@@ -39,13 +39,13 @@
 	String jsonData = ac.getFileContent();
 	%>
 	<script>
-		function populateCustomer (jsonData , partnerIndex)
+		function populateCustomer (jsonData , partnerName)
 		{
-			const partner = jsonData.Partners[partnerIndex];
+			const partner = jsonData.Partners.find(obj => obj.Name === partnerName); 
 			customerSelect.innerHTML = "";
 	        for (const index in partner.Customers) {
 	            const option = document.createElement("option");
-	            option.value = index;
+	            option.value = partner.Customers[index].Name;
 	            option.textContent = partner.Customers[index].Name;
 	            customerSelect.appendChild(option);
 	        }
@@ -53,15 +53,52 @@
 		
 		function populateInfra(jsonData , selectedPartner , selectedCustomer )
 		{
-			const customer = jsonData.Partners[selectedPartner].Customers[selectedCustomer];
+			const partner = jsonData.Partners.find(obj => obj.Name === selectedPartner);
+			const customer = partner.Customers.find(obj => obj.Name === selectedCustomer); ; //jsonData.Partners[selectedPartner].Customers[selectedCustomer];
 	        infraSelect.innerHTML = "";
 	        for (const index in customer.Infras) {
 	            const option = document.createElement("option");
-	            option.value = index;
+	            option.value = customer.Infras[index].Name;
 	            option.textContent = customer.Infras[index].Name;
 	            infraSelect.appendChild(option);
 	        }
 		}
+		function populateEnvs() {
+			 var partner = document.getElementById("partnerSelect").value;
+			 var customer = document.getElementById("customerSelect").value;
+			 var infra = document.getElementById("infraSelect").value;
+			 var org = document.getElementById("orgSelect").value;
+			 var url = "/ResourceManagerWeb/rest/partner/"+partner+"/customer/" + customer + "/infra/" + infra+"/org/" + org + "/env";  
+			 populateSelectItem(url , "orgSelect") ; 
+		}
+		
+		function populateOrgs() {
+			 var partner = document.getElementById("partnerSelect").value;
+			 var customer = document.getElementById("customerSelect").value;
+			 var infra = document.getElementById("infraSelect").value;
+			 var url = "/ResourceManagerWeb/rest/partner/"+partner+"/customer/" + customer + "/infra/" + infra+"/org" ;  
+			 populateSelectItem(url , "orgSelect") ; 
+		}
+		function populateSelectItem(url , selectItemId) {
+		  var orgSelect = document.getElementById( selectItemId );
+	      orgSelect.innerHTML = ""; // Clear existing options
+		  // Perform an AJAX request
+		  var xhr = new XMLHttpRequest();
+		  xhr.open("GET", url , true);
+		  xhr.onreadystatechange = function () {
+		    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+		      var itemData = JSON.parse(xhr.responseText.trim());
+		      for (var i = 0; i < itemData.length; i++) {
+		        var option = document.createElement("option");
+		        option.value = itemData[i];
+		        option.textContent = itemData[i];
+		        orgSelect.appendChild(option);
+		      }
+		    }
+		  };
+		  xhr.send();
+		}
+		
 		const selectedPartner = 0 ;
 		const selectedCustomer = 0 ; 
 		document.addEventListener("DOMContentLoaded", function() {
@@ -74,34 +111,51 @@
 	    // Populate partner options
 	    for (const index in jsonData.Partners) {
 	        const option = document.createElement("option");
-	        option.value = index;
+	        option.value = jsonData.Partners[index].Name;
 	        option.textContent = jsonData.Partners[index].Name;
 	        partnerSelect.appendChild(option);
 	    }
-	    populateCustomer (jsonData , 0); 
-	    populateInfra(jsonData , 0 , 0 )
+	    var intialPartner = jsonData.Partners[0].Name ; 
+	    var intialCustomer = jsonData.Partners[0].Customers[0].Name  ; 
+	    var intialInfra = jsonData.Partners[0].Customers[0].Infras[0].Name ; 
+	    populateCustomer (jsonData , intialPartner); 
+	    populateInfra(jsonData , intialPartner , intialCustomer ) ; 
+	    
+	    <% if ( includeOrgSelect) { %>
+	    populateOrgs(jsonData , intialPartner , intialCustomer , intialInfra) ; 
+	    <%}%>
 	    
 	 
 	    // Populate customer options based on the selected partner
 	    partnerSelect.addEventListener("change", function() {
 	        const selectedPartner = partnerSelect.value;
 	        populateCustomer(jsonData , selectedPartner) ;
-	        populateInfra(jsonData , selectedPartner , 0 )
+	        var partner = jsonData.Partners.find(obj => obj.Name === selectedPartner);
+	        populateCustomer (jsonData , partner.Name);
+	        populateInfra(jsonData , selectedPartner , partner.Customers[0].Name ); 
+	        <% if ( includeOrgSelect) { %>
+	        populateOrgs(jsonData , selectedPartner , partner.Customers[0].Name , partner.Customers[0].Infras[0].Name) ; 
+	        <%}%>
 	    });
 	    
 	    // Populate infrastructure options based on the selected customer
 	    customerSelect.addEventListener("change", function() {
 	        const selectedPartner = partnerSelect.value;
 	        const selectedCustomer = customerSelect.value;
-	        populateInfra(jsonData , selectedPartner , selectedCustomer ) ; 
-	        
+	        var partner = jsonData.Partners.find(obj => obj.Name === selectedPartner);
+	        var customer = partner.Customers.find(obj => obj.Name === selectedCustomer);
+	        populateInfra(jsonData , selectedPartner , selectedCustomer ) ;
+	        <% if ( includeOrgSelect) { %>
+	        populateOrgs(jsonData , selectedPartner , selectedCustomer , customer.Infras[0].Name)
+	        <%}%>
 	    });
 	    <% if ( includeOrgSelect) { %>
-		// Populate Organization options based on the selected infra
-		    orgSelect.addEventListener("change", function() {
+		// Populate Orgs options based on the selected infra
+		    infraSelect.addEventListener("change", function() {
 		        const selectedPartner = partnerSelect.value;
 		        const selectedCustomer = customerSelect.value;
-		        populateInfra(jsonData , selectedPartner , selectedCustomer ) ; 
+		        const selectedInfra = infraSelect.value ; 
+		        populateOrgs(jsonData , selectedPartner , selectedCustomer , selectedInfra)
 		    });
 	 	<% } %>
 	});
