@@ -19,6 +19,8 @@
 <%@page import ="com.smartvalue.apigee.resourceManager.ManagementServer"%>
 <%@page import ="java.util.*"%>
 <%@page import ="java.io.InputStream"%>
+<%@page import ="java.lang.reflect.Type"%>
+<%@page import ="com.smartvalue.moj.clients.environments.JsonParser"%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -34,9 +36,12 @@
 	boolean includeOrgSelect = request.getParameter("includeOrgSelect")!= null  ; 
 	boolean includeEnvSelect = request.getParameter("includeEnvSelect")!= null  ;
 	
-	ApigeeConfig ac = new ApigeeConfig(inputStream);
+	//ApigeeConfig ac = new ApigeeConfig(inputStream);
+	Type apigeeConfigType = (Type) ApigeeConfig.class ;
+	JsonParser apigeeConfigParser = new JsonParser( apigeeConfigType ) ;
+	ApigeeConfig ac = (ApigeeConfig) apigeeConfigParser.getObject(inputStream) ;
 	
-	String jsonData = ac.getFileContent();
+	String jsonData = apigeeConfigParser.getFileContent();
 	%>
 	<script>
 		function populateCustomer (jsonData , partnerName)

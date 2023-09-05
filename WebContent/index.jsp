@@ -32,5 +32,10 @@
 		<tr><td><a href = "messageProcessor/MessageProcessors.jsp"  target = "messageProcessors">message Processors  </a></td></tr>
 		<tr><td><a href = "routers/routers.jsp"  target = "routers">Routers </a></td></tr>
 	</table>
+	
+	<h1> REST Services </h1>
+	<table border = 1>
+		<tr><td><a href = "rest/partner/MasterWorks/customer/Moj/infra/Stage/org"  target = "Rest Services ">REST Services  </a></td></tr>
+	</table>
 </body>
 </html>
