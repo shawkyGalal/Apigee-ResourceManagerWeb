@@ -27,6 +27,7 @@
 </head>
 <body>
 <%
+
 		Infra infra ; 
 		HashMap<String , Organization > orgs ; 
 		ManagementServer ms = (ManagementServer) session.getAttribute("ms") ;
