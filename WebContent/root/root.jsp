@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="application/json; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="com.smartvalue.apigee.configuration.ApigeeConfig"%>
+<%@page import="com.smartvalue.apigee.configuration.ApigeeConfigFactory"%>
 <%@page import="com.smartvalue.apigee.configuration.Partner"%>
 <%@page import="com.smartvalue.apigee.configuration.Customer"%>
 <%@page import="com.smartvalue.apigee.configuration.infra.*"%>
@@ -12,7 +13,8 @@
  
 <% 	ServletContext serveletContext = request.getServletContext();
 	InputStream inputStream = serveletContext.getResourceAsStream("/WEB-INF/classes/config.json");
-	ApigeeConfig ac = new ApigeeConfig(inputStream);
+	ApigeeConfig ac = ApigeeConfigFactory.create(inputStream) ;
+	
 	HashMap<String , String > atts = (HashMap<String , String >) request.getAttribute("atts");
 	
 	String partner = atts.get("partner") ; //(String) request.getAttribute("partner");

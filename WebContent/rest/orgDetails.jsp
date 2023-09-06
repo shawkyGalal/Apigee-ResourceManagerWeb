@@ -1,3 +1,4 @@
+<%@page import="com.smartvalue.apigee.configuration.ApigeeConfigFactory"%>
 <%@ page language="java" contentType="application/json; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="com.smartvalue.apigee.configuration.ApigeeConfig"%>
 <%@page import="com.smartvalue.apigee.configuration.Partner"%>
@@ -8,7 +9,7 @@
 <%@page import ="com.google.gson.Gson"%>
 <% 	ServletContext serveletContext = request.getServletContext();
 	InputStream inputStream = serveletContext.getResourceAsStream("/WEB-INF/classes/config.json");
-	ApigeeConfig ac = new ApigeeConfig(inputStream);
+	ApigeeConfig ac = ApigeeConfigFactory.create(inputStream) ;
 	String partner = (String) request.getAttribute("partner");
 	String customer = (String) request.getAttribute("customer");
 	String infra = (String) request.getAttribute("infra");

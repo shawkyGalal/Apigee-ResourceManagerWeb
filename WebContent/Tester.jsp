@@ -17,6 +17,9 @@
 <%@page import ="com.smartvalue.apigee.rest.schema.virtualHost.VirtualHost"%>
 <%@page import ="com.smartvalue.apigee.resourceManager.ManagementServer"%>
 <%@page import ="java.util.*"%>
+<%@page import ="java.io.InputStream"%>
+<%@page import="com.smartvalue.apigee.configuration.ApigeeConfigFactory"%>
+
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -28,8 +31,9 @@
 </head>
 <body>
 <%
-	ApigeeConfig ac = new ApigeeConfig("E:\\MasterWorks\\Eclipse-WS\\ResourceManagerWeb\\WebContent\\config.json" ) ; 
-		
+		ServletContext serveletContext = request.getServletContext();
+		InputStream inputStream = serveletContext.getResourceAsStream("/WEB-INF/classes/config.json");
+		ApigeeConfig ac = ApigeeConfigFactory.create(inputStream) ;		
 		Infra infra = ac.getInfra("MasterWorks" , "MOJ" , "Stage") ;
 		String orgName = "stg" ; 
 		String envName = "cert-protected" ; 

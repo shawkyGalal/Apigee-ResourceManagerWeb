@@ -15,8 +15,7 @@
 <%@page import ="com.smartvalue.apigee.resourceManager.ManagementServer"%>
 <%@page import ="java.util.*"%>
 <%@page import ="java.io.InputStream"%>
-<%@page import ="java.lang.reflect.Type"%>
-<%@page import ="com.smartvalue.moj.clients.environments.JsonParser"%>
+<%@page import="com.smartvalue.apigee.configuration.ApigeeConfigFactory"%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -37,10 +36,7 @@
  		{
 			ServletContext serveletContext = request.getServletContext();
 			InputStream inputStream = serveletContext.getResourceAsStream("/WEB-INF/classes/config.json");
-			//ApigeeConfig ac = new ApigeeConfig(inputStream);
-			Type apigeeConfigType = (Type) ApigeeConfig.class ;
-			JsonParser apigeeConfigParser = new JsonParser( apigeeConfigType ) ;
-			ApigeeConfig ac = (ApigeeConfig) apigeeConfigParser.getObject(inputStream) ;
+			ApigeeConfig ac = ApigeeConfigFactory.create(inputStream) ;
 			
 			String partnerSelect = request.getParameter("partnerSelect") ; 
 			String customerSelect = request.getParameter("customerSelect")  ;
