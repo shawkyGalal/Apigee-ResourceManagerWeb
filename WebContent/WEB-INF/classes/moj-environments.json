@@ -3,7 +3,7 @@
  	[ 
 	 	{
 	 			"name" : "testing" , 
-	 			"url" : "https://apis-test.moj.gov.sa/" ,
+	 			"mojServicesBaseUrl" : "https://apis-test.moj.gov.sa/" ,
 	 			"tokenUrl" : "https://apis-test.moj.gov.sa/v1/authorize/access-token", 
 	 			"credential" : 
 				{
@@ -26,7 +26,7 @@
 	 	
 	 	{
 	 			"name" : "prod" , 
-	 			"url" : "https://apis.moj.gov.sa/" ,
+	 			"mojServicesBaseUrl" : "https://apis.moj.gov.sa/" ,
 	 			"tokenUrl" : "https://api.moj.gov.sa/v1/authorize/access-token",
 				"credential" : 
 				{

@@ -68,25 +68,26 @@
 	            infraSelect.appendChild(option);
 	        }
 		}
-		function populateEnvs() {
-			 var partner = document.getElementById("partnerSelect").value;
-			 var customer = document.getElementById("customerSelect").value;
-			 var infra = document.getElementById("infraSelect").value;
-			 var org = document.getElementById("orgSelect").value;
-			 var url = "/ResourceManagerWeb/rest/partner/"+partner+"/customer/" + customer + "/infra/" + infra+"/org/" + org + "/env";  
+		function populateEnvs(selectedPartner , selectedCustomer , selectedInfra , selectedOrg) {
+			 //var partner = document.getElementById("partnerSelect").value;
+			 //var customer = document.getElementById("customerSelect").value;
+			 //var infra = document.getElementById("infraSelect").value;
+			 //var org = document.getElementById("orgSelect").value;
+			 var url = "/ResourceManagerWeb/rest/partner/"+selectedPartner+"/customer/" + selectedCustomer + "/infra/" + selectedInfra+"/org/" + selectedOrg + "/env";  
+			 populateSelectItem(url , "envSelect") ; 
+		}
+		
+		function populateOrgs(selectedPartner , selectedCustomer , selectedInfra) {
+			 //var partner = document.getElementById("partnerSelect").value;
+			 //var customer = document.getElementById("customerSelect").value;
+			 //var infra = document.getElementById("infraSelect").value;
+			 var url = "/ResourceManagerWeb/rest/partner/"+selectedPartner+"/customer/" + selectedCustomer + "/infra/" + selectedInfra+"/org" ;  
 			 populateSelectItem(url , "orgSelect") ; 
 		}
 		
-		function populateOrgs() {
-			 var partner = document.getElementById("partnerSelect").value;
-			 var customer = document.getElementById("customerSelect").value;
-			 var infra = document.getElementById("infraSelect").value;
-			 var url = "/ResourceManagerWeb/rest/partner/"+partner+"/customer/" + customer + "/infra/" + infra+"/org" ;  
-			 populateSelectItem(url , "orgSelect") ; 
-		}
 		function populateSelectItem(url , selectItemId) {
-		  var orgSelect = document.getElementById( selectItemId );
-	      orgSelect.innerHTML = ""; // Clear existing options
+		  var itemSelect = document.getElementById( selectItemId );
+		  itemSelect.innerHTML = ""; // Clear existing options
 		  // Perform an AJAX request
 		  var xhr = new XMLHttpRequest();
 		  xhr.open("GET", url , true);
@@ -97,15 +98,19 @@
 		        var option = document.createElement("option");
 		        option.value = itemData[i];
 		        option.textContent = itemData[i];
-		        orgSelect.appendChild(option);
+		        itemSelect.appendChild(option);
+		        if (i==0) {
+		        	itemSelect.value = option.value ; 
+		        	}
 		      }
+		       
 		    }
 		  };
 		  xhr.send();
 		}
 		
-		const selectedPartner = 0 ;
-		const selectedCustomer = 0 ; 
+		//const selectedPartner = 0 ;
+		//const selectedCustomer = 0 ; 
 		document.addEventListener("DOMContentLoaded", function() {
 	    const partnerSelect = document.getElementById("partnerSelect");
 	    const customerSelect = document.getElementById("customerSelect");
@@ -127,7 +132,7 @@
 	    populateInfra(jsonData , intialPartner , intialCustomer ) ; 
 	    
 	    <% if ( includeOrgSelect) { %>
-	    populateOrgs(jsonData , intialPartner , intialCustomer , intialInfra) ; 
+	    populateOrgs(intialPartner , intialCustomer , intialInfra) ; 
 	    <%}%>
 	    
 	 
@@ -139,7 +144,7 @@
 	        populateCustomer (jsonData , partner.Name);
 	        populateInfra(jsonData , selectedPartner , partner.Customers[0].Name ); 
 	        <% if ( includeOrgSelect) { %>
-	        populateOrgs(jsonData , selectedPartner , partner.Customers[0].Name , partner.Customers[0].Infras[0].Name) ; 
+	        populateOrgs(selectedPartner , partner.Customers[0].Name , partner.Customers[0].Infras[0].Name) ; 
 	        <%}%>
 	    });
 	    
@@ -151,18 +156,32 @@
 	        var customer = partner.Customers.find(obj => obj.Name === selectedCustomer);
 	        populateInfra(jsonData , selectedPartner , selectedCustomer ) ;
 	        <% if ( includeOrgSelect) { %>
-	        populateOrgs(jsonData , selectedPartner , selectedCustomer , customer.Infras[0].Name)
+	        populateOrgs(selectedPartner , selectedCustomer , customer.Infras[0].Name)
 	        <%}%>
 	    });
 	    <% if ( includeOrgSelect) { %>
-		// Populate Orgs options based on the selected infra
-		    infraSelect.addEventListener("change", function() {
+				// Populate Orgs options based on the selected infra
+		    	infraSelect.addEventListener("change", function() {
 		        const selectedPartner = partnerSelect.value;
 		        const selectedCustomer = customerSelect.value;
 		        const selectedInfra = infraSelect.value ; 
-		        populateOrgs(jsonData , selectedPartner , selectedCustomer , selectedInfra)
+		        //const selectedOrg = orgSelect.value ;
+		        populateOrgs(selectedPartner , selectedCustomer , selectedInfra)
+		        populateEnvs(selectedPartner , selectedCustomer , selectedInfra , orgSelect.value ) ; 
 		    });
 	 	<% } %>
+	 	
+	 	<% if ( includeEnvSelect) { %>
+			// Populate Orgs options based on the selected infra
+	    	orgSelect.addEventListener("change", function() {
+	        const selectedPartner = partnerSelect.value;
+	        const selectedCustomer = customerSelect.value;
+	        const selectedInfra = infraSelect.value ;
+	        const selectedOrg = orgSelect.value ;
+	        populateEnvs(selectedPartner , selectedCustomer , selectedInfra , selectedOrg ) ; 
+	    });
+ 	<% } %>
+ 	
 	});
 	</script>
 	<form action="<%= request.getParameter("targetPage") %>" method="post" >

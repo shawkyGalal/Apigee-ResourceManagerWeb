@@ -18,11 +18,11 @@
 	
 	<h1> Special Queries </h1>
 	<table border = 1>
-		<tr><td><a href = "specialQueries/ProxiesUsingTargetServer.jsp" target = "listProxiesUsingTargetServer" >listProxiesUsingTargetServer </a></td></tr>
-		<tr><td><a href = "specialQueries/listProxiesNotDeployed.jsp" target = "listProxiesNotDeployed">listProxiesNotDeployed  </a></td></tr>
-		<tr><td><a href = "specialQueries/productsWithoutProxies.jsp" target = "productsWithoutProxies">productsWithoutProxies  </a></td></tr>
-		<tr><td><a href = "specialQueries/ProxiesWithoutPolices.jsp" target = "ProxiesWithoutPolices">ProxiesWithoutPolices  </a></td></tr>
-		<tr><td><a href = "specialQueries/ProxiesWithoutPolices.jsp" target = "ProxiesWithoutPolices">ProxiesWithoutPolices  </a></td></tr>
+		<tr><td><a href = "specialQueries/proxiesUsingTargetServer/InfraSelector.jsp" target = "listProxiesUsingTargetServer" >listProxiesUsingTargetServer </a></td></tr>
+		<tr><td><a href = "specialQueries/listProxiesNotDeployed/InfraSelector.jsp" target = "listProxiesNotDeployed">listProxiesNotDeployed  </a></td></tr>
+		<tr><td><a href = "specialQueries/productsWithoutProxies/InfraSelector.jsp" target = "productsWithoutProxies">productsWithoutProxies  </a></td></tr>
+		<tr><td><a href = "specialQueries/ProxiesWithoutPolices/InfraSelector.jsp" target = "ProxiesWithoutPolices">ProxiesWithoutPolices  </a></td></tr>
+		<tr><td><a href = "specialQueries/ProxiesWithoutPolices/InfraSelector.jsp" target = "ProxiesWithoutPolices">ProxiesWithoutPolices  </a></td></tr>
 	
 	</table>
 	
