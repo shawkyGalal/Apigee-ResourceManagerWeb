@@ -22,7 +22,7 @@ if (mojEnv == null)
 	ServletContext serveletContext = request.getServletContext();
 	InputStream inputStream = serveletContext.getResourceAsStream("/WEB-INF/classes/moj-environments.json");
 	Environments mojEnvs = ClientEnvironmentsFactory.create(inputStream) ;
-	mojEnv  =mojEnvs.getEnvByName("testing") ;
+	mojEnv  =mojEnvs.getEnvByName("prod") ;
 	session.setAttribute("mojEnv" , mojEnv );
 }
 		

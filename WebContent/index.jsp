@@ -37,5 +37,19 @@
 	<table border = 1>
 		<tr><td><a href = "rest/partner/MasterWorks/customer/Moj/infra/Stage/org"  target = "Rest Services ">REST Services  </a></td></tr>
 	</table>
+	
+	<h1> Najiz Like Sample Application  </h1>
+	
+	<%@include file="NajizLikeSampleApp/intialize.jsp" %>
+	<%
+		String authURL = mojEnv.getUrlBuilder()
+									.withForthAuth(false)
+									.withResponseType("code")
+									.withScope("openid")
+									.buildAuthorizationURL();
+		
+	%>
+	<a href = <%=authURL%> Target = "NajizLikeApp" >Login Using Nafath Mowahad </a>
+	
 </body>
 </html>

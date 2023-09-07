@@ -17,13 +17,8 @@
 	String authorizationCode = request.getParameter("code") ;
 	%>Received Authorization Code : <%=authorizationCode%><% 
 	
-	ApigeeAccessToken accessToken = mojEnv.getAccessToken(false); 
-	if (accessToken == null)
-	{
-		accessToken = mojEnv.getAccessToken(authorizationCode);
-		session.setAttribute("accessToken" , accessToken);
-	}
-	
+	ApigeeAccessToken accessToken = mojEnv.getAccessToken(authorizationCode);
+	response.sendRedirect("dashboard.jsp") ; 
 %>
 </body>
 </html>
