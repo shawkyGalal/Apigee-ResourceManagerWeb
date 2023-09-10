@@ -19,15 +19,8 @@
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-<%
 
+<%
 		Infra infra ; 
 		HashMap<String , Organization > orgs ; 
 		ManagementServer ms = (ManagementServer) session.getAttribute("ms") ;
@@ -35,23 +28,8 @@
 		boolean refreshSessionInfo = xx != null && xx.equalsIgnoreCase("true") ; 
  		if (ms == null || refreshSessionInfo )
  		{
-			ServletContext serveletContext = request.getServletContext();
-			InputStream inputStream = serveletContext.getResourceAsStream("/WEB-INF/classes/config.json");
-			ApigeeConfig ac = ApigeeConfigFactory.create(inputStream) ;
-			
-			String partnerSelect = request.getParameter("partnerSelect") ; 
-			String customerSelect = request.getParameter("customerSelect")  ;
-			String infraSelect = request.getParameter("infraSelect") ;
-			Partner partnr =  (Partner) ac.getPartnerByName(partnerSelect) ; 
-			Customer customer = partnr.getCustomerByName(customerSelect) ; 
-			infra = customer.getInfraByName(infraSelect) ; //.getInfra("MasterWorks" , "MOJ" , infraName) ;
-			ms = new ManagementServer(infra) ;
-			orgs = ms.getOrgs() ;
-			//HashMap<String , Object > userSessionVars = new HashMap() ; 
-			//userSessionVars.put("ms" , ms) ; 
-			session.setAttribute("ms", ms) ;
-			session.setAttribute("infra", infra) ;
-			session.setAttribute("orgs", orgs) ;
+ 			response.sendRedirect("infraSelector.jsp") ; 
+ 			
  		}
  		else 
  		{
@@ -60,5 +38,3 @@
  		}
 		
 %>
-</body>
-</html>

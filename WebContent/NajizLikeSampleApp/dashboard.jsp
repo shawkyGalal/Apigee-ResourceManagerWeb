@@ -17,7 +17,7 @@
 <body>
 <%@include file="intialize.jsp" %>
 <%
-		//out.print(Renderer.objectToHtmlTable(mojEnv.getAccessToken()));
+		out.print(Renderer.objectToHtmlTable(mojEnv.getAccessToken()));
 	
 	
 		%><h1>Proxy : Exec-IntegrationServices </h1><%

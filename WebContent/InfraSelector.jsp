@@ -21,6 +21,9 @@
 <%@page import ="java.io.InputStream"%>
 <%@page import ="java.lang.reflect.Type"%>
 <%@page import ="com.smartvalue.moj.clients.environments.JsonParser"%>
+<%@page import="com.smartvalue.apigee.configuration.ApigeeConfigFactory"%>
+<%@page import="com.smartvalue.apigee.configuration.infra.Infra"%>
+
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -28,22 +31,58 @@
 <html>
 
 <%
-	//Get the ServletContext
 	ServletContext serveletContext = request.getServletContext();
-	
-	// Get the input stream of the JSON resource
 	InputStream inputStream = serveletContext.getResourceAsStream("/WEB-INF/classes/config.json");
-	boolean includeOrgSelect = request.getParameter("includeOrgSelect")!= null  ; 
-	boolean includeEnvSelect = request.getParameter("includeEnvSelect")!= null  ;
-	
-	//ApigeeConfig ac = new ApigeeConfig(inputStream);
 	Type apigeeConfigType = (Type) ApigeeConfig.class ;
-	JsonParser apigeeConfigParser = new JsonParser( apigeeConfigType ) ;
+	JsonParser apigeeConfigParser = new JsonParser( apigeeConfigType ) ; 
 	ApigeeConfig ac = (ApigeeConfig) apigeeConfigParser.getObject(inputStream) ;
 	
-	String jsonData = apigeeConfigParser.getFileContent();
+	if (request.getParameter("submit") == null)
+	{
+	  String jsonData = apigeeConfigParser.getFileContent();
+	
 	%>
 	<script>
+
+		document.addEventListener("DOMContentLoaded", function() {
+	    const partnerSelect = document.getElementById("partnerSelect");
+	    const customerSelect = document.getElementById("customerSelect");
+	    const infraSelect = document.getElementById("infraSelect");
+	    const jsonData = <%=jsonData%> ;
+
+	    // Populate partner options
+	    for (const index in jsonData.Partners) {
+	        const option = document.createElement("option");
+	        option.value = jsonData.Partners[index].Name;
+	        option.textContent = jsonData.Partners[index].Name;
+	        partnerSelect.appendChild(option);
+	    }
+	    var intialPartner = jsonData.Partners[0].Name ; 
+	    var intialCustomer = jsonData.Partners[0].Customers[0].Name  ; 
+	    var intialInfra = jsonData.Partners[0].Customers[0].Infras[0].Name ; 
+	    populateCustomer (jsonData , intialPartner); 
+	    populateInfra(jsonData , intialPartner , intialCustomer ) ; 
+	 
+    	// Populate customer options based on the selected partner
+    	partnerSelect.addEventListener("change", function() {
+	        const selectedPartner = partnerSelect.value;
+	        populateCustomer(jsonData , selectedPartner) ;
+	        var partner = jsonData.Partners.find(obj => obj.Name === selectedPartner);
+	        populateCustomer (jsonData , partner.Name);
+	        populateInfra(jsonData , selectedPartner , partner.Customers[0].Name ); 
+	    });
+	    
+	    // Populate infrastructure options based on the selected customer
+	    customerSelect.addEventListener("change", function() {
+	        const selectedPartner = partnerSelect.value;
+	        const selectedCustomer = customerSelect.value;
+	        var partner = jsonData.Partners.find(obj => obj.Name === selectedPartner);
+	        var customer = partner.Customers.find(obj => obj.Name === selectedCustomer);
+	        populateInfra(jsonData , selectedPartner , selectedCustomer ) ;
+	    });
+	
+	});
+		
 		function populateCustomer (jsonData , partnerName)
 		{
 			const partner = jsonData.Partners.find(obj => obj.Name === partnerName); 
@@ -68,123 +107,9 @@
 	            infraSelect.appendChild(option);
 	        }
 		}
-		function populateEnvs(selectedPartner , selectedCustomer , selectedInfra , selectedOrg) {
-			 //var partner = document.getElementById("partnerSelect").value;
-			 //var customer = document.getElementById("customerSelect").value;
-			 //var infra = document.getElementById("infraSelect").value;
-			 //var org = document.getElementById("orgSelect").value;
-			 var url = "/ResourceManagerWeb/rest/partner/"+selectedPartner+"/customer/" + selectedCustomer + "/infra/" + selectedInfra+"/org/" + selectedOrg + "/env";  
-			 populateSelectItem(url , "envSelect") ; 
-		}
 		
-		function populateOrgs(selectedPartner , selectedCustomer , selectedInfra) {
-			 //var partner = document.getElementById("partnerSelect").value;
-			 //var customer = document.getElementById("customerSelect").value;
-			 //var infra = document.getElementById("infraSelect").value;
-			 var url = "/ResourceManagerWeb/rest/partner/"+selectedPartner+"/customer/" + selectedCustomer + "/infra/" + selectedInfra+"/org" ;  
-			 populateSelectItem(url , "orgSelect") ; 
-		}
-		
-		function populateSelectItem(url , selectItemId) {
-		  var itemSelect = document.getElementById( selectItemId );
-		  itemSelect.innerHTML = ""; // Clear existing options
-		  // Perform an AJAX request
-		  var xhr = new XMLHttpRequest();
-		  xhr.open("GET", url , true);
-		  xhr.onreadystatechange = function () {
-		    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-		      var itemData = JSON.parse(xhr.responseText.trim());
-		      for (var i = 0; i < itemData.length; i++) {
-		        var option = document.createElement("option");
-		        option.value = itemData[i];
-		        option.textContent = itemData[i];
-		        itemSelect.appendChild(option);
-		        if (i==0) {
-		        	itemSelect.value = option.value ; 
-		        	}
-		      }
-		       
-		    }
-		  };
-		  xhr.send();
-		}
-		
-		//const selectedPartner = 0 ;
-		//const selectedCustomer = 0 ; 
-		document.addEventListener("DOMContentLoaded", function() {
-	    const partnerSelect = document.getElementById("partnerSelect");
-	    const customerSelect = document.getElementById("customerSelect");
-	    const infraSelect = document.getElementById("infraSelect");
-
-	    const jsonData = <%=jsonData%> ;
-	 
-	    // Populate partner options
-	    for (const index in jsonData.Partners) {
-	        const option = document.createElement("option");
-	        option.value = jsonData.Partners[index].Name;
-	        option.textContent = jsonData.Partners[index].Name;
-	        partnerSelect.appendChild(option);
-	    }
-	    var intialPartner = jsonData.Partners[0].Name ; 
-	    var intialCustomer = jsonData.Partners[0].Customers[0].Name  ; 
-	    var intialInfra = jsonData.Partners[0].Customers[0].Infras[0].Name ; 
-	    populateCustomer (jsonData , intialPartner); 
-	    populateInfra(jsonData , intialPartner , intialCustomer ) ; 
-	    
-	    <% if ( includeOrgSelect) { %>
-	    populateOrgs(intialPartner , intialCustomer , intialInfra) ; 
-	    <%}%>
-	    
-	 
-	    // Populate customer options based on the selected partner
-	    partnerSelect.addEventListener("change", function() {
-	        const selectedPartner = partnerSelect.value;
-	        populateCustomer(jsonData , selectedPartner) ;
-	        var partner = jsonData.Partners.find(obj => obj.Name === selectedPartner);
-	        populateCustomer (jsonData , partner.Name);
-	        populateInfra(jsonData , selectedPartner , partner.Customers[0].Name ); 
-	        <% if ( includeOrgSelect) { %>
-	        populateOrgs(selectedPartner , partner.Customers[0].Name , partner.Customers[0].Infras[0].Name) ; 
-	        <%}%>
-	    });
-	    
-	    // Populate infrastructure options based on the selected customer
-	    customerSelect.addEventListener("change", function() {
-	        const selectedPartner = partnerSelect.value;
-	        const selectedCustomer = customerSelect.value;
-	        var partner = jsonData.Partners.find(obj => obj.Name === selectedPartner);
-	        var customer = partner.Customers.find(obj => obj.Name === selectedCustomer);
-	        populateInfra(jsonData , selectedPartner , selectedCustomer ) ;
-	        <% if ( includeOrgSelect) { %>
-	        populateOrgs(selectedPartner , selectedCustomer , customer.Infras[0].Name)
-	        <%}%>
-	    });
-	    <% if ( includeOrgSelect) { %>
-				// Populate Orgs options based on the selected infra
-		    	infraSelect.addEventListener("change", function() {
-		        const selectedPartner = partnerSelect.value;
-		        const selectedCustomer = customerSelect.value;
-		        const selectedInfra = infraSelect.value ; 
-		        //const selectedOrg = orgSelect.value ;
-		        populateOrgs(selectedPartner , selectedCustomer , selectedInfra)
-		        populateEnvs(selectedPartner , selectedCustomer , selectedInfra , orgSelect.value ) ; 
-		    });
-	 	<% } %>
-	 	
-	 	<% if ( includeEnvSelect) { %>
-			// Populate Orgs options based on the selected infra
-	    	orgSelect.addEventListener("change", function() {
-	        const selectedPartner = partnerSelect.value;
-	        const selectedCustomer = customerSelect.value;
-	        const selectedInfra = infraSelect.value ;
-	        const selectedOrg = orgSelect.value ;
-	        populateEnvs(selectedPartner , selectedCustomer , selectedInfra , selectedOrg ) ; 
-	    });
- 	<% } %>
- 	
-	});
 	</script>
-	<form action="<%= request.getParameter("targetPage") %>" method="post" >
+	<form action="InfraSelector.jsp" method="post" >
 		<label for="partnerSelect">Select Partner:</label>
 		<select id="partnerSelect" name = "partnerSelect">
 	        <!-- Add more partners here -->
@@ -203,29 +128,33 @@
 	    <select id="infraSelect" name = "infraSelect" >
 	        <!-- Options will be populated based on the selected customer -->
 	    </select>
-	    
-	    <br><br>
-	    
-	    <% if ( includeOrgSelect) { %>
-	     <label for="orgSelect">Select Organization:</label>
-	    <select id="orgSelect" name = "orgSelect" >
-	        <!-- Options will be populated based on the selected Infa -->
-	    </select>
-	    <% } %>
-	    
-	    <br><br>
-	    
-	    <% if ( includeEnvSelect) { %>
-	     <label for="envSelect">Select Environment:</label>
-	    <select id="envSelect" name = "envSelect" >
-	        <!-- Options will be populated based on the selected organization -->
-	    </select>
-	    <% } %>
-	    
-	    <br><br>
+		<br><br>
 	    <input type="hidden" id="refreshSessionInfo" name="refreshSessionInfo" value="true">
+	    <input type="hidden" id="targetPage" name="targetPage" value="<%=request.getParameter("targetPage")%>">
 	    
-	    <button type="submit">Submit</button>
+	    <button type="submit" name= "submit" id = "submit">Submit</button>
 	</form>
     
+    
+    <%
+	}
+	else if (request.getParameter("submit") != null)
+    {
+		String partnerSelect = request.getParameter("partnerSelect") ; 
+		String customerSelect = request.getParameter("customerSelect")  ;
+		String infraSelect = request.getParameter("infraSelect") ;
+		Partner partnr =  (Partner) ac.getPartnerByName(partnerSelect) ; 
+		Customer customer = partnr.getCustomerByName(customerSelect) ; 
+		Infra infra = customer.getInfraByName(infraSelect) ; 
+		ManagementServer ms = new ManagementServer(infra) ;
+		HashMap<String, Organization> orgs = ms.getOrgs() ;
+		session.setAttribute("ms", ms) ;
+		session.setAttribute("infra", infra) ;
+		session.setAttribute("orgs", orgs) ;
+		String targetPage = request.getParameter("targetPage") ; 
+		response.sendRedirect( "index.jsp" ) ; 
+    }
+    
+	
+    %>
 </html>

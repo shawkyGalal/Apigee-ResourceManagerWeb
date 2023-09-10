@@ -10,7 +10,7 @@
 <body>
 <%@include file="../intialize.jsp" %>
 
-		<br>Apigee Infrastructure (<%=infra.getName() %>) <br> <br> <br> <%
+		<br>Apigee Infrastructure (<%=ms.getInfraName() %>) <br> <br> <br> <%
 		for ( String orgName : orgs.keySet())
 		{ 
 			out.print ("<br>KVMs for Organization " + orgName ) ; 

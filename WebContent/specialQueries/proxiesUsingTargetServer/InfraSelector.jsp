@@ -19,6 +19,8 @@
   <jsp:param name="targetPage" value="Result.jsp?" />
   <jsp:param name="includeOrgSelect" value="true" />
   <jsp:param name="includeEnvSelect" value="true" />
+  <jsp:param name="includeResourceTypeSelect" value="true" />
+  
 </jsp:include>
  
 </body>

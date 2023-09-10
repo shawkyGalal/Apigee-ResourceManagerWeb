@@ -11,11 +11,11 @@
 </head>
 <body>
 
-<h2>Select Apigee Infrastructure to Display Products of all Organizations </h2> 
+<h2>Select Organization to Display Products  </h2> 
 <br> 
 
     
-<jsp:include page="../InfraSelector.jsp" >
+<jsp:include page="../apigeeItemSelector.jsp" >
   <jsp:param name="targetPage" value="productsResult.jsp" />
 </jsp:include>
  

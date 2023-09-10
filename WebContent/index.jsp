@@ -1,12 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
+<%@page import ="com.smartvalue.apigee.resourceManager.ManagementServer"%>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
+	<a href = "InfraSelector.jsp">Select Apigee Infrastructure </a>
+	<% ManagementServer ms = (ManagementServer) session.getAttribute("ms") ;  
+		if (ms != null) out.print ("Current Infra Name : " + ms.getInfraName() ) ;  
+	%>
 	<h1> Apigee Operational Tasks </h1>
 	<table border = 1>
 		<tr><td><a href = "products/products.jsp" target = "products" >Products </a></td></tr>
@@ -35,7 +40,7 @@
 	
 	<h1> REST Services </h1>
 	<table border = 1>
-		<tr><td><a href = "rest/partner/MasterWorks/customer/Moj/infra/Stage/org"  target = "Rest Services ">REST Services  </a></td></tr>
+		<tr><td><a href = "rest/v1/o/smart-value/apis"  target = "Rest Services ">REST Services  </a></td></tr>
 	</table>
 	
 	<h1> Najiz Like Sample Application  </h1>
