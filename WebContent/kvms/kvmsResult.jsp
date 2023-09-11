@@ -11,11 +11,13 @@
 <%@include file="../intialize.jsp" %>
 
 		<br>Apigee Infrastructure (<%=ms.getInfraName() %>) <br> <br> <br> <%
-		for ( String orgName : orgs.keySet())
-		{ 
-			out.print ("<br>KVMs for Organization " + orgName ) ; 
+		 
+			
+			String orgSelect = request.getParameter("orgSelect") ;
+			out.print ("<br>KVMs for Organization " + orgSelect ) ; 
+					
 			try {
-			Organization org = orgs.get(orgName) ;  
+			Organization org = ms.getOrgByName(orgSelect) ;  
 			List<String> envs = org.getEnvironments() ;
 			int counter = 0 ; 
 			%>
@@ -34,7 +36,7 @@
 						<td><%=counter%></td>
 						<td><%=env%></td>
 						<td><%=kvmName%></td>
-						<td><a href = "kvmDetails.jsp?org=<%=orgName%>&env=<%=env%>&kvm=<%=kvmName%>"> Details</a> </td> 
+						<td><a href = "kvmDetails.jsp?org=<%=orgSelect%>&env=<%=env%>&kvm=<%=kvmName%>"> Details</a> </td> 
 				</tr> 
 				<%
 				}
@@ -48,7 +50,7 @@
 			{
 				out.print ( "<br>Unable to Display Organization KVM's due to : " + e.getMessage() ) ; 
 			}
-		}
+		
 		%> 
 		</body>
 </html>

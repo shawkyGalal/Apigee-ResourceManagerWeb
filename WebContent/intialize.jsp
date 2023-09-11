@@ -21,20 +21,14 @@
     pageEncoding="ISO-8859-1"%>
 
 <%
-		Infra infra ; 
-		HashMap<String , Organization > orgs ; 
 		ManagementServer ms = (ManagementServer) session.getAttribute("ms") ;
 		String xx = request.getParameter("refreshSessionInfo") ; 
 		boolean refreshSessionInfo = xx != null && xx.equalsIgnoreCase("true") ; 
  		if (ms == null || refreshSessionInfo )
  		{
- 			response.sendRedirect("infraSelector.jsp") ; 
+ 			response.sendRedirect("/infraSelector.jsp") ; 
  			
  		}
- 		else 
- 		{
- 			infra = (Infra) session.getAttribute("infra") ;
- 			orgs = (HashMap<String , Organization>) session.getAttribute("orgs") ;
- 		}
+ 		
 		
 %>

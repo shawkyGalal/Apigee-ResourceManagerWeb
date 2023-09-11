@@ -31,95 +31,114 @@
 <body >
 
 	<%
-	boolean includeEnvSelect = request.getParameter("includeEnvSelect")!= null  ;
-	boolean includeResourceTypeSelect = request.getParameter("includeResourceTypeSelect")!= null  ;
-	
+	String[] neededAttributes = (request.getParameter("neededAttributes") != null) ? request.getParameter("neededAttributes").trim().split("\\s*,\\s*") :new String[] {}; 
+	List<String> neededlist = Arrays.asList(neededAttributes) ; 
+	boolean orgIsNeeded = neededlist.contains("org"); 
+	boolean envIsNeeded = neededlist.contains("env");
+	boolean resourceTypeIsNeeded = neededlist.contains("resourceType");
+ 
 	%>
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
 			populateOrgs(); 
+			<% if ( envIsNeeded ) { %>
+	 			const orgSelect = document.getElementById("orgSelect");
+		    	orgSelect.addEventListener("change", function() {
+			    	populateEnvs() ;
+			    	<% if (resourceTypeIsNeeded) {%> populateResources() ; <% } %>  
+    			});
+			<% } %>
 		} )
 		
 		
 		function populateOrgs() {
 			 var url = "http://localhost:8080/ResourceManagerWeb/rest/v1/o" ;  
 			 populateSelectItem(url , "orgSelect") ; 
+			 <% if ( envIsNeeded ) { %>
+			 populateEnvs() ; 
+			 <% } %>
 		}
 		
-		function populateEnvs() {
-	        const selectedOrg = orgSelect.value ; 
-			var url = "/ResourceManagerWeb/v1/o/"+ selectedOrg + "/env";  
-			 populateSelectItem(url , "envSelect") ; 
-		}
+		<% if (envIsNeeded) {%>
+			function populateEnvs() {
+		        const selectedOrg = orgSelect.value ; 
+				var url = "http://localhost:8080/ResourceManagerWeb/rest/v1/o/"+ selectedOrg + "/e";  
+				 populateSelectItem(url , "envSelect") ; 
+			}
+		<% } %> 
 		
-		function populateResources() {
-	        const selectedOrg = orgSelect.value ; 
-	        const selectedEnv = envSelect.value ; 
-	        const selectedResourceType = resourceTypeSelect.value ;
-	        
-			var url = "/ResourceManagerWeb/rest/v1/o/"+selectedOrg+"/sharedflows/CorsPostFlow" ;  
-			populateSelectItem(url , "resourceSelect") ; 
-		}
-		
+		<% if (resourceTypeIsNeeded) {%>
+			function populateResources() {
+		        const selectedOrg = orgSelect.value ; 
+		        const selectedEnv = envSelect.value ; 
+		        const selectedResourceType = resourceTypeSelect.value ;
+		        
+				var url = "/ResourceManagerWeb/rest/v1/o/"+selectedOrg+"/sharedflows/CorsPostFlow" ;  
+				populateSelectItem(url , "resourceSelect") ; 
+			}
+		<%}%>
 				
 		function populateSelectItem(url , selectItemId) {
 		  var itemSelect = document.getElementById( selectItemId );
 		  itemSelect.innerHTML = ""; // Clear existing options
 		  // Perform an AJAX request
 		  var xhr = new XMLHttpRequest();
-		  xhr.open("GET", url , true);
+		  xhr.open("GET", url , false);
 		  xhr.onreadystatechange = function () {
-		    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-		      var itemData = JSON.parse(xhr.responseText.trim());
-		      for (var i = 0; i < itemData.length; i++) {
+		  try{
+			  	if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+		      	var itemData = JSON.parse(xhr.responseText.trim());
+		      	for (var i = 0; i < itemData.length; i++) {
 		        var option = document.createElement("option");
 		        option.value = itemData[i];
 		        option.textContent = itemData[i];
 		        itemSelect.appendChild(option);
-		        if (i==0) {
-		        	itemSelect.value = option.value ; 
-		        	}
-		      }
+		        
+		      	}	
+		        
 		       
+		    	}
+			  	else if (xhr.readyState === XMLHttpRequest.DONE && xhr.status !== 200) 
+			  	{ throw new Error(" Unable to Retive list of options "+ xhr.responseText.trim() + xhr.responseURL) ; }
+		    }
+		    catch ( Exception ) 
+		    { 
+		    	var messages = document.getElementById( "messages" );
+		    	messages.hidden=false ; 
+		    	messages.innerText =  Exception ; 
 		    }
 		  };
 		  xhr.send();
 		}
-	    
 	 	
-	 	<% if ( includeEnvSelect) { %>
-		    	orgSelect.addEventListener("change", function() {
-		    	populateEnvs() ;
-		    	populateResources() ;
-	    });
- 		<% } %>
  		
- 		<% if ( includeResourceTypeSelect) { %>
+ 		<% if ( resourceTypeIsNeeded) { %>
 		    	resourceTypeSelect.addEventListener("change", function() {
 		    	populateResources() ; 
 	    	});
 		<% } %>
 		
 	</script>
+	<textarea rows="" cols="" id = "messages" hidden="true"></textarea>
 	<form action="<%=request.getParameter("targetPage") %>" method="post" >
 	    
+	    <% if ( orgIsNeeded) { %>
 	    <label for="orgSelect">Select Organization:</label>
-	    <select id="orgSelect" name = "orgSelect" >
+	    <select id="orgSelect" name = "orgSelect"  >
 	        <!-- Options will be populated based on the selected Infa -->
 	    </select>
-	    
 	    <br><br>
+	    <% } %>
 	    
-	    <% if ( includeEnvSelect) { %>
+	    <% if ( envIsNeeded) { %>
 	     <label for="envSelect">Select Environment:</label>
 	    <select id="envSelect" name = "envSelect" >
 	        <!-- Options will be populated based on the selected organization -->
 	    </select>
-	    <% } %>
-
-	    <br><br> 
+	    <br><br>
+     	<% } %>
 	    
-	    <% if ( includeResourceTypeSelect) { %>
+	    <% if ( resourceTypeIsNeeded) { %>
 	     <label for="resourceTypeSelect">Select Resource Type:</label>
 	    	<select id="resourceTypeSelect" name = "resourceTypeSelect" >
 	        <option>apis</option>
@@ -128,16 +147,18 @@
 	        <option>virtualhosts</option>
 	        <option>targetservers</option>
 	    </select>
+	    <br><br>
 	    <% } %>
-	    <br><br> 
-	    <% if ( includeResourceTypeSelect) { %>
+	    
+	    <% if ( resourceTypeIsNeeded) { %>
 	     <label for="resourceSelect">Select Resource </label>
 	    	<select id="resourceSelect" name = "resourceSelect" >
 	    </select>
-	    <% } %>
 	    <br><br>
-	    <input type="hidden" id="refreshSessionInfo" name="refreshSessionInfo" value="true">
-	    <input type="hidden" id="targetPage" name="targetPage" value="<%=request.getParameter("targetPage")%>">
+	    <% } %>
+	    
+	    
+	    <input type="hidden" id="targetPage" name="targetPage" value="<%= request.getParameter("targetPage")%>">
 	    
 	    <button type="submit" name= "submit" id = "submit">Submit</button>
 	</form>

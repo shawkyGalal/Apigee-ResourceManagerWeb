@@ -15,8 +15,8 @@
 <br> 
 
     
-<jsp:include page="../InfraSelector.jsp" >
-  <jsp:param name="targetPage" value="MessageProcessorsResult.jsp" />
+<jsp:include page="../apigeeItemSelector.jsp" >
+    <jsp:param name="targetPage" value="MessageProcessorsResult.jsp" />
 </jsp:include>
  
 </body>

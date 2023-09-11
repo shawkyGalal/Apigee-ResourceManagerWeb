@@ -27,23 +27,23 @@
 <body>
 <%@include file="../intialize.jsp" %>
 <%
-		out.print(request.getParameter("partnerSelect")) ;
 		
-		%> <br>Apigee Infrastructure (<%=infra.getName() %>) <br> <br> <br> <%
-		for ( String orgName : orgs.keySet())
-		{ 
-			out.print ("<br>Products for Organization " + orgName ) ; 
+		%> <br>Apigee Infrastructure (<%=ms.getInfraName() %>) <br> <br> <br> <%
+		 
+			String orgSelect = request.getParameter("orgSelect") ; 
+			out.print ("<br>Products for Organization " + orgSelect ) ; 
 			try {
-			Organization org = orgs.get(orgName) ;  
-			List<String> envs = org.getEnvironments(); 
-			ArrayList<String> developers = org.getAllProductsNames() ; 
-			out.print(Renderer.arrayListToHtmlTable(developers)) ;
+				
+			Organization org = ms.getOrgByName(orgSelect) ;  
+			ArrayList<String> products = org.getAllProductsNames() ; 
+			out.print(Renderer.arrayListToHtmlTable(products)) ;
 			}
 			catch ( Exception e) 
 			{
-				out.print ( "<br>Unable to Display Organization developers due to : " + e.getMessage() ) ; 
+				out.print ( "<br>Unable to Display Organization Products due to : " + e.getMessage() ) ; 
 			}
-		}
+				
+		
 		%> 
 		</body>
 </html>

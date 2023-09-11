@@ -28,17 +28,19 @@
 <%@include file="../intialize.jsp" %>
 <%
 		
-		%> <br>Apigee Infrastructure (<%=infra.getName() %>) <br> <br> <br> <%
-		for ( String orgName : orgs.keySet())
-		{ 
-			out.print ("<br>Developers for Organization " + orgName ) ; 
+		%> <br>Apigee Infrastructure (<%=ms.getInfraName() %>) <br> <br> <br> <%
+			
+			
+			String orgSelect = request.getParameter("orgSelect") ;
+			out.print ("<br>Developers for Organization " + orgSelect ) ;
 			try {
-			Organization org = orgs.get(orgName) ;  
-			List<String> envs = org.getEnvironments(); 
+		
+			Organization org = ms.getOrgByName(orgSelect) ;  
+			//List<String> envs = org.getEnvironments(); 
 			ArrayList<String> developers = org.getDeveloperNames() ;
 			HashMap<String , String > extrLinks = new HashMap<String , String >() ; 
-			extrLinks.put ("devDetails.jsp?org="+orgName+"&developerId=" , "Details") ;
-			extrLinks.put ("xxxxx.jsp?org="+orgName+"&developerId=" , "xxxx") ;
+			extrLinks.put ("devDetails.jsp?org="+orgSelect+"&developerId=" , "Details") ;
+			extrLinks.put ("xxxxx.jsp?org="+orgSelect+"&developerId=" , "xxxx") ;
 			
 			out.print(Renderer.arrayListToHtmlTable(developers , extrLinks)) ;
 			}
@@ -46,7 +48,7 @@
 			{
 				out.print ( "<br>Unable to Display Organization developers due to : " + e.getMessage() ) ; 
 			}
-		}
+		
 		%> 
 		</body>
 </html>

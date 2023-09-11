@@ -11,12 +11,13 @@
 </head>
 <body>
 
-<h2>Select Apigee Infrastructure to Display KVM's for All Organizations </h2> 
+<h2>Select Apigee Infrastructure to Display KVM's for the selected environment </h2> 
 <br> 
 
     
-<jsp:include page="../InfraSelector.jsp" >
+<jsp:include page="../apigeeItemSelector.jsp" >
   <jsp:param name="targetPage" value="kvmsResult.jsp" />
+   <jsp:param name="neededAttributes" value="org,env" />
 </jsp:include>
  
 </body>

@@ -8,6 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<h1><a href = "NajizLikeSampleApp/index.jsp" target = "Najiz"> Najiz Like Sample Application </a></h1>
+	
+	
 	<a href = "InfraSelector.jsp">Select Apigee Infrastructure </a>
 	<% ManagementServer ms = (ManagementServer) session.getAttribute("ms") ;  
 		if (ms != null) out.print ("Current Infra Name : " + ms.getInfraName() ) ;  
@@ -43,18 +46,8 @@
 		<tr><td><a href = "rest/v1/o/smart-value/apis"  target = "Rest Services ">REST Services  </a></td></tr>
 	</table>
 	
-	<h1> Najiz Like Sample Application  </h1>
 	
-	<%@include file="NajizLikeSampleApp/intialize.jsp" %>
-	<%
-		String authURL = mojEnv.getUrlBuilder()
-									.withForthAuth(false)
-									.withResponseType("code")
-									.withScope("openid")
-									.buildAuthorizationURL();
-		
-	%>
-	<a href = <%=authURL%> Target = "NajizLikeApp" >Login Using Nafath Mowahad </a>
+	
 	
 </body>
 </html>

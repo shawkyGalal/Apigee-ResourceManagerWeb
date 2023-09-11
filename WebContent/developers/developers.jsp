@@ -11,12 +11,13 @@
 </head>
 <body>
 
-<h2>Select Apigee Infrastructure to Display Developers registered with Organizations </h2> 
+<h2>Select Apigee Organization to Display Developers registered with the selected Organization </h2> 
 <br> 
 
     
-<jsp:include page="../InfraSelector.jsp" >
-  <jsp:param name="targetPage" value="DevelopersResult.jsp" />
+<jsp:include page="../apigeeItemSelector.jsp" >
+  	<jsp:param name="targetPage" value="DevelopersResult.jsp" />
+ 	<jsp:param name="neededAttributes" value="org" /> 
 </jsp:include>
  
 </body>

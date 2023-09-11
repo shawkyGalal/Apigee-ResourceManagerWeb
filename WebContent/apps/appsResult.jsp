@@ -23,12 +23,12 @@
 <body>
 <%@include file="../intialize.jsp" %>
 
-		<br>Apigee Infrastructure (<%=infra.getName() %>) <br> <br> <br> <%
-		for ( String orgName : orgs.keySet())
-		{ 
-			out.print ("<br>Applications for Organization " + orgName ) ; 
+		<br>Apigee Infrastructure (<%=ms.getInfraName() %>) <br> <br> <br> <%
+			String orgSelect = request.getParameter("orgSelect") ; 
+			out.print ("<br>Applications for Organization " + orgSelect ) ; 
+					
 			try {
-				Organization org = orgs.get(orgName) ;  
+				Organization org = ms.getOrgByName(orgSelect) ;  
 				ArrayList<Application> apps = org.getAllApps() ;
 				int counter = 0 ; 
 				%>
@@ -48,8 +48,8 @@
 					%> <tr>
 							<td><%=counter%></td>
 							<td><%=app.getName()%> </td> 
-							<td><a href = "../developers/devDetails.jsp?org=<%=orgName %>&developerId=<%=developerEmail%>" > <%=developerEmail%></a></td>
-							<td><a href = "appDetails.jsp?org=<%=orgName%>&appId=<%=app.getAppId()%>" > Details</a></td>
+							<td><a href = "../developers/devDetails.jsp?org=<%=orgSelect %>&developerId=<%=developerEmail%>" > <%=developerEmail%></a></td>
+							<td><a href = "appDetails.jsp?org=<%=orgSelect%>&appId=<%=app.getAppId()%>" > Details</a></td>
 					</tr> 
 					<%
 				}
@@ -60,9 +60,9 @@
 			}
 			catch ( Exception e) 
 			{
-				out.print ( "<br>Unable to Display Organization developers due to : " + e.getMessage() ) ; 
+				out.print ( "<br>Unable to Display Organization Applications due to : " + e.getMessage() ) ; 
 			}
-		}
+		
 		%> 
 		</body>
 </html>

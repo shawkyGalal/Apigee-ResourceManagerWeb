@@ -59,8 +59,8 @@
 		serviceResponse = mojEnv.executeRequest( serviceUrl , null, "GET", "") ; 
 		out.print(Renderer.objectToHtmlTable(serviceResponse));
 		
-		
-		%><h1>Proxy : Taqadhi_ICMS </h1><%
+
+		%><h1>Proxy : Taqadhi_ICMS</h1><%
 		%><h2>Flow Name : empty (Case Details) </h2><%
 	
 		serviceBasePath = "/self-services/taqadhi_icms" ; 
@@ -69,6 +69,14 @@
 		serviceResponse = mojEnv.executeRequest( serviceUrl , null, "GET", "") ; 
 		out.print(Renderer.objectToHtmlTable(serviceResponse));
 
+		%><h1>Proxy : Taqadhi_ICMS_IAM </h1><%
+		%><h2>Flow Name : api_my-sessions-range  </h2><%
+	
+		serviceBasePath = "/v1/taqadhi_icms_iam" ; 
+		serviceSuffix = "/icms/api/my-sessions-range?DateFrom=2023-09-11&DateTo=2023-09-11" ; 
+		serviceUrl = mojEnv.getMojServicesBaseUrl() + serviceBasePath + serviceSuffix ; 
+		serviceResponse = mojEnv.executeRequest( serviceUrl , null, "GET", "") ; 
+		out.print(Renderer.objectToHtmlTable(serviceResponse));		
 		
 		%><h1>Proxy : NajizACLAttorney </h1><%
 		%><h2>Flow Name : get-all-individual-attorneys </h2><%

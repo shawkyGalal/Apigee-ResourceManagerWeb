@@ -34,10 +34,11 @@
 	
 				
 		ArrayList<String> regions = ms.getRegions() ;
-		%> <br>Apigee Infrastructure (<%=infra.getName() %>) <br> <br> <br> <%
+		%> <br>Apigee Infrastructure (<%=ms.getInfraName() %>) <br> <br> <br> <%
+		HashMap <String , Organization> orgs = ms.getOrgs() ; 
 		for ( String orgName : orgs.keySet())
 		{ 
-			Organization org = orgs.get(orgName) ;  
+			Organization org = ms.getOrgByName(orgName) ;  
 			List<String> envs = org.getEnvironments(); 
 			%>
 			  
