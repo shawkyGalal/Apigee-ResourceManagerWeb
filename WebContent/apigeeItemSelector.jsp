@@ -43,19 +43,21 @@
 			populateOrgs(); 
 			<% if ( envIsNeeded ) { %>
 	 			const orgSelect = document.getElementById("orgSelect");
-		    	orgSelect.addEventListener("change", function() {
-			    	populateEnvs() ;
-			    	<% if (resourceTypeIsNeeded) {%> populateResources() ; <% } %>  
-    			});
-			<% } %>
-		} )
-		
-		
+		    	orgSelect.addEventListener("change", function() 
+		    	{
+				    populateEnvs() ;
+				    
+				} )
+		 	<% } %>
+		})
 		function populateOrgs() {
 			 var url = "http://localhost:8080/ResourceManagerWeb/rest/v1/o" ;  
 			 populateSelectItem(url , "orgSelect") ; 
 			 <% if ( envIsNeeded ) { %>
 			 populateEnvs() ; 
+			 <% } %>
+			 <% if ( resourceTypeIsNeeded ) { %>
+			 populateResources() ; 
 			 <% } %>
 		}
 		
@@ -64,8 +66,13 @@
 		        const selectedOrg = orgSelect.value ; 
 				var url = "http://localhost:8080/ResourceManagerWeb/rest/v1/o/"+ selectedOrg + "/e";  
 				 populateSelectItem(url , "envSelect") ; 
+				 <% if (resourceTypeIsNeeded) {%> 
+				    var resourceTypeSelect = document.getElementById("resourceTypeSelect");
+				    resourceTypeSelect.addEventListener("change", function() { populateResources() ; } ) ;
+			 		<% } %>
 			}
 		<% } %> 
+		
 		
 		<% if (resourceTypeIsNeeded) {%>
 			function populateResources() {
@@ -73,7 +80,7 @@
 		        const selectedEnv = envSelect.value ; 
 		        const selectedResourceType = resourceTypeSelect.value ;
 		        
-				var url = "/ResourceManagerWeb/rest/v1/o/"+selectedOrg+"/sharedflows/CorsPostFlow" ;  
+				var url = "http://localhost:8080/ResourceManagerWeb/rest/v1/o/"+selectedOrg+"/e/"+ selectedEnv +"/" + selectedResourceType ;  
 				populateSelectItem(url , "resourceSelect") ; 
 			}
 		<%}%>
@@ -112,11 +119,7 @@
 		}
 	 	
  		
- 		<% if ( resourceTypeIsNeeded) { %>
-		    	resourceTypeSelect.addEventListener("change", function() {
-		    	populateResources() ; 
-	    	});
-		<% } %>
+ 		
 		
 	</script>
 	<textarea rows="" cols="" id = "messages" hidden="true"></textarea>
@@ -141,12 +144,10 @@
 	    <% if ( resourceTypeIsNeeded) { %>
 	     <label for="resourceTypeSelect">Select Resource Type:</label>
 	    	<select id="resourceTypeSelect" name = "resourceTypeSelect" >
-	        <option>apis</option>
-	        <option>kvm</option>
-	        <option>sharedflows</option>
-	        <option>virtualhosts</option>
-	        <option>targetservers</option>
-	    </select>
+		        <option>keyvaluemaps</option>
+		        <option>virtualhosts</option>
+		        <option>targetservers</option>
+	    	</select>
 	    <br><br>
 	    <% } %>
 	    

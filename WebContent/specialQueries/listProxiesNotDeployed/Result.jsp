@@ -4,13 +4,16 @@
 <%@page import ="com.smartvalue.apigee.rest.schema.organization.Organization"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.product.ProductsServices"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.proxy.Proxy"%>
+<%@page import ="com.smartvalue.apigee.rest.schema.developer.Developer"%>
+<%@page import ="com.smartvalue.apigee.rest.schema.server.Postgres"%>
 
-
+<%@page import ="com.smartvalue.apigee.rest.schema.TargetServer"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.virtualHost.VirtualHost"%>
 <%@page import ="com.smartvalue.apigee.resourceManager.ManagementServer"%>
 <%@page import ="java.util.*"%>
 <%@page import ="java.io.InputStream"%>
 <%@page import ="com.smartvalue.apigee.resourceManager.*"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -20,15 +23,14 @@
 <title>Insert title here</title>
 </head>
 <body>
+<h1> List Of Proxies Not Deployed To any Environment </h1>
 <%@include file="../../intialize.jsp" %>
 
 		<br>Apigee Infrastructure (<%=ms.getInfraName()%>) <br> <br> <br> 
 		<%
-			String deployedRevisionOnly = request.getParameter("deployedRevisionOnly") ; 
-			String targetServer = request.getParameter("resourceSelect") ;
 			String org = request.getParameter("orgSelect") ;
 			Organization orgObj = (Organization) ms.getOrgByName(org) ;  
-			HashMap<String, Object> proxies = orgObj.getAllProxiesUsesTargetServer(targetServer , true ); 
+			ArrayList<String> proxies = orgObj.getUndeployedProxies(); 
 			out.print(Renderer.arrayListToHtmlTable(proxies)) ;
 			
 		%> 

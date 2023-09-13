@@ -14,12 +14,9 @@
 <h2>Select Apigee Infrastructure to Display proxies Using a given Target Server </h2> 
 <br> 
 
-    
-<jsp:include page="../../InfraSelector.jsp" >
+<jsp:include page="../../apigeeItemSelector.jsp" >
   <jsp:param name="targetPage" value="Result.jsp?" />
-  <jsp:param name="includeOrgSelect" value="true" />
-  <jsp:param name="includeEnvSelect" value="true" />
-  <jsp:param name="includeResourceTypeSelect" value="true" />
+  <jsp:param name="neededAttributes" value="org, env , resourceType" /> 
   
 </jsp:include>
  
