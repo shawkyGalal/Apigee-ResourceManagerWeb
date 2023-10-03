@@ -17,6 +17,7 @@
 	%>
 	<h1> Apigee Operational Tasks </h1>
 	<table border = 1>
+		<tr><td><a href = "environments/Environments.jsp" target = "envs">Environments</a></td></tr>
 		<tr><td><a href = "products/products.jsp" target = "products" >Products </a></td></tr>
 		<tr><td><a href = "developers/developers.jsp" target = "developers">Developers  </a></td></tr>
 		<tr><td><a href = "apps/apps.jsp" target = "applications">Applications  </a></td></tr>
