@@ -60,13 +60,13 @@
 						<%  Environment envObj = org.getEnvByName(env) ; 
 							for (String  region : regions)
 							{	%> <td><table border = 1 name = "Region Message Processors "> 
-									<tr> <td>MP IP </td> <td>Heath Check </td> </tr>
+									<tr> <td>MP IP : UUID </td> <td>Heath Check </td> </tr>
 								<% 
 									try { List<MPServer> mpServers = envObj.getMessageProcesors(region) ;
 									for ( MPServer mpServer : mpServers )
 									{
 										String mpIP = mpServer.getInternalIP() ;
-										%><tr><td><%=mpIP%></td> <td>mpServer.healthCheck()</td></tr><% 
+										%><tr><td><%=mpIP%> : <%=mpServer.getuUID()%> </td> <td>mpServer.healthCheck()</td></tr><% 
 									}
 									} catch (Exception e )
 									{
@@ -80,5 +80,30 @@
 				<%}%>
 			</Table>
 	<%} %>
+	
+	 Free Message Processors
+	<Table border = 1>
+		
+		
+	
+	<% 
+	
+	for (String  region : regions)
+	{
+		ArrayList<MPServer> freeMps = ms.getFreeMps(region) ;
+		
+		out.print ("<tr><td>" + region + "</td><td>" ) ;  
+		
+		for ( MPServer freeMp :  freeMps)
+		{
+			out.println("<br>" + freeMp.getInternalIP() + ":"+ freeMp.getuUID() ) ; 
+		}
+		out.print("</td></tr>"); 
+		
+	}
+	%>
+	
+		
+	</table>
 </body>
 </html>

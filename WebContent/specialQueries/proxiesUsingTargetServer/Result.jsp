@@ -9,7 +9,7 @@
 <%@page import ="com.smartvalue.apigee.rest.schema.virtualHost.VirtualHost"%>
 <%@page import ="com.smartvalue.apigee.resourceManager.ManagementServer"%>
 <%@page import ="java.util.*"%>
-<%@page import ="java.io.InputStream"%>
+<%@page import ="java.io.*"%>
 <%@page import ="com.smartvalue.apigee.resourceManager.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -24,12 +24,18 @@
 
 		<br>Apigee Infrastructure (<%=ms.getInfraName()%>) <br> <br> <br> 
 		<%
+			
+		
+			
 			String deployedRevisionOnly = request.getParameter("deployedRevisionOnly") ; 
 			String targetServer = request.getParameter("resourceSelect") ;
 			String org = request.getParameter("orgSelect") ;
-			Organization orgObj = (Organization) ms.getOrgByName(org) ;  
+			Organization orgObj = (Organization) ms.getOrgByName(org) ;
+			OutputStream os = new org.apache.commons.io.output.WriterOutputStream(out);
+			PrintStream ps = new PrintStream(os);
+			orgObj.setPrintStream(ps); 
 			HashMap<String, Object> proxies = orgObj.getAllProxiesUsesTargetServer(targetServer , true ); 
-			out.print(Renderer.arrayListToHtmlTable(proxies)) ;
+			out.print(Renderer.objectToHtmlTable(proxies)) ;
 			
 		%> 
 		</body>

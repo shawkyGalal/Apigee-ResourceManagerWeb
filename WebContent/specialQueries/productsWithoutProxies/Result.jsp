@@ -11,7 +11,7 @@
 <%@page import ="com.smartvalue.apigee.rest.schema.virtualHost.VirtualHost"%>
 <%@page import ="com.smartvalue.apigee.resourceManager.ManagementServer"%>
 <%@page import ="java.util.*"%>
-<%@page import ="java.io.InputStream"%>
+<%@page import ="java.io.*"%>
 <%@page import ="com.smartvalue.apigee.resourceManager.*"%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -23,14 +23,20 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1> List Of Proxies Not Deployed To any Environment </h1>
+<h1> List Of Products without Proxies </h1>
 <%@include file="../../intialize.jsp" %>
 
 		<br>Apigee Infrastructure (<%=ms.getInfraName()%>) <br> <br> <br> 
 		<%
 			String org = request.getParameter("orgSelect") ;
 			
-			ArrayList<Object> products = ms.getProductServices(org).getProductsWithoutProxies(); 
+			OutputStream os = new org.apache.commons.io.output.WriterOutputStream(out);
+			PrintStream ps = new PrintStream(os);
+		
+			ProductsServices productsServices = ms.getProductServices(org); 
+			productsServices.setPrintStream(ps) ;
+			
+			ArrayList<Object> products =  productsServices.getProductsWithoutProxies(); 
 			out.print(Renderer.arrayListToHtmlTable(products)) ;
 			
 		%> 

@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<h2>Select Apigee Infrastructure to Display Message Processors associations with Environment for all available Regions </h2> 
+<h2>Display Message Processors associations with Environment for all available Regions </h2> 
 <br> 
 
     
