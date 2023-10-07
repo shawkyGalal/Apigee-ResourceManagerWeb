@@ -24,28 +24,27 @@
 <%@include file="../intialize.jsp" %>
 
 		<br>Apigee Infrastructure (<%=ms.getInfraName() %>) <br> <br> <br> <%
-			String orgSelect = request.getParameter("orgSelect") ; 
-			out.print ("<br>Applications for Organization " + orgSelect ) ; 
-					
-			try {
-				Organization org = ms.getOrgByName(orgSelect) ;  
-				ArrayList<Application> apps = org.getAllApps() ;
-				int counter = 0 ; 
-				%>
+ 	String orgSelect = request.getParameter("orgSelect") ; 
+ 	out.print ("<br>Applications for Organization " + orgSelect ) ; 
+ 			
+ 	try {
+ 		Organization org = ms.getOrgByName(orgSelect) ;  
+ 		ArrayList<AppContext> apps = org.getAllApps() ;
+ 		int counter = 0 ;
+ %>
 				<table border = 1 > 
 				<tr><td> <%=counter%><td>App Name </td>  <td>Developer</td> <td>Details</td></tr>
 				<%
-				
-				for (Application app  : apps)
-				{ 
-					String developerEmail = "xxxxxxUnknownxxxxxx"; 
-					if (app.getDeveloperId() != null )
-					{
-						Developer developer = org.getDeveloper( app.getDeveloperId() ) ;
-						developerEmail = developer.getEmail() ;
-					}
-					counter++ ; 
-					%> <tr>
+					for (AppContext app  : apps)
+						{ 
+							String developerEmail = "xxxxxxUnknownxxxxxx"; 
+							if (app.getDeveloperId() != null )
+							{
+								Developer developer = org.getDeveloper( app.getDeveloperId() ) ;
+								developerEmail = developer.getEmail() ;
+							}
+							counter++ ;
+				%> <tr>
 							<td><%=counter%></td>
 							<td><%=app.getName()%> </td> 
 							<td><a href = "../developers/devDetails.jsp?org=<%=orgSelect %>&developerId=<%=developerEmail%>" > <%=developerEmail%></a></td>

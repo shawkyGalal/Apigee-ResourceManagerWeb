@@ -17,6 +17,9 @@
 <%@page import ="com.smartvalue.apigee.rest.schema.TargetServer"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.virtualHost.VirtualHost"%>
 <%@page import ="com.smartvalue.apigee.resourceManager.ManagementServer"%>
+<%@page import ="com.smartvalue.html.AppContext"%>
+
+
 <%@page import ="java.util.*"%>
 <%@page import ="java.io.InputStream"%>
 
@@ -31,35 +34,33 @@
 <%@include file="../intialize.jsp" %>
 <body>
 <%
-	
-				
+	HashMap<String , HashMap<String , Environment>> storedEnvs = AppContext.getStoredEnvs(request, application) ; 
+		
 		ArrayList<String> regions = ms.getRegions() ;
-		%> <br>Apigee Infrastructure (<%=ms.getInfraName() %>) <br> <br> <br> <%
-		HashMap <String , Organization> orgs = ms.getOrgs() ; 
-		for ( String orgName : orgs.keySet())
+%> <br>Apigee Infrastructure (<%=ms.getInfraName() %>) <br> <br> <br> <%
+		//HashMap <String , Organization> orgs = ms.getOrgs() ; 
+		for ( String orgName : storedEnvs.keySet())
 		{ 
-			Organization org = ms.getOrgByName(orgName) ;  
-			HashMap<String , Environment> envs = org.getEnvs(); // getEnvironments(); 
+			//Organization org = ms.getOrgByName(orgName) ;  
+			HashMap<String, Environment> envs = storedEnvs.get(orgName) ; // org.getEnvironments(); 
 			%>
 			  
-			<br>Environments of Organization ( <%=org.getName() %> ) 
+			<br>Environments of Organization ( <%=orgName %> ) 
 			<Table border = 1>
-				<tr><td>Environments</td> <td>Config</td> <td colspan = 3 >Monitoring</td></tr>
+				<tr><td>Environments</td> <td>Config</td> <td colspan = 2 >Monitoring</td></tr>
 				
-				<% for (String envName : envs.keySet()) { 
-					Environment env = envs.get(envName) ; 
-					int status = env.getMonitoringStatus(); 
-				%>
+				<% for (String env : envs.keySet()) { %>
 					<tr>
-						<td><%=envName%></td>
+						<td><%=env%></td>
 						<td><a href = "EnvConfig.jsp?envName=<%=env%>&orgName=<%=orgName%>">Config </a></td>
-						<td><%=status%></td>
-						<td><a href = "EnvsMonitoring.jsp?operation=Start&envName=<%=envName%>&orgName=<%=orgName%>">Start </a></td>
-						<td><a href = "EnvsMonitoring.jsp?operation=Stop&envName=<%=envName%>&orgName=<%=orgName%>">Stop </a></td>
+						<td><a href = "EnvsMonitoring.jsp?operation=Start&envName=<%=env%>&orgName=<%=orgName%>">Start </a></td>
+						<td><a href = "EnvsMonitoring.jsp?operation=Stop&envName=<%=env%>&orgName=<%=orgName%>">Stop </a></td>
 					</tr>
 				<%}%>
 			</Table>
-	<%} %>
+		<%}
+				
+ %>
 	
 </body>
 </html>

@@ -22,35 +22,26 @@
 <%@include file="../intialize.jsp" %>
 <body>
 <%
+	HashMap<String , HashMap<String , Environment>> storedEnvs = AppContext.getStoredEnvs(request, application) ; 
 		String envName = request.getParameter("envName") ; 
 		String orgName = request.getParameter("orgName") ;
+		Environment env = storedEnvs.get(orgName).get(envName) ;  
+		
+		
+		
 		String operation = request.getParameter("operation") ;
-		String envUniqueName =  orgName + "_"+ envName ; 
-		
-		Environment env ;
-		HashMap<String , Environment> storedEnvs = ( HashMap<String , Environment> ) application.getAttribute("storedEnvs") ; 
-		if (storedEnvs == null)
-		{
-			storedEnvs= new HashMap<String , Environment>() ; 
-		}
-			
-		env = storedEnvs.get(envUniqueName); 
-		if (env == null)
-		{
-			env = ms.getOrgByName(orgName).getEnvByName(envName) ;
-			storedEnvs.put(envUniqueName, env) ;
-			application.setAttribute("storedEnvs" , storedEnvs) ; 
-		}
-		
 		if (operation.equalsIgnoreCase("start"))
 		{		 
-			env.startMonitoring(1) ;
+	env.startMonitoring(1) ;
+	out.print("Monitoring "+envUniqueName+" Successfully Started"); 
 		}
 		else if (operation.equalsIgnoreCase("stop"))
 		{
-			env.stopMonitoring() ;
+	env.stopMonitoring() ;
+	out.print("Monitoring "+envUniqueName+" Successfully Stoped");
 		}
- %>
+%>
+ 
 	
 </body>
 </html>

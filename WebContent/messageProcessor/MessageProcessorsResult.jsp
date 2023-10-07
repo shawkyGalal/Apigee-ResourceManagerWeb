@@ -38,6 +38,7 @@
 		HashMap <String , Organization> orgs = ms.getOrgs() ; 
 		for ( String orgName : orgs.keySet())
 		{ 
+			//String orgName= request.getParameter("orgSelect"); 
 			Organization org = ms.getOrgByName(orgName) ;  
 			List<String> envs = org.getEnvironments(); 
 			%>
@@ -87,7 +88,7 @@
 		
 	
 	<% 
-	
+	try {
 	for (String  region : regions)
 	{
 		ArrayList<MPServer> freeMps = ms.getFreeMps(region) ;
@@ -101,6 +102,8 @@
 		out.print("</td></tr>"); 
 		
 	}
+	}
+	catch (Exception e ) {out.print("Failure To Render Free MPS Due to " + e.getMessage()) ; }
 	%>
 	
 		
