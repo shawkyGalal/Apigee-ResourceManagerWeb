@@ -10,6 +10,7 @@
 <%@page import ="com.smartvalue.apigee.resourceManager.ManagementServer"%>
 <%@page import ="java.util.*"%>
 <%@page import ="java.io.InputStream"%>
+<%@page import ="com.smartvalue.html.AppContext"%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -22,23 +23,23 @@
 <%@include file="../intialize.jsp" %>
 <body>
 <%
-	HashMap<String , HashMap<String , Environment>> storedEnvs = AppContext.getStoredEnvs(request, application) ; 
+	HashMap<String , HashMap<String , Environment>> storedEnvs = AppContext.getStoredEnvs(application , ms ) ; 
 		String envName = request.getParameter("envName") ; 
 		String orgName = request.getParameter("orgName") ;
+		String envUniqueName = orgName + "_" + envName; 
 		Environment env = storedEnvs.get(orgName).get(envName) ;  
-		
 		
 		
 		String operation = request.getParameter("operation") ;
 		if (operation.equalsIgnoreCase("start"))
 		{		 
-	env.startMonitoring(1) ;
-	out.print("Monitoring "+envUniqueName+" Successfully Started"); 
+			env.startMonitoring(1) ;
+			out.print("Monitoring "+envUniqueName+" Successfully Started"); 
 		}
 		else if (operation.equalsIgnoreCase("stop"))
 		{
-	env.stopMonitoring() ;
-	out.print("Monitoring "+envUniqueName+" Successfully Stoped");
+			env.stopMonitoring() ;
+			out.print("Monitoring "+envUniqueName+" Successfully Stoped");
 		}
 %>
  

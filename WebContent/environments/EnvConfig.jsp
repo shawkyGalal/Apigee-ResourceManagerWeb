@@ -34,14 +34,14 @@
 <%@include file="../intialize.jsp" %>
 <body>
 <%
-	HashMap<String , HashMap<String , Environment>> storedEnvs = AppContext.getStoredEnvs(request, application) ; 
-		
-		ArrayList<String> regions = ms.getRegions() ;
-%> <br>Apigee Infrastructure (<%=ms.getInfraName() %>) <br> <br> <br> <%
+	HashMap<String , HashMap<String , Environment>> storedEnvs = AppContext.getStoredEnvs( application , ms ) ; 
+
+	ArrayList<String> regions = ms.getRegions() ;
+%> <br>Apigee Infrastructure (<%=ms.getInfraName() %>) <br> <br> <br> 
+<%
 		//HashMap <String , Organization> orgs = ms.getOrgs() ; 
 		for ( String orgName : storedEnvs.keySet())
 		{ 
-			//Organization org = ms.getOrgByName(orgName) ;  
 			HashMap<String, Environment> envs = storedEnvs.get(orgName) ; // org.getEnvironments(); 
 			%>
 			  

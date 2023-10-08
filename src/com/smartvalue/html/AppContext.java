@@ -12,32 +12,20 @@ import com.smartvalue.apigee.rest.schema.environment.Environment;
 
 public class AppContext {
 	
-	public static HashMap<String , HashMap<String , Environment>> getStoredEnvs(HttpServletRequest request , ServletContext  application , ManagementServer ms ) throws UnirestException, IOException
+	public static HashMap<String , HashMap<String , Environment>> getStoredEnvs(ServletContext  application , ManagementServer ms ) throws UnirestException, IOException
 	{
 		
-		String envName = request.getParameter("envName") ; 
-		String orgName = request.getParameter("orgName") ;
-		
-		Environment env ;
 		HashMap<String , HashMap<String , Environment>> storedEnvs = ( HashMap<String , HashMap<String , Environment>> ) application.getAttribute("storedEnvs") ; 
-		if (storedEnvs == null)
+		if (storedEnvs == null  )
 		{
-			storedEnvs= new HashMap<String , HashMap<String , Environment>> () ; 
-			storedEnvs.put(orgName , new HashMap<String , Environment> () ) ; 
+			storedEnvs= new HashMap<String , HashMap<String , Environment>> () ;
+			for ( String orgName : ms.getAllOrgNames())
+			{
+				storedEnvs.put(orgName , ms.getOrgByName(orgName).getEnvs() ) ; 
+			}
+			application.setAttribute("storedEnvs", storedEnvs);
 		}
 		
-		if (storedEnvs.get(orgName) == null)
-		{
-			storedEnvs.put(orgName , new HashMap<String , Environment>()) ; 
-		}
-			
-		env = storedEnvs.get(orgName).get(envName) ; 
-		if (env == null)
-		{
-			env = ms.getOrgByName(orgName).getEnvByName(envName) ;
-			storedEnvs.get(orgName).put(envName , env) ; 
-			application.setAttribute("storedEnvs" , storedEnvs) ;  
-		}
 		return storedEnvs ; 
 	}
 }

@@ -29,13 +29,13 @@
  			
  	try {
  		Organization org = ms.getOrgByName(orgSelect) ;  
- 		ArrayList<AppContext> apps = org.getAllApps() ;
+ 		ArrayList<Application> apps = org.getAllApps() ;
  		int counter = 0 ;
  %>
 				<table border = 1 > 
 				<tr><td> <%=counter%><td>App Name </td>  <td>Developer</td> <td>Details</td></tr>
 				<%
-					for (AppContext app  : apps)
+					for (Application app  : apps)
 						{ 
 							String developerEmail = "xxxxxxUnknownxxxxxx"; 
 							if (app.getDeveloperId() != null )

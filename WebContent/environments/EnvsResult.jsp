@@ -19,6 +19,7 @@
 <%@page import ="com.smartvalue.apigee.resourceManager.ManagementServer"%>
 <%@page import ="java.util.*"%>
 <%@page import ="java.io.InputStream"%>
+<%@page import ="com.smartvalue.html.AppContext"%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -35,14 +36,14 @@
 				
 		ArrayList<String> regions = ms.getRegions() ;
 		%> <br>Apigee Infrastructure (<%=ms.getInfraName() %>) <br> <br> <br> <%
-		HashMap <String , Organization> orgs = ms.getOrgs() ; 
-		for ( String orgName : orgs.keySet())
+		HashMap<String , HashMap<String , Environment>> storedEnvs = AppContext.getStoredEnvs(application , ms ) ; 
+		 
+		for ( String orgName : storedEnvs.keySet())
 		{ 
-			Organization org = ms.getOrgByName(orgName) ;  
-			HashMap<String , Environment> envs = org.getEnvs(); // getEnvironments(); 
+			HashMap<String , Environment> envs = storedEnvs.get(orgName) ; //org.getEnvs(); // getEnvironments(); 
 			%>
 			  
-			<br>Environments of Organization ( <%=org.getName() %> ) 
+			<br>Environments of Organization ( <%=orgName %> ) 
 			<Table border = 1>
 				<tr><td>Environments</td> <td>Config</td> <td colspan = 3 >Monitoring</td></tr>
 				
