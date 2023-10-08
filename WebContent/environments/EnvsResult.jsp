@@ -19,7 +19,6 @@
 <%@page import ="com.smartvalue.apigee.resourceManager.ManagementServer"%>
 <%@page import ="java.util.*"%>
 <%@page import ="java.io.InputStream"%>
-<%@page import ="com.smartvalue.html.AppContext"%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -36,7 +35,7 @@
 				
 		ArrayList<String> regions = ms.getRegions() ;
 		%> <br>Apigee Infrastructure (<%=ms.getInfraName() %>) <br> <br> <br> <%
-		HashMap<String , HashMap<String , Environment>> storedEnvs = AppContext.getStoredEnvs(application , ms ) ; 
+		HashMap<String , HashMap<String , Environment>> storedEnvs = ms.getStoredEnvs(false) ; 
 		 
 		for ( String orgName : storedEnvs.keySet())
 		{ 
@@ -55,8 +54,16 @@
 						<td><%=envName%></td>
 						<td><a href = "EnvConfig.jsp?envName=<%=env%>&orgName=<%=orgName%>">Config </a></td>
 						<td><%=status%></td>
-						<td><a href = "EnvsMonitoring.jsp?operation=Start&envName=<%=envName%>&orgName=<%=orgName%>">Start </a></td>
-						<td><a href = "EnvsMonitoring.jsp?operation=Stop&envName=<%=envName%>&orgName=<%=orgName%>">Stop </a></td>
+						<td><% if (status == 0 ) { 
+							%> <a href = "EnvsMonitoring.jsp?operation=Start&envName=<%=envName%>&orgName=<%=orgName%>">Start </a>  
+							<%} else {out.print("Running.."); } %>
+							</td>
+						
+						<td><% if (status == 1 ) { 
+							%>
+							<a href = "EnvsMonitoring.jsp?operation=Stop&envName=<%=envName%>&orgName=<%=orgName%>">Stop </a>
+							<%}%>
+						</td>
 					</tr>
 				<%}%>
 			</Table>

@@ -17,7 +17,6 @@
 <%@page import ="com.smartvalue.apigee.rest.schema.TargetServer"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.virtualHost.VirtualHost"%>
 <%@page import ="com.smartvalue.apigee.resourceManager.ManagementServer"%>
-<%@page import ="com.smartvalue.html.AppContext"%>
 
 
 <%@page import ="java.util.*"%>
@@ -34,7 +33,7 @@
 <%@include file="../intialize.jsp" %>
 <body>
 <%
-	HashMap<String , HashMap<String , Environment>> storedEnvs = AppContext.getStoredEnvs( application , ms ) ; 
+	HashMap<String , HashMap<String , Environment>> storedEnvs = ms.getStoredEnvs(false) ; 
 
 	ArrayList<String> regions = ms.getRegions() ;
 %> <br>Apigee Infrastructure (<%=ms.getInfraName() %>) <br> <br> <br> 

@@ -67,7 +67,7 @@
 									for ( MPServer mpServer : mpServers )
 									{
 										String mpIP = mpServer.getInternalIP() ;
-										%><tr><td><%=mpIP%> : <%=mpServer.getuUID()%> </td> <td>mpServer.healthCheck()</td></tr><% 
+										%><tr><td><%=mpIP%> : <%=mpServer.getuUID()%> <a href = "MpOperation.jsp?region=<%=region%>&orgName=<%=orgName%>&uUID=<%=mpServer.getuUID()%>&envName=<%=env%>&operation=remove" >Remove</a></td> <td>mpServer.healthCheck()</td></tr><% 
 									}
 									} catch (Exception e )
 									{
