@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
  <%@page import ="com.smartvalue.moj.clients.environments.*"%>
  <%@page import ="com.smartvalue.moj.clients.environments.Environment"%>
  <%@page import ="com.smartvalue.apigee.rest.schema.ApigeeAccessToken"%>
@@ -16,7 +14,10 @@
 </head>
 <body>
 <%@include file="intialize.jsp" %>
+<br> 
+<a href="Appointments.jsp" target="Your Appointments"> Manage Your Appointments</a>
 <%
+		
 		out.print(Renderer.objectToHtmlTable(mojEnv.getAccessToken()));
 	
 	
@@ -86,7 +87,11 @@
 		serviceUrl = mojEnv.getMojServicesBaseUrl() + serviceBasePath + serviceSuffix ; 
 		serviceResponse = mojEnv.executeRequest( serviceUrl , null, "GET", "") ; 
 		out.print(Renderer.objectToHtmlTable(serviceResponse)); 
+		
 
 %>
+
+
+
 </body>
 </html>
