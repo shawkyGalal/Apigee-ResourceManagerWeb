@@ -37,6 +37,7 @@
 	boolean envIsNeeded = neededlist.contains("env");
 	boolean resourceTypeIsNeeded = neededlist.contains("resourceType");
 	String hostIp = "10.169.3.142"; 
+	int port = request.getLocalPort() ; 
  
 	%>
 	<script>
@@ -52,7 +53,7 @@
 		 	<% } %>
 		})
 		function populateOrgs() {
-			 var url = "http://<%=hostIp%>:8080/ResourceManagerWeb/rest/v1/o" ;  
+			 var url = "http://<%=hostIp%>:<%=port%>/ResourceManagerWeb/rest/v1/o" ;  
 			 populateSelectItem(url , "orgSelect") ; 
 			 <% if ( envIsNeeded ) { %>
 			 populateEnvs() ; 
@@ -65,7 +66,7 @@
 		<% if (envIsNeeded) {%>
 			function populateEnvs() {
 		        const selectedOrg = orgSelect.value ; 
-				var url = "http://<%=hostIp%>:8080/ResourceManagerWeb/rest/v1/o/"+ selectedOrg + "/e";  
+				var url = "http://<%=hostIp%>:<%=port%>/ResourceManagerWeb/rest/v1/o/"+ selectedOrg + "/e";  
 				 populateSelectItem(url , "envSelect") ; 
 				 <% if (resourceTypeIsNeeded) {%> 
 				    var resourceTypeSelect = document.getElementById("resourceTypeSelect");
@@ -81,7 +82,7 @@
 		        const selectedEnv = envSelect.value ; 
 		        const selectedResourceType = resourceTypeSelect.value ;
 		        
-				var url = "http://<%=hostIp%>:8080/ResourceManagerWeb/rest/v1/o/"+selectedOrg+"/e/"+ selectedEnv +"/" + selectedResourceType ;  
+				var url = "http://<%=hostIp%>:<%=port%>/ResourceManagerWeb/rest/v1/o/"+selectedOrg+"/e/"+ selectedEnv +"/" + selectedResourceType ;  
 				populateSelectItem(url , "resourceSelect") ; 
 			}
 		<%}%>

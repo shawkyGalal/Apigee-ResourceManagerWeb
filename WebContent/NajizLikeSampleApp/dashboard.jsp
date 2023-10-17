@@ -3,6 +3,7 @@
  <%@page import ="com.smartvalue.apigee.rest.schema.ApigeeAccessToken"%>
  <%@page import ="com.smartvalue.apigee.resourceManager.*"%>
  <%@page import ="com.mashape.unirest.http.*"%>
+ <%@page import ="com.auth0.jwt.exceptions.TokenExpiredException"%>
  
  
  
@@ -15,18 +16,34 @@
 <body>
 <%@include file="intialize.jsp" %>
 <br> 
-<a href="Appointments.jsp" target="Your Appointments"> Manage Your Appointments</a>
+
+Welcome <%=(mojEnv.getAccessToken()!= null)?  mojEnv.getAccessToken().getEnglishFirstName() : "Not Logged"%>
+<br><a href="userProfile.jsp" target="Your Profile"> Your Profile</a>
+
 <%
 		
-		out.print(Renderer.objectToHtmlTable(mojEnv.getAccessToken()));
-	
-	
+		String serviceBasePath ; 
+		String serviceSuffix ;
+		String serviceUrl ; 
+		HttpResponse<String> serviceResponse = null ;
+		String loginPage = "/ResourceManagerWeb/NajizLikeSampleApp/index.jsp" ;  
+
+		%><h1>Proxy : Appointment </h1><%
+		%><h2>Flow Name : GetPersonFutureAppointmentsCount </h2><%
+		serviceBasePath = "/v1/self-services/appointment-mobile" ;
+		serviceSuffix = "/api/people/xxxxx/appointments-count" ; //  service will automatically replace xxxx with the logged in user id from the accesstoken  
+		serviceUrl = mojEnv.getMojServicesBaseUrl() + serviceBasePath + serviceSuffix ; 
+		try { serviceResponse = mojEnv.executeRequest( serviceUrl , null, "GET", "") ; } 
+		catch ( AccessTokenNotFound | TokenExpiredException t) {response.sendRedirect(loginPage) ; return ;  }
+		out.print(Renderer.objectToHtmlTable(serviceResponse));
+		%><h3><a href="Appointments/List.jsp" target="Your Appointments"> Manage Your Appointments</a></h3><%
+		
 		%><h1>Proxy : Exec-IntegrationServices </h1><%
 		%><h2>Flow Name : PartyRequests </h2><%
-		String serviceBasePath = "/v1/exec-integrationapis/self-services" ; 
-		String serviceSuffix = "/api/Integration/PartyRequests/1/1/1006411456/1/1" ; 
-		String serviceUrl = mojEnv.getMojServicesBaseUrl() + serviceBasePath + serviceSuffix ; 
-		HttpResponse<String> serviceResponse = mojEnv.executeRequest( serviceUrl , null, "GET", "") ; 
+		serviceBasePath = "/v1/exec-integrationapis/self-services" ; 
+		serviceSuffix = "/api/Integration/PartyRequests/1/1/1006411456/1/1" ; 
+		serviceUrl = mojEnv.getMojServicesBaseUrl() + serviceBasePath + serviceSuffix ; 
+		serviceResponse = mojEnv.executeRequest( serviceUrl , null, "GET", "") ; 
 		out.print(Renderer.objectToHtmlTable(serviceResponse));
 		
 

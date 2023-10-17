@@ -15,7 +15,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%@include file="intialize.jsp" %>
+<%@include file="../intialize.jsp" %>
 <form action="">
 
 <%
@@ -25,42 +25,11 @@
 		String serviceUrl ; 
 		HttpResponse<String> serviceResponse = null ; 
 		
-		%><h1>Proxy : Appointment </h1><%
-		%><h2>Flow Name : GetPersonFutureAppointmentsCount </h2><%
-		serviceBasePath = "/v1/self-services/appointment-mobile" ;
-		serviceSuffix = "/api/people/xxxxx/appointments-count" ; //  service will automatically replace xxxx with the logged in user id from the accesstoken  
-		serviceUrl = mojEnv.getMojServicesBaseUrl() + serviceBasePath + serviceSuffix ; 
-		try { serviceResponse = mojEnv.executeRequest( serviceUrl , null, "GET", "") ; } 
-		catch ( AccessTokenNotFound | TokenExpiredException t) {response.sendRedirect("/ResourceManagerWeb/NajizLikeSampleApp/index.jsp") ; return ;  }
-		out.print(Renderer.objectToHtmlTable(serviceResponse));
-		%>
-		
-		<h1> List My Appointments <h1>
-		<h2>Flow Name : GetPersonFutureAppointments </h2>
-		<%
-		serviceBasePath = "/v1/self-services/appointment-mobile" ;  
-		serviceSuffix = "/api/people/$userId/appointments?includeRequests=True" ; 
-		serviceUrl = mojEnv.getMojServicesBaseUrl() + serviceBasePath + serviceSuffix ; 
-		serviceResponse = mojEnv.executeRequest( serviceUrl , null, "GET", "") ; 
-		//out.print(Renderer.objectToHtmlTable(serviceResponse));
-		HashMap<String, Object>  appointments = gson.fromJson(serviceResponse.getBody(), HashMap.class);
-		ArrayList<Object> requests = (ArrayList) appointments.get("requests") ; 
-		out.print(Renderer.generateArrayHtmlTable(requests));
-		
-		for (Object req : requests)
-		{
-			out.print("<tr>"); 
-			LinkedTreeMap <String , String> ReqMap = (LinkedTreeMap) req ;
-			out.print(Renderer.hashMaptoHtmlTable(ReqMap));
-		}
-		
 		 %>
-		<br><br><br>
-		
-		======================================================
-		
 		 
 		<h1> Add a New Appointment <h1>
+		== Not Yet Completed ==  
+		
 		<h2>Flow Name : GetRegions </h2>
 		<%
 		serviceBasePath = "/v1/appointment-mobile" ;  
@@ -139,6 +108,8 @@
 				}
 			%>
 		</select>
+		<br> <br>
+		<input type="submit"  name="حجز موعد" id="submit" />
 	</form>
 
 </body>
