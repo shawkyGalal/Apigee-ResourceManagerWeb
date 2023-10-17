@@ -14,7 +14,7 @@
 	String authorizationCode = request.getParameter("code") ;
 	%>Received Authorization Code : <%=authorizationCode%><% 
 	
-	ApigeeAccessToken accessToken = mojEnv.getAccessToken(authorizationCode);
+	mojEnv.setAccessToken(authorizationCode);
 	response.sendRedirect("dashboard.jsp") ; 
 %>
 </body>
