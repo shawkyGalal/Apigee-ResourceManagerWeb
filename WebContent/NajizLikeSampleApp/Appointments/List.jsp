@@ -6,7 +6,7 @@
  <%@page import ="com.mashape.unirest.http.*"%>
  <%@page import ="com.google.gson.internal.LinkedTreeMap"%>
  <%@page import ="com.auth0.jwt.exceptions.TokenExpiredException"%>
- <%@page import ="com.smartvalue.moj.najiz.services.appointments.auto.Appointments"%>
+ <%@page import ="com.smartvalue.moj.najiz.services.appointments.auto.*"%>
  
  
 <!DOCTYPE html>
@@ -45,7 +45,12 @@
 		serviceResponse = mojEnv.executeRequest( serviceUrl , null, "GET", "") ; 
 		Appointments appointments = gson.fromJson(serviceResponse.getBody() , Appointments.class) ;
 		%><li>Your Appointments Requests</li><%
-		out.print(Renderer.arrayListToHtmlTable(appointments.getRequests()));
+		for (Request reqx : appointments.getRequests() )
+		{
+			out.print(Renderer.objectToHtmlTable(reqx));
+			out.print("<a href = 'Delete.jsp?protectedId="+reqx.getProtectedId()+"' >Delete </a>") ; 
+		}
+		// out.print(Renderer.arrayListToHtmlTable(appointments.getRequests()));
 		%><li>Your Appointments</li><%
 		out.print(Renderer.arrayListToHtmlTable(appointments.getAppointments()));
 		
