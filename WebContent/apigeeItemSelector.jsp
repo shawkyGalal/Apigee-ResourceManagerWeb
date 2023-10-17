@@ -36,8 +36,8 @@
 	boolean orgIsNeeded = neededlist.contains("org"); 
 	boolean envIsNeeded = neededlist.contains("env");
 	boolean resourceTypeIsNeeded = neededlist.contains("resourceType");
-	String hostIp = "10.169.3.142"; 
 	int port = request.getLocalPort() ; 
+	String hostIp = request.getServerName() ; //"10.169.3.142"; 
  
 	%>
 	<script>
