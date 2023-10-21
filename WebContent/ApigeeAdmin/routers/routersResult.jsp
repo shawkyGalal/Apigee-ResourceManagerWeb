@@ -37,7 +37,7 @@
 		ArrayList<String> regions = ms.getRegions() ;
 		
 		ServerServices ss = ms.getServerServices() ;	
-		%> <br>Apigee Infrastructure (<%=infra.getName() %>) <br> <br> <br> 
+		%> <br>Apigee Infrastructure (<%=ms.getInfraName() %>) <br> <br> <br> 
 			  
 
 			<Table border = 1>

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 			 
 
-@WebServlet("/rest/*")
+@WebServlet("/ApigeeAdmin/rest/*")
 public class RestServelet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
@@ -21,7 +21,7 @@ public class RestServelet extends HttpServlet {
 	        String pathInfo = request.getPathInfo();
 	        request.setAttribute("pathInfo" , pathInfo);
        
-	        String jspPage = "/root/root.jsp" ; // determineJspPage(segmentNames, segmentValues);
+	        String jspPage = "/ApigeeAdmin/root/root.jsp" ; // determineJspPage(segmentNames, segmentValues);
 
 	        // Forward the request to the selected JSP
 	        request.getRequestDispatcher(jspPage).forward(request, response);

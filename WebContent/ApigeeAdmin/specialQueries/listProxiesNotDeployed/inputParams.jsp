@@ -15,7 +15,7 @@
 <br> 
 
     
-<jsp:include page="../../apigeeItemSelector.jsp" >
+<jsp:include page="../../apigeeItemSelector.jsp" > 
   <jsp:param name="targetPage" value="Result.jsp?" />
   <jsp:param name="neededAttributes" value="org" /> 
   
