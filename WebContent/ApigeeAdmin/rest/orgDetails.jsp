@@ -4,7 +4,7 @@
 <%@page import="com.smartvalue.apigee.configuration.Partner"%>
 <%@page import="com.smartvalue.apigee.configuration.Customer"%>
 <%@page import="com.smartvalue.apigee.configuration.infra.*"%>
-<%@page import ="com.smartvalue.apigee.resourceManager.ManagementServer"%>
+<%@page import ="com.smartvalue.apigee.configuration.infra.ManagementServer"%>
 <%@page import ="java.io.InputStream"%>
 <%@page import ="com.google.gson.Gson"%>
 <% 	ServletContext serveletContext = request.getServletContext();
@@ -19,7 +19,8 @@
 	Partner partnerObj =  ac.getPartnerByName(partner) ; 
 	Customer customerObj = partnerObj.getCustomerByName(customer) ; 
 	Infra infraObj = customerObj.getInfraByName(infra) ; //.getInfra("MasterWorks" , "MOJ" , infraName) ;
-	ManagementServer ms = new ManagementServer(infraObj) ;
+	Region region0= infraObj.getRegions().get(0);  
+	ManagementServer ms = infraObj.getManagementServer(region0.getName())  ;
 	if (org== null && env == null )
 	{	
 		String[] orgs = ms.getAllOrgNames() ;

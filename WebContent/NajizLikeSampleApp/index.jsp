@@ -1,6 +1,6 @@
 <%@ page language="java"     %>
 <!DOCTYPE html>
-<%@page import ="com.smartvalue.apigee.resourceManager.ManagementServer"%>
+<%@page import ="com.smartvalue.apigee.configuration.infra.ManagementServer"%>
 <html>
 <head>
 <meta charset="ISO-8859-1">
@@ -18,6 +18,7 @@
 									.buildAuthorizationURL();
 		
 	%>
+	Your are Not Logged in , or Your Session is Expired.  
 	<a href = <%=authURL%> Target = "NajizLikeApp" >Login Using Nafath Mowahad </a>
 	<br><br>
 	

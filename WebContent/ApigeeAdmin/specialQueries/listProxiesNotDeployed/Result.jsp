@@ -9,7 +9,7 @@
 
 <%@page import ="com.smartvalue.apigee.rest.schema.TargetServer"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.virtualHost.VirtualHost"%>
-<%@page import ="com.smartvalue.apigee.resourceManager.ManagementServer"%>
+<%@page import ="com.smartvalue.apigee.configuration.infra.ManagementServer"%>
 <%@page import ="java.util.*"%>
 <%@page import ="java.io.InputStream"%>
 <%@page import ="com.smartvalue.apigee.resourceManager.*"%>
@@ -23,12 +23,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1> List Of Proxies Not Deployed To any Environment </h1>
+<%
+			String org = request.getParameter("orgSelect") ;
+%>
+<h1> List Of Proxies found in Org : <%=org %> and Not Deployed To any Environment </h1>
 <%@include file="../../intialize.jsp" %>
 
 		<br>Apigee Infrastructure (<%=ms.getInfraName()%>) <br> <br> <br> 
 		<%
-			String org = request.getParameter("orgSelect") ;
 			Organization orgObj = (Organization) ms.getOrgByName(org) ;  
 			ArrayList<String> proxies = orgObj.getUndeployedProxies(); 
 			out.print(Renderer.arrayListToHtmlTable(proxies)) ;

@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
     
 <%@page import ="com.smartvalue.apigee.rest.schema.application.Application"%>
-<%@page import ="com.smartvalue.apigee.resourceManager.ManagementServer"%>
+<%@page import ="com.smartvalue.apigee.configuration.infra.ManagementServer"%>
 <%@page import="com.smartvalue.apigee.resourceManager.Renderer"%>
     
 <!DOCTYPE html>

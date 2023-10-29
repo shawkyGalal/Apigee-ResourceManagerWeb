@@ -66,7 +66,7 @@
 		}
 	 %>
 	 <br>
-	 <a href="Create.jsp">New Appointment Request</a>
+	 <a href="CreateForm.jsp">New Appointment Request</a>
 
 </body>
 </html>

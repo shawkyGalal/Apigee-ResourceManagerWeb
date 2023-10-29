@@ -1,4 +1,4 @@
-<%@page import ="com.smartvalue.apigee.resourceManager.ManagementServer"%>
+<%@page import ="com.smartvalue.apigee.configuration.infra.ManagementServer"%>
 <%@include file="../intialize.jsp" %>
 <% 	
 	String input = (String) request.getAttribute("pathInfo");

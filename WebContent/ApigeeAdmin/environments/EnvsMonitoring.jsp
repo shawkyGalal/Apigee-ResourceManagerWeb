@@ -7,7 +7,7 @@
 <%@page import ="com.smartvalue.apigee.rest.schema.environment.Environment"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.organization.Organization"%>
 
-<%@page import ="com.smartvalue.apigee.resourceManager.ManagementServer"%>
+<%@page import ="com.smartvalue.apigee.configuration.infra.ManagementServer"%>
 <%@page import ="java.util.*"%>
 <%@page import ="java.io.InputStream"%>
 

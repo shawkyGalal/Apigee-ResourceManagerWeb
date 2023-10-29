@@ -30,10 +30,7 @@ Welcome <%=(mojEnv.getAccessToken()!= null)?  mojEnv.getAccessToken().getEnglish
 
 		%><h1>Proxy : Appointment </h1><%
 		%><h2>Flow Name : GetPersonFutureAppointmentsCount </h2><%
-		serviceBasePath = "/v1/self-services/appointment-mobile" ;
-		serviceSuffix = "/api/people/xxxxx/appointments-count" ; //  service will automatically replace xxxx with the logged in user id from the accesstoken  
-		serviceUrl = mojEnv.getMojServicesBaseUrl() + serviceBasePath + serviceSuffix ; 
-		try { serviceResponse = mojEnv.executeRequest( serviceUrl , null, "GET", "") ; } 
+		try { serviceResponse = mojEnv.getAppointmentService().GetMyFutureAppointmentsCount() ; }
 		catch ( AccessTokenNotFound | TokenExpiredException t) {response.sendRedirect(loginPage) ; return ;  }
 		out.print(Renderer.objectToHtmlTable(serviceResponse));
 		%><h3><a href="Appointments/List.jsp" target="Your Appointments"> Manage Your Appointments</a></h3><%
@@ -65,27 +62,6 @@ Welcome <%=(mojEnv.getAccessToken()!= null)?  mojEnv.getAccessToken().getEnglish
 		serviceResponse = mojEnv.executeRequest( serviceUrl , null, "GET", "") ; 
 		out.print(Renderer.objectToHtmlTable(serviceResponse));
 
-		
-		%><h1>Proxy : Taqadhi_ICMS </h1><%
-		%><h2>Flow Name : empty : ( Cases List ) </h2><%
-	
-		serviceBasePath = "/self-services/taqadhi_icms" ; 
-		serviceSuffix = "/icms/api/my-cases?pageSize=10&pageIndex=0" ; 
-		serviceUrl = mojEnv.getMojServicesBaseUrl() + serviceBasePath + serviceSuffix ; 
-		HashMap<String , String> headers =new HashMap<String , String> () ; 
-		//headers.put("")
-		serviceResponse = mojEnv.executeRequest( serviceUrl , null, "GET", "") ; 
-		out.print(Renderer.objectToHtmlTable(serviceResponse));
-		
-
-		%><h1>Proxy : Taqadhi_ICMS</h1><%
-		%><h2>Flow Name : empty (Case Details) </h2><%
-	
-		serviceBasePath = "/self-services/taqadhi_icms" ; 
-		serviceSuffix = "/icms/icms/api/cases/1a18ef54-16fc-4438-b4bb-b8edb318358b" ; 
-		serviceUrl = mojEnv.getMojServicesBaseUrl() + serviceBasePath + serviceSuffix ; 
-		serviceResponse = mojEnv.executeRequest( serviceUrl , null, "GET", "") ; 
-		out.print(Renderer.objectToHtmlTable(serviceResponse));
 
 		%><h1>Proxy : Taqadhi_ICMS_IAM </h1><%
 		%><h2>Flow Name : api_my-sessions-range  </h2><%

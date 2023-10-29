@@ -16,7 +16,7 @@
 <%@page import ="com.smartvalue.apigee.rest.schema.sharedFlow.SharedFlow"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.TargetServer"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.virtualHost.VirtualHost"%>
-<%@page import ="com.smartvalue.apigee.resourceManager.ManagementServer"%>
+<%@page import ="com.smartvalue.apigee.configuration.infra.ManagementServer"%>
 <%@page import ="java.util.*"%>
 <%@page import ="java.io.InputStream"%>
 <%@page import ="java.lang.reflect.Type"%>
@@ -33,9 +33,9 @@
 <%
 	ServletContext serveletContext = request.getServletContext();
 	InputStream inputStream = serveletContext.getResourceAsStream("/WEB-INF/classes/config.json");
-	Type apigeeConfigType = (Type) ApigeeConfig.class ;
-	JsonParser apigeeConfigParser = new JsonParser( apigeeConfigType ) ; 
-	ApigeeConfig ac = (ApigeeConfig) apigeeConfigParser.getObject(inputStream) ;
+	//Type apigeeConfigType = (Type) ApigeeConfig.class ;
+	JsonParser apigeeConfigParser = new JsonParser( ) ; 
+	ApigeeConfig ac = (ApigeeConfig) apigeeConfigParser.getObject(inputStream , ApigeeConfig.class) ;
 	
 	if (request.getParameter("submit") == null)
 	{
@@ -146,12 +146,10 @@
 		Partner partnr =  (Partner) ac.getPartnerByName(partnerSelect) ; 
 		Customer customer = partnr.getCustomerByName(customerSelect) ; 
 		Infra infra = customer.getInfraByName(infraSelect) ; 
-		ManagementServer ms = new ManagementServer(infra) ;
-		HashMap<String, Organization> orgs = ms.getOrgs() ;
+		Region region0 = infra.getRegions().get(0) ; 
+		ManagementServer ms = infra.getManagementServer(region0.getName()); // ManagementServer(infra) ;
 		session.setAttribute("ms", ms) ;
 		session.setAttribute("infra", infra) ;
-		session.setAttribute("orgs", orgs) ;
-		String targetPage = request.getParameter("targetPage") ; 
 		response.sendRedirect( "index.jsp" ) ; 
     }
     

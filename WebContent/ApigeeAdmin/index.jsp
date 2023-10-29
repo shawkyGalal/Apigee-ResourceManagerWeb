@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<%@page import ="com.smartvalue.apigee.resourceManager.ManagementServer"%>
+<%@page import ="com.smartvalue.apigee.configuration.infra.ManagementServer"%>
 <html>
 <head>
 <meta charset="ISO-8859-1">
@@ -11,10 +11,12 @@
 	
 	<a href = "InfraSelector.jsp">Select Apigee Infrastructure </a>
 	<% ManagementServer ms = (ManagementServer) session.getAttribute("ms") ;  
-		if (ms != null) out.print ("Current Infra Name : " + ms.getInfraName() ) ;  
+		if (ms != null) { out.print ("Current Infra Name : " + ms.getInfraName() ) ; }
+		else {return ; }
 	%>
 	<h1> Apigee Operational Tasks </h1>
 	<table border = 1>
+		<tr><td><a href = "proxies/proxies.jsp" target = "Proxies">Proxies</a></td></tr>
 		<tr><td><a href = "environments/Environments.jsp" target = "envs">Environments</a></td></tr>
 		<tr><td><a href = "products/products.jsp" target = "products" >Products </a></td></tr>
 		<tr><td><a href = "developers/developers.jsp" target = "developers">Developers  </a></td></tr>

@@ -11,11 +11,13 @@
 </head>
 <body>
 
-<h2>Select Apigee Infrastructure to Display All Routers </h2> 
+<h2>Select Apigee Infrastructure to Display Proxies for the selected Organization </h2> 
 <br> 
+
     
 <jsp:include page="../apigeeItemSelector.jsp" >
-  <jsp:param name="targetPage" value="routersResult.jsp" />
+  <jsp:param name="targetPage" value="proxiesResult.jsp" />
+   <jsp:param name="neededAttributes" value="org" />
 </jsp:include>
  
 </body>

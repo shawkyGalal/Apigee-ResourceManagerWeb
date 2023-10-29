@@ -7,7 +7,7 @@
 
 
 <%@page import ="com.smartvalue.apigee.rest.schema.virtualHost.VirtualHost"%>
-<%@page import ="com.smartvalue.apigee.resourceManager.ManagementServer"%>
+<%@page import ="com.smartvalue.apigee.configuration.infra.ManagementServer"%>
 <%@page import ="java.util.*"%>
 <%@page import ="java.io.*"%>
 <%@page import ="com.smartvalue.apigee.resourceManager.*"%>

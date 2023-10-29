@@ -16,8 +16,7 @@
 <%@page import ="com.smartvalue.apigee.rest.schema.TargetServer"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.virtualHost.VirtualHost"%>
 <%@page import ="com.smartvalue.apigee.resourceManager.ManagementServer"%>
-<%@page import ="java.util.*"%>
-<%@page import ="java.io.InputStream"%>
+<%@page imporcom.smartvalue.apigee.configuration.infra.ManagementServeram"%>
 <%@page import="com.smartvalue.apigee.configuration.ApigeeConfigFactory"%>
 
 

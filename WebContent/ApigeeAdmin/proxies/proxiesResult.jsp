@@ -1,5 +1,4 @@
-
-
+<%@page import="com.smartvalue.apigee.resourceManager.Renderer"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.application.Application"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.organization.Organization"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.product.ProductsServices"%>
@@ -29,28 +28,36 @@
  			
  	try {
  		Organization org = ms.getOrgByName(orgSelect) ;  
- 		ArrayList<Application> apps = org.getAllApps() ;
+ 		ArrayList<String> proxiesNames= org.getAllProxiesNames() ;
  		int counter = 0 ;
  %>
 				<table border = 1 > 
 				<tr><td> <%=counter%><td>App Name </td>  <td>Developer</td> <td>Details</td></tr>
 				<%
-					for (Application app  : apps)
+					for (String proxyName  : proxiesNames)
 						{ 
-							String developerEmail = "xxxxxxUnknownxxxxxx"; 
-							if (app.getDeveloperId() != null )
-							{
-								Developer developer = org.getDeveloper( app.getDeveloperId() ) ;
-								developerEmail = developer.getEmail() ;
-							}
-							counter++ ;
+							
 				%> <tr>
 							<td><%=counter%></td>
-							<td><%=app.getName()%> </td> 
-							<td><a href = "../developers/devDetails.jsp?org=<%=orgSelect %>&developerId=<%=developerEmail%>" > <%=developerEmail%></a></td>
-							<td><a href = "appDetails.jsp?org=<%=orgSelect%>&appId=<%=app.getAppId()%>" > Details</a></td>
+							<td><%=proxyName%> </td> 
+							<%
+							HashMap<String , List<Object>> basePaths = new HashMap<String , List<Object>>() ; 
+							try {
+								Proxy proxy = org.getProxy(proxyName) ; 
+								List<String> allversions = proxy.getRevision() ;
+								
+								for (String revision : allversions )
+								{
+									basePaths.put(revision , (List<Object>)(Object)proxy.getRevision(revision).getBasepaths() );
+								}
+							} catch(Exception e ) {}
+							%>
+							<td><%=Renderer.hashMapWithArraylisttoHtmlTable(basePaths) %> </td>
+							
 					</tr> 
+					
 					<%
+					counter++; 
 				}
 				%>
 				</table>
