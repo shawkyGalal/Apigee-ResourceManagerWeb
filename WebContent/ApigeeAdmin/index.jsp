@@ -44,7 +44,7 @@
 	
 	<h1> REST Services </h1>
 	<table border = 1>
-		<tr><td><a href = "rest/v1/o/"  target = "Rest Services ">REST Services  </a></td></tr>
+		<tr><td><a href = "rest/v1/organizations/"  target = "Rest Services ">REST Services  </a></td></tr>
 	</table>
 	
 	

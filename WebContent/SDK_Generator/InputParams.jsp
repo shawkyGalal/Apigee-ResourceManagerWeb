@@ -12,6 +12,8 @@
 <br><br>Sepecification URL : <select name = "specsUrl" id = "specsUrl"> 
 	<option id = "1"  value = "https://api.moj.gov.local/v1/najiz-services/portal/openapi.json" >https://api.moj.gov.local/v1/najiz-services/portal/openapi.json</option>
 	<option id = "2" value = "https://raw.githubusercontent.com/openapitools/openapi-generator/master/modules/openapi-generator/src/test/resources/3_0/petstore.json" >https://raw.githubusercontent.com/openapitools/openapi-generator/master/modules/openapi-generator/src/test/resources/3_0/petstore.json</option>
+	<option id = "2" value = "https://api-test.moj.gov.local/v1/nic-scj-sms/openapi.json">https://api-test.moj.gov.local/v1/nic-scj-sms/openapi.json</option>
+	
 </select>
 
 <br><br>Required Language <select name = "lang" id = "lang">
@@ -175,9 +177,9 @@ wsdl-schema
 xojo-client
 zapier
  -->
-<br><br>Package Name (hidden): <input type="hidden" name = "packageName" id = "packageName" value = "org.moj.najiz.sdk">
+<br><br>Package Name (hidden): <input type="text" name = "packageName" id = "packageName" value = "org.moj.najiz.sdk">
 
-<br><br>outputDirectory (hidden) :  <input type="hidden" name = "outputDirectory" id = "outputDirectory" value = "C:\\Users\\Shawky Foda\\Downloads\\MOJ_SDK">
+<br><br>outputDirectory (hidden) :  <input type="text" name = "outputDirectory" id = "outputDirectory" value = "C:\Users\sfoda\Documents\GitHub\MOJ_SDK\src">
 <br><br> Validate Specification ? <input type="checkbox" name="validateSpecs" id = "validateSpecs" > 
 <br><br><input type="submit" name = "submit">
 </form>

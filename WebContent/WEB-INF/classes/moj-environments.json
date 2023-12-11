@@ -21,7 +21,7 @@
 					"tokenWithPkceUrl" 			: "https://apis-test.moj.gov.sa/oidc-core/oauth2/pkce/token" ,
 					"refreshTokenWithPkceUrl"  	: "https://apis-test.moj.gov.sa/oidc-core/oauth2/pkce/token/refresh" ,
 					  
-					"redirectUri" 				: "http://10.169.3.142:81/ResourceManagerWeb/NajizLikeSampleApp/NafathCallBack.jsp", 
+					"redirectUri" 				: "http://apigeeadmin.moj.gov.sa:8181/ResourceManagerWeb/NajizLikeSampleApp/NafathCallBack.jsp", 
 					"logoutUrl"					: "https://apis-test.moj.gov.sa/oidc-core/logout/wsaml" 
 				}
 	 	}, 
@@ -46,8 +46,7 @@
 
 					"tokenWithPkceUrl" 			: "https://apis.moj.gov.sa/oidc-core/oauth2/pkce/token" ,
 					"refreshTokenWithPkceUrl"  	: "https://apis.moj.gov.sa/oidc-core/oauth2/pkce/token/refresh" ,
-					  
-					"redirectUri" 				: "http://10.169.3.142:81/ResourceManagerWeb/NajizLikeSampleApp/NafathCallBack.jsp" , 
+					"redirectUri" 				: "http://apigeeadmin.moj.gov.sa:8181/ResourceManagerWeb/NajizLikeSampleApp/NafathCallBack.jsp" , 
 					"logoutUrl"					: "https://apis.moj.gov.sa/oidc-core/logout/wsaml"
 				}
 	 	}

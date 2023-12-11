@@ -24,7 +24,7 @@
 
 		<br>Apigee Infrastructure (<%=ms.getInfraName() %>) <br> <br> <br> <%
  	String orgSelect = request.getParameter("orgSelect") ; 
- 	out.print ("<br>Applications for Organization " + orgSelect ) ; 
+ 	out.print ("<br>Proxies for Organization " + orgSelect ) ; 
  			
  	try {
  		Organization org = ms.getOrgByName(orgSelect) ;  
@@ -32,7 +32,7 @@
  		int counter = 0 ;
  %>
 				<table border = 1 > 
-				<tr><td> <%=counter%><td>App Name </td>  <td>Developer</td> <td>Details</td></tr>
+				<tr><td> <%=counter%><td>App Name </td>  <td>BasePaths</td> <td>Details</td></tr>
 				<%
 					for (String proxyName  : proxiesNames)
 						{ 
