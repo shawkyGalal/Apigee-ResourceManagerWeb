@@ -1,6 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<meta name="google-signin-client_id" content="743562068929-2m0gujbpdcs9g3gebrroeaj4hbkelc3b.apps.googleusercontent.com">
+<%@page import="java.io.IOException"%>
+<%@page import="java.io.BufferedReader"%>
+<%@page import="java.io.InputStreamReader"%>
+<%@page import="java.io.InputStream"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"  pageEncoding="ISO-8859-1"%>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -8,28 +12,30 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <head>
-
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-<script>
-  function initGoogleSignIn() {
-    gapi.load('auth2', function() {
-      gapi.auth2.init();
-    });
-  }
-
-  function onSignIn(googleUser) {
-	  var profile = googleUser.getBasicProfile();
-	  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-	  console.log('Name: ' + profile.getName());
-	  console.log('Image URL: ' + profile.getImageUrl());
-	  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-	}
-  
-</script>
+	<script src="https://accounts.google.com/gsi/client" async></script>
 </head>
-<body>
 
-<div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+<body>
+<% String client_id= "743562068929-2m0gujbpdcs9g3gebrroeaj4hbkelc3b.apps.googleusercontent.com" ;   %>
+<!--  Google Sign in  -->
+	<div id="g_id_onload"
+     data-client_id="<%=client_id %>"
+     data-context="signin"
+     data-ux_mode="popup"
+     data-login_uri="https://apigeeadmin.moj.gov.sa:8443/ResourceManagerWeb/ApigeeAdmin/loginWithGoogle/loginHandler.jsp"
+     data-auto_prompt="false">
+</div>
+
+
+<div class="g_id_signin"
+     data-type="standard"
+     data-shape="rectangular"
+     data-theme="filled_blue"
+     data-text="signin_with"
+     data-size="large"
+     data-logo_alignment="left">
+</div>
 
 </body>
 </html>
