@@ -17,13 +17,16 @@
 
 
 <body>
-<% String client_id= "743562068929-2m0gujbpdcs9g3gebrroeaj4hbkelc3b.apps.googleusercontent.com" ;   %>
+<% 
+String client_id= "743562068929-2m0gujbpdcs9g3gebrroeaj4hbkelc3b.apps.googleusercontent.com" ;   
+application.setAttribute("client_id", client_id) ; 
+%>
 <!--  Google Sign in  -->
 	<div id="g_id_onload"
      data-client_id="<%=client_id %>"
      data-context="signin"
      data-ux_mode="popup"
-     data-login_uri="https://apigeeadmin.moj.gov.sa:8443/ResourceManagerWeb/ApigeeAdmin/loginWithGoogle/loginHandler.jsp"
+     data-login_uri="https://apigeeadmin.moj.gov.sa:8443/ResourceManagerWeb/loginWithGoogle/loginHandler.jsp"
      data-auto_prompt="false">
 </div>
 
