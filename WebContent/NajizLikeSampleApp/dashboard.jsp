@@ -1,4 +1,8 @@
- <%@page import ="com.smartvalue.moj.clients.environments.*"%>
+ <%@page import="org.moj.najiz.sdk.*"%>
+  <%@page import="org.moj.najiz.sdk.api.*"%>
+  <%@page import="org.moj.najiz.sdk.model.*"%>
+  <%@page import="org.moj.najiz.sdk.auth.*"%>
+<%@page import ="com.smartvalue.moj.clients.environments.*"%>
  <%@page import ="com.smartvalue.moj.clients.environments.Environment"%>
  <%@page import ="com.smartvalue.apigee.rest.schema.ApigeeAccessToken"%>
  <%@page import ="com.smartvalue.apigee.resourceManager.*"%>
@@ -22,6 +26,24 @@ Welcome <%=(mojEnv.getAccessToken()!= null)?  mojEnv.getAccessToken().getEnglish
 
 <%
 		
+		//---1- Using generated SDK Lib
+		/*
+		%><h1>Proxy : portalservices </h1><%
+		%><h2>Flow Name : GetCaseJudges </h2><%
+		UUID caseObjectKey = UUID.randomUUID(); // UUID | The case unique identifire of type GUID
+		ApiClient defaultClient = new ApiClient() ; //.getDefaultApiClient();
+        
+    	// Configure OAuth2 access token for authorization: oauth2
+        OAuth oauth2 = (OAuth) defaultClient.getAuthentication("oauth2");
+        oauth2.setAccessToken("RfGgtk97y1f6qsFh71Q5lhBA2zIF");
+    	
+    	//defaultClient.setBasePath("https://api.moj.gov.local/v1/najiz-services/portal");
+        //defaultClient.setServerIndex(0); 
+    	CaseApi api = new CaseApi(defaultClient);
+        List<MojNajizCasesApplicationDtoCaseJudgesDto> caseJudges = api.getCaseJudges(caseObjectKey);
+        out.print(Renderer.arrayListToHtmlTable(caseJudges));
+        */
+        //---2- Using mannual sdk  
 		String serviceBasePath ; 
 		String serviceSuffix ;
 		String serviceUrl ; 
