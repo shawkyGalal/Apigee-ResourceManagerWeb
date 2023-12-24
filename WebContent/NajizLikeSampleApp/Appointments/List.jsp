@@ -6,10 +6,10 @@
  <%@page import ="com.smartvalue.apigee.resourceManager.*"%>
  <%@page import ="com.mashape.unirest.http.*"%>
  <%@page import ="com.google.gson.internal.LinkedTreeMap"%>
- <%@page import ="com.auth0.jwt.exceptions.TokenExpiredException"%>
  <%@page import ="com.smartvalue.moj.najiz.mapping.appointments.Appointments"%>
  <%@page import ="com.smartvalue.moj.najiz.mapping.appointments.auto.Request"%>
- <%@page import =" com.smartvalue.moj.najiz.mapping.appointments.AppointmentServices"%>
+ <%@page import ="com.smartvalue.moj.najiz.mapping.appointments.AppointmentServices"%>
+ <%@page import ="com.mashape.unirest.http.exceptions.UnirestException"%>
 
  
  
@@ -31,7 +31,7 @@
 		%><h2>Flow Name : GetPersonFutureAppointmentsCount </h2><%
 		
 		try { serviceResponse = mojEnv.getAppointmentService().getMyAppintmentsCount(); }
-		catch ( AccessTokenNotFound | TokenExpiredException t) {response.sendRedirect("/ResourceManagerWeb/NajizLikeSampleApp/index.jsp") ; return ;  }
+		catch ( UnirestException | AccessTokenNotFound t) {response.sendRedirect("/ResourceManagerWeb/NajizLikeSampleApp/index.jsp") ; return ;  }
 		
 		out.print(Renderer.objectToHtmlTable(serviceResponse));
 		%>
@@ -61,7 +61,7 @@
 				}
 				
 		}
-		catch ( AccessTokenNotFound | TokenExpiredException t)	{
+		catch ( UnirestException | AccessTokenNotFound t)	{
 			response.sendRedirect("/ResourceManagerWeb/NajizLikeSampleApp/index.jsp") ; return ;  
 		}
 	 %>

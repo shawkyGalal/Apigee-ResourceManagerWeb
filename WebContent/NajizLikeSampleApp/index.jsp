@@ -1,6 +1,5 @@
 <%@ page language="java"     %>
 <!DOCTYPE html>
-<%@page import ="com.smartvalue.apigee.configuration.infra.ManagementServer"%>
 <html>
 <head>
 <meta charset="ISO-8859-1">

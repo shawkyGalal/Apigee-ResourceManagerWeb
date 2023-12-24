@@ -3,8 +3,10 @@
  <%@page import ="com.smartvalue.apigee.rest.schema.ApigeeAccessToken"%>
  <%@page import ="com.smartvalue.apigee.resourceManager.*"%>
  <%@page import ="com.mashape.unirest.http.*"%>
- <%@page import ="com.auth0.jwt.exceptions.TokenExpiredException"%>
  <%@page import ="com.smartvalue.moj.najiz.mapping.appointments.AppointmentServices"%>
+ <%@page import ="com.mashape.unirest.http.exceptions.UnirestException"%>
+ 
+ 
  
 <!DOCTYPE html>
 <html>
@@ -26,7 +28,7 @@
 		try {  
 			res = appointmentServices.createRequest(req01); 
 		}
-		catch ( AccessTokenNotFound | TokenExpiredException t) {response.sendRedirect("/ResourceManagerWeb/NajizLikeSampleApp/index.jsp") ; return ;  }
+		catch ( UnirestException | AccessTokenNotFound t) {response.sendRedirect("/ResourceManagerWeb/NajizLikeSampleApp/index.jsp") ; return ;  }
 		
 		out.print(Renderer.objectToHtmlTable(req01));
 		%>

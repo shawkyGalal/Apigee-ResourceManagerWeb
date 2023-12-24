@@ -7,7 +7,7 @@
  <%@page import ="com.smartvalue.apigee.rest.schema.ApigeeAccessToken"%>
  <%@page import ="com.smartvalue.apigee.resourceManager.*"%>
  <%@page import ="com.mashape.unirest.http.*"%>
- <%@page import ="com.auth0.jwt.exceptions.TokenExpiredException"%>
+ <%@page import ="com.mashape.unirest.http.exceptions.UnirestException"%>
  
  
  
@@ -53,7 +53,7 @@ Welcome <%=(mojEnv.getAccessToken()!= null)?  mojEnv.getAccessToken().getEnglish
 		%><h1>Proxy : Appointment </h1><%
 		%><h2>Flow Name : GetPersonFutureAppointmentsCount </h2><%
 		try { serviceResponse = mojEnv.getAppointmentService().GetMyFutureAppointmentsCount() ; }
-		catch ( AccessTokenNotFound | TokenExpiredException t) {response.sendRedirect(loginPage) ; return ;  }
+		catch ( UnirestException | AccessTokenNotFound t) {response.sendRedirect(loginPage) ; return ;  }
 		out.print(Renderer.objectToHtmlTable(serviceResponse));
 		%><h3><a href="Appointments/List.jsp" target="Your Appointments"> Manage Your Appointments</a></h3><%
 		

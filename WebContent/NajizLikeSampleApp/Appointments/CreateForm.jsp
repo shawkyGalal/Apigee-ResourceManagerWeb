@@ -4,8 +4,8 @@
  <%@page import ="com.smartvalue.moj.clients.environments.*"%>
  <%@page import ="com.mashape.unirest.http.*"%>
  <%@page import ="com.google.gson.internal.LinkedTreeMap"%>
- <%@page import ="com.auth0.jwt.exceptions.TokenExpiredException"%>
- <%@page import =" com.smartvalue.moj.najiz.mapping.appointments.AppointmentServices"%>
+ <%@page import ="com.smartvalue.moj.najiz.mapping.appointments.AppointmentServices"%>
+ <%@page import ="com.mashape.unirest.http.exceptions.UnirestException"%>
  
 <!DOCTYPE html>
 <html>
@@ -110,7 +110,7 @@
 	
 	} 
 	catch ( AccessTokenNotFound ex) {response.sendRedirect("/ResourceManagerWeb/NajizLikeSampleApp/index.jsp") ; return ;  }
-	catch (TokenExpiredException ex) {mojEnv.refreshAccessToken() ; }
+	catch (UnirestException t) {mojEnv.refreshAccessToken() ; }
 	%>
 	<br><br><br>Selected Day : <input type="text" name = "date"  value = "2023-10-29">	
 	<br><br><br>Selected TimeSlot : <input type="text" name = "slotId" id = "slotId" value = "5">
