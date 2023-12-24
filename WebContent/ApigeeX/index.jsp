@@ -6,7 +6,7 @@
 <script src="https://accounts.google.com/gsi/client" async></script>
 
 <meta charset="ISO-8859-1">
-<title>MOJ Automation Services </title>
+<title>ApigeeX Migration Services </title>
 </head>
 <body>
 	<% 
@@ -30,15 +30,14 @@
 	     data-logo_alignment="left">
 	</div>
 
-	<h1> NajizLikeSample App </h1>
-		<h2><a href = "NajizLikeSampleApp/dashboard.jsp" target = "Najiz"> Najiz Sample Like Application Using Najiz SDK </a></h2>
-		<h2><a href = "SDK_Generator/InputParams.jsp" target = "SDK Generator"> SDK Generator </a></h2>
+	<h1> Build Apigee X Environments  </h1>
+		<h2><a href = "Environments/create.jsp" target = "Najiz"> 01- Create Environments  </a></h2>
+		<h2><a href = "Environments/create.jsp" target = "Najiz"> 02- Delete Environments  </a></h2>
+	We Will Use ETL ( Extract , Transform and Load ) Model 
+	<h1><a href = "ETL/extract/extract.jsp" target = "Najiz"> Extract Apigee Objects from Staging  </a></h1>
+	<h1><a href = "ETL/transform/transform.jsp" target = "Najiz"> Transform Objects to Match ApigeeX requirments </a></h1>
+	<h1><a href = "ETL/load/load.jsp" target = "load" >Load Apigee Objects to Apigee X Cloud </a></h1>
 	
-	<h1><a href = "ApigeeAdmin/index.jsp" target = "Najiz"> Apigee Administration </a></h1>
-	<br>
-	<h1><a href = "ApigeeX/index.jsp" target = "Apigee X"> Apigee X </a></h1>
-	
-	<h3><a href="loginWithGoogle/login.jsp" target = "Google Login" >Login with Google</a></h3>
 	
 </body>
 </html>

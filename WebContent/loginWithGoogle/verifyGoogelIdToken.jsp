@@ -15,20 +15,13 @@
 <body>
 <% 
 	GoogleIdToken googleIdToken= (GoogleIdToken) session.getAttribute("GoogleIdToken") ; 
-	if (googleIdToken == null)
-	{
-		response.sendRedirect("/loginWithGoogle/login.jsp");
-		return ; 
-	}
-	else 
-	{
+
 		boolean isTimeValid = IdTokenVerifier.verifyTimingOnly(googleIdToken) ;
 		if ( ! isTimeValid )
 		{
 			out.print( "Your session is Expired, You need to relogin to Google") ;
 			response.sendRedirect("/loginWithGoogle/login.jsp");
 		}
-	}
 
 %>
 

@@ -1,6 +1,7 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.List"%>
 <%@page import="com.smartvalue.apigee.resourceManager.Renderer"%>
 <%@page import="com.smartvalue.apigee.configuration.ApigeeConfig"%>
-<%@page import="com.smartvalue.apigee.configuration.infra.*"%>
 <%@page import="com.smartvalue.apigee.configuration.infra.*"%>
 
 <%@page import ="com.smartvalue.apigee.rest.schema.environment.Environment"%>
@@ -15,8 +16,7 @@
 <%@page import ="com.smartvalue.apigee.rest.schema.sharedFlow.SharedFlow"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.TargetServer"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.virtualHost.VirtualHost"%>
-<%@page import ="com.smartvalue.apigee.resourceManager.ManagementServer"%>
-<%@page imporcom.smartvalue.apigee.configuration.infra.ManagementServeram"%>
+<%@page import ="com.smartvalue.apigee.configuration.infra.ManagementServer"%>
 <%@page import="com.smartvalue.apigee.configuration.ApigeeConfigFactory"%>
 
 
@@ -31,14 +31,15 @@
 <body>
 <%
 		ServletContext serveletContext = request.getServletContext();
-		InputStream inputStream = serveletContext.getResourceAsStream("/WEB-INF/classes/config.json");
+
+		java.io.InputStream inputStream = serveletContext.getResourceAsStream("/WEB-INF/classes/config.json");
 		ApigeeConfig ac = ApigeeConfigFactory.create(inputStream) ;		
 		Infra infra = ac.getInfra("MasterWorks" , "MOJ" , "Stage") ;
 		String orgName = "stg" ; 
 		String envName = "cert-protected" ; 
 		String proxyName = "oidc-core" ; 
 		
-		ManagementServer ms = new ManagementServer(infra) ; 
+		ManagementServer ms = infra.getManagementServer("dc-1"); // ManagementServer() ; 
 	
 		
 		//out.print(Renderer.hashMaptoHtmlTable(orgs) )  ;
