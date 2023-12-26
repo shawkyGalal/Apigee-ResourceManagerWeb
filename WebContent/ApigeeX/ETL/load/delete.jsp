@@ -1,10 +1,9 @@
-<%@page import ="com.smartvalue.apigee.rest.schema.proxy.ProxyServices"%>
-
-<%@page import ="com.smartvalue.apigee.rest.schema.proxy.transformers.BundleUploadTransformer"%>
+<%@page import ="com.smartvalue.apigee.rest.schema.proxy.*"%>
 <%@page import ="com.smartvalue.moj.clients.environments.JsonParser"%>
 <%@page import ="com.smartvalue.apigee.configuration.infra.Infra"%>
 <%@page import ="com.smartvalue.apigee.configuration.infra.ManagementServer"%>
 <%@page import ="com.smartvalue.apigee.configuration.ApigeeConfig"%>
+<%@page import ="com.smartvalue.apigee.rest.schema.proxy.google.auto.GoogleProxiesList"%>
 <%@page import ="java.io.InputStream"%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -21,16 +20,17 @@
 InputStream inputStream = serveletContext.getResourceAsStream("/WEB-INF/classes/config.json");
 
 JsonParser apigeeConfigParser = new JsonParser( ) ;
-ApigeeConfig ac = apigeeConfigParser.getObject(inputStream , ApigeeConfig.class) ; 
+ApigeeConfig ac = apigeeConfigParser.getObject(inputStream , ApigeeConfig.class) ;
 
-//----- ETL Starting Extraction ----  
-Infra sourceInfra = ac.getInfra("MasterWorks" , "MOJ" , "Stage") ;
-String sourceOrgName = "stg" ; 
-ManagementServer sourceMs = sourceInfra.getManagementServer(sourceInfra.getRegions().get(0).getName()) ;
-ProxyServices sourceProxiesServices = sourceMs.getProxyServices(sourceOrgName);
-String exportFolder = "C:\\temp\\proxies" ;
-sourceProxiesServices.exportAll(exportFolder) ;
-out.print("=========Export Executed Successfully========== ") ;
+//----- ETL Starting Loading ----
+Infra destInfra = ac.getInfra("MasterWorks" , "MOJ" , "Gcloud(shawky.foda@gmail.com)") ;
+String destOrgName = "apigee-moj-stage" ; 
+String transformedFolder = "C:\\temp\\transformed\\proxies" ; 
+
+ManagementServer destMs = destInfra.getManagementServer(destInfra.getRegions().get(0).getName()) ;
+ProxyServices proxiesServices = destMs.getProxyServices(destOrgName); 
+GoogleProxiesList proxiesList= proxiesServices.getAllProxiesList(GoogleProxiesList.class); 
+proxiesServices.deleteAll(proxiesList) ;
 %>
 </body>
 </html>

@@ -38,6 +38,7 @@
 	boolean resourceTypeIsNeeded = neededlist.contains("resourceType");
 	int port = request.getLocalPort() ; 
 	String hostIp = request.getServerName() ; //"10.169.3.142"; 
+	String protocol = "https"; 
  
 	%>
 	<script>
@@ -53,7 +54,7 @@
 		 	<% } %>
 		})
 		function populateOrgs() {
-			 var url = "http://<%=hostIp%>:<%=port%>/ResourceManagerWeb/ApigeeAdmin/rest/v1/organizations" ;  
+			 var url = "<%=protocol%>://<%=hostIp%>:<%=port%>/ResourceManagerWeb/ApigeeAdmin/rest/v1/organizations" ;  
 			 populateSelectItem(url , "orgSelect") ; 
 			 <% if ( envIsNeeded ) { %>
 			 populateEnvs() ; 
@@ -66,7 +67,7 @@
 		<% if (envIsNeeded) {%>
 			function populateEnvs() {
 		        const selectedOrg = orgSelect.value ; 
-				var url = "http://<%=hostIp%>:<%=port%>/ResourceManagerWeb/ApigeeAdmin/rest/v1/organizations/"+ selectedOrg + "/environments";  
+				var url = "<%=protocol%>://<%=hostIp%>:<%=port%>/ResourceManagerWeb/ApigeeAdmin/rest/v1/organizations/"+ selectedOrg + "/environments";  
 				 populateSelectItem(url , "envSelect") ; 
 				 <% if (resourceTypeIsNeeded) {%> 
 				    var resourceTypeSelect = document.getElementById("resourceTypeSelect");
@@ -82,7 +83,7 @@
 		        const selectedEnv = envSelect.value ; 
 		        const selectedResourceType = resourceTypeSelect.value ;
 		        
-				var url = "http://<%=hostIp%>:<%=port%>/ResourceManagerWeb/ApigeeAdmin/rest/v1/organizations/"+selectedOrg+"/e/"+ selectedEnv +"/" + selectedResourceType ;  
+				var url = "<%=protocol%>://<%=hostIp%>:<%=port%>/ResourceManagerWeb/ApigeeAdmin/rest/v1/organizations/"+selectedOrg+"/e/"+ selectedEnv +"/" + selectedResourceType ;  
 				populateSelectItem(url , "resourceSelect") ; 
 			}
 		<%}%>
