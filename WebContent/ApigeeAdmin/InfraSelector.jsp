@@ -151,7 +151,8 @@
 		ms = infra.getManagementServer(region0.getName()); // ManagementServer(infra) ;
 		session.setAttribute("ms", ms) ;
 		session.setAttribute("infra", infra) ;
-		response.sendRedirect( "index.jsp" ) ; 
+		response.sendRedirect( (infra.getAccessTokenSource() !=null && infra.getAccessTokenSource().equalsIgnoreCase(Infra.GoogleWebAppCredential)) ? "../loginWithGoogle/authorize.jsp":   "index.jsp" ) ;
+		
     }
     
 	

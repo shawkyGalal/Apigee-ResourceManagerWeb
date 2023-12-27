@@ -1,3 +1,6 @@
+<%@page import="com.smartvalue.apigee.rest.schema.targetServer.TargetServerServices"%>
+<%@page import="java.io.OutputStream"%>
+<%@page import="java.io.PrintStream"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.proxy.ProxyServices"%>
 
 <%@page import ="com.smartvalue.apigee.rest.schema.proxy.transformers.BundleUploadTransformer"%>
@@ -27,9 +30,15 @@ ApigeeConfig ac = apigeeConfigParser.getObject(inputStream , ApigeeConfig.class)
 Infra sourceInfra = ac.getInfra("MasterWorks" , "MOJ" , "Stage") ;
 String sourceOrgName = "stg" ; 
 ManagementServer sourceMs = sourceInfra.getManagementServer(sourceInfra.getRegions().get(0).getName()) ;
-ProxyServices sourceProxiesServices = sourceMs.getProxyServices(sourceOrgName);
-String exportFolder = "C:\\temp\\proxies" ;
-sourceProxiesServices.exportAll(exportFolder) ;
+
+TargetServerServices tss = sourceMs.getTargetServersServices(sourceOrgName); 
+ 
+
+tss.exportAll("C:\\temp\\targetservers");
+
+//ProxyServices sps = sourceMs.getProxyServices(sourceOrgName);
+//sps.exportAll("C:\\temp\\proxies") ;
+
 out.print("=========Export Executed Successfully========== ") ;
 %>
 </body>
