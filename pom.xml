@@ -2,9 +2,10 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>ResourceManagerWeb</groupId>
   <artifactId>ResourceManagerWeb</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0.0</version>
   <properties>
   	<javaxjson.version>1.1.4</javaxjson.version>
+  	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <packaging>war</packaging>
   <build>
@@ -13,12 +14,12 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
         <configuration>
-          <release>19</release>
+          	<release>19</release>
         </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-war-plugin</artifactId>
-        <version>3.2.3</version>
+        <version>3.4.0</version>
         <configuration>
 		    <failOnMissingWebXml>false</failOnMissingWebXml>
 		</configuration>
@@ -35,9 +36,9 @@
   </dependency>
  
 	<dependency>
-	    <groupId>com.smartValue.apigee.resourceManager</groupId>
-	    <artifactId>ResourceManager</artifactId>
-	    <version>0.0.1-SNAPSHOT</version>
+	  <groupId>com.smartValue.apigee</groupId>
+	  <artifactId>resourceManager</artifactId>
+	  <version>2.0.0</version>
 	</dependency>
 	
  	<!--  MOJ-SDK Project -->  
@@ -85,5 +86,13 @@
       <artifactId>google-api-client</artifactId>
       <version>1.33.0</version>
     </dependency>
+    
+    <dependency>
+	    <groupId>javax.servlet</groupId>
+	    <artifactId>javax.servlet-api</artifactId>
+	    <version>4.0.1</version> <!-- Use the version that matches your servlet container -->
+	    <scope>provided</scope>
+	</dependency>
+
   </dependencies>
 </project>
