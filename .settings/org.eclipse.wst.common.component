@@ -19,9 +19,6 @@
         <dependent-module archiveName="resourceManager-2.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ResourceManager/ResourceManager">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="moj-sdk-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/MOJ_SDK/MOJ_SDK">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
                                 
         
         
