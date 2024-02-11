@@ -41,12 +41,13 @@
 	  <version>2.0.0</version>
 	</dependency>
 	
- 	<!--  MOJ-SDK Project -->  
+ 	<!--  MOJ-SDK Project   
 	<dependency>
 	    <groupId>org.moj.najiz</groupId>
 	    <artifactId>moj-sdk</artifactId>
 	    <version>1.0</version>
 	</dependency>
+	-->
 	
   	<!-- https://mvnrepository.com/artifact/com.mashape.unirest/unirest-java -->
 	<dependency>
