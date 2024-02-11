@@ -15,7 +15,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-@WebFilter(urlPatterns ="/ApigeeAdmin/messageProcessor/*")
+@WebFilter(urlPatterns ="/ApigeeAdmin/messageProcessorxxx/*")
 public class CommonIncludeFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
@@ -26,7 +26,7 @@ public class CommonIncludeFilter implements Filter {
     	{
     		ServletOutputStream out = response.getOutputStream(); 
     		out.print("Redirecting to Google Cloud Login .....");
-    		request.getRequestDispatcher("/loginWithGoogle/login.jsp").include(request, response);
+    		request.getRequestDispatcher("/loginWithGoogle/authorize.jsp").include(request, response);
     	}
     	else 
     	{
