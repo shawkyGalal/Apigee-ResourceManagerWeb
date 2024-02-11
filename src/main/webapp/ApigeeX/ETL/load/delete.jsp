@@ -28,7 +28,7 @@ String destOrgName = "apigee-moj-stage" ;
 String transformedFolder = "C:\\temp\\transformed\\proxies" ; 
 
 ManagementServer destMs = destInfra.getManagementServer(destInfra.getRegions().get(0).getName()) ;
-ProxyServices proxiesServices = destMs.getProxyServices(destOrgName); 
+ProxyServices proxiesServices =(ProxyServices) destMs.getProxyServices(destOrgName); 
 GoogleProxiesList proxiesList= proxiesServices.getAllProxiesList(GoogleProxiesList.class); 
 proxiesServices.deleteAll(proxiesList) ;
 %>

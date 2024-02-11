@@ -1,3 +1,4 @@
+<%@page import="com.smartvalue.apigee.rest.schema.product.Product"%>
 <%@page import="com.smartvalue.apigee.resourceManager.Renderer"%>
 <%@page import="com.smartvalue.apigee.configuration.ApigeeConfig"%>
 <%@page import="com.smartvalue.apigee.configuration.Partner"%>
@@ -7,9 +8,7 @@
 <%@page import ="com.smartvalue.apigee.rest.schema.environment.Environment"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.organization.Organization"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.product.ProductsServices"%>
-<%@page import ="com.smartvalue.apigee.rest.schema.proxy.Proxy"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.server.MPServer"%>
-<%@page import ="com.smartvalue.apigee.rest.schema.server.Postgres"%>
 
 <%@page import ="com.smartvalue.apigee.rest.schema.TargetServer"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.virtualHost.VirtualHost"%>
@@ -35,8 +34,11 @@
 			try {
 				
 			Organization org = ms.getOrgByName(orgSelect) ;  
-			ArrayList<String> products = org.getAllProductsNames() ; 
-			out.print(Renderer.arrayListToHtmlTable(products)) ;
+			ArrayList<String> products = org.getAllProductsNames() ;
+			ProductsServices ps = (ProductsServices) ms.getProductServices(orgSelect) ;
+			ArrayList<Product> allproducts =  ps.getAllProducs();
+			out.print(Renderer.arrayListToHtmlTable(allproducts)) ;
+			
 			}
 			catch ( Exception e) 
 			{

@@ -33,7 +33,7 @@
 			OutputStream os = new org.apache.commons.io.output.WriterOutputStream(out);
 			PrintStream ps = new PrintStream(os);
 		
-			ProductsServices productsServices = ms.getProductServices(org); 
+			ProductsServices productsServices = (ProductsServices)ms.getProductServices(org); 
 			productsServices.setPrintStream(ps) ;
 			
 			ArrayList<Object> products =  productsServices.getProductsWithoutProxies(); 

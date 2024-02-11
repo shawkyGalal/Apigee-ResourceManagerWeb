@@ -3,7 +3,6 @@
 <%@page import="java.io.PrintStream"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.proxy.ProxyServices"%>
 
-<%@page import ="com.smartvalue.apigee.rest.schema.proxy.transformers.ApigeeObjectTransformer"%>
 <%@page import ="com.smartvalue.moj.clients.environments.JsonParser"%>
 <%@page import ="com.smartvalue.apigee.configuration.infra.Infra"%>
 <%@page import ="com.smartvalue.apigee.configuration.infra.ManagementServer"%>
@@ -31,7 +30,7 @@ Infra sourceInfra = ac.getInfra("MasterWorks" , "MOJ" , "Stage") ;
 String sourceOrgName = "stg" ; 
 ManagementServer sourceMs = sourceInfra.getManagementServer(sourceInfra.getRegions().get(0).getName()) ;
 
-TargetServerServices tss = sourceMs.getTargetServersServices(sourceOrgName); 
+TargetServerServices tss = (TargetServerServices) sourceMs.getTargetServersServices(sourceOrgName); 
  
 
 tss.exportAll("C:\\temp\\targetservers");

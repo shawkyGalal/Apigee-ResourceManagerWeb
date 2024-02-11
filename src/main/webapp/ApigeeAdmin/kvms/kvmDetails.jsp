@@ -1,3 +1,4 @@
+<%@page import="com.smartvalue.apigee.rest.schema.keyValueMap.KvmServices"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
@@ -22,7 +23,8 @@
 		%> <br>Apigee KVM  (<%=org %>)/ <%=env %>/<%=kvm %> Details <br> <br> <br> <%
 			
 		try {
-				KeyValueMap kvmObj  = ms.getKeyValueMapServices(org).getKvmDetails(kvm) ;
+				KeyValueMap kvmObj  = ((KvmServices) ms.getKeyValueMapServices(org)).getKvmDetails(kvm) ;
+				
 				out.print(Renderer.objectToHtmlTable(kvmObj)) ; 
 			}
 			catch ( Exception e) 

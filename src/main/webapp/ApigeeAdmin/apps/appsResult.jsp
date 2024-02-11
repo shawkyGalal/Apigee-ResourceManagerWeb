@@ -9,6 +9,7 @@
 <%@page import ="com.smartvalue.apigee.rest.schema.TargetServer"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.virtualHost.VirtualHost"%>
 <%@page import ="com.smartvalue.apigee.configuration.infra.ManagementServer"%>
+<%@page import="com.smartvalue.apigee.resourceManager.Renderer"%>
 <%@page import ="java.util.*"%>
 <%@page import ="java.io.InputStream"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -32,7 +33,7 @@
  		int counter = 0 ;
  %>
 				<table border = 1 > 
-				<tr><td> <%=counter%><td>App Name </td>  <td>Developer</td> <td>Details</td></tr>
+				<tr><td> <%=counter%><td>App Name </td>  <td>Developer</td> <td>Details</td> <td>credentials</td> <td>Edge Details</td> </tr>
 				<%
 					for (Application app  : apps)
 						{ 
@@ -48,6 +49,11 @@
 							<td><%=app.getName()%> </td> 
 							<td><a href = "../developers/devDetails.jsp?org=<%=orgSelect %>&developerId=<%=developerEmail%>" > <%=developerEmail%></a></td>
 							<td><a href = "appDetails.jsp?org=<%=orgSelect%>&appId=<%=app.getAppId()%>" > Details</a></td>
+							<td><%=app.getCredentials().get(0).getApiProducts().size() %></td>
+							<td><a href = "https://api-prd-n.moj.gov.sa:3001/platform/<%=orgSelect%>/apps/<%=app.getAppId()%>" target = "edge" >Edge Details</a></td>
+							
+							
+							
 					</tr> 
 					<%
 				}

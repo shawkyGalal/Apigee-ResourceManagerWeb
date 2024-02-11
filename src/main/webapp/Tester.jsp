@@ -1,3 +1,4 @@
+<%@page import="com.smartvalue.apigee.rest.schema.proxy.ProxyServices"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
 <%@page import="com.smartvalue.apigee.resourceManager.Renderer"%>
@@ -55,7 +56,7 @@
 		Proxy proxy = org.getProxy(proxyName);
 		out.print(Renderer.objectToHtmlTable(proxy));
 		
-		ProductsServices   productServices = ms.getProductServices(orgName) ; 
+		ProductsServices   productServices = (ProductsServices)ms.getProductServices(orgName) ; 
 		//ArrayList<String>  productsWithoutProxies  =productServices.getProductsWithoutProxies(org) ;  
 		//out.print(productsWithoutProxies.toString()); 
 		 
@@ -70,7 +71,7 @@
 		//result = env.addMessageProcessor(envMpServers.get(0)) ;
 		
 		String[] aa = {"FC-ELK-Logger" ,  "ELK-Logger" ,  "FC-Elk-Logger" } ; 
-		HashMap<String , List<Object>>  result =  ms.getProxyServices(orgName).getProxiesWithoutPolices(aa, true) ;
+		HashMap<String , List<Object>>  result =  ((ProxyServices)ms.getProxyServices(orgName)).getProxiesWithoutPolices(aa, true) ;
 		
 		out.print(Renderer.hashMapWithArraylisttoHtmlTable(result));
 		

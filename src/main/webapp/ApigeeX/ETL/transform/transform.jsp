@@ -1,3 +1,4 @@
+<%@page import="com.smartvalue.apigee.rest.schema.ApigeeService"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.proxy.*"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.proxy.transformers.*"%>
@@ -18,7 +19,7 @@
 </head>
 <body>
 <%
-ServletContext serveletContext = request.getServletContext();
+	ServletContext serveletContext = request.getServletContext();
 InputStream inputStream = serveletContext.getResourceAsStream("/WEB-INF/classes/config.json");
 
 JsonParser apigeeConfigParser = new JsonParser( ) ;
@@ -28,13 +29,10 @@ ApigeeConfig ac = apigeeConfigParser.getObject(inputStream , ApigeeConfig.class)
 Infra sourceInfra = ac.getInfra("MasterWorks" , "MOJ" , "Stage") ;
 String sourceOrgName = "stg" ; 
 String transformedFolder = "C:\\temp\\transformed\\proxies" ; 
-ArrayList<ApigeeObjectTransformer> tranformers = new ArrayList<ApigeeObjectTransformer>(); 
-tranformers.add(new TargetServerTransformer() );
-tranformers.add(new NullTransformer() );
 
 ManagementServer sourceMs = sourceInfra.getManagementServer(sourceInfra.getRegions().get(0).getName()) ;
-ProxyServices sourceProxiesServices = sourceMs.getProxyServices(sourceOrgName);
-sourceProxiesServices.setBundleUploadTranformers(tranformers);
+ApigeeService sourceProxiesServices = sourceMs.getProxyServices(sourceOrgName);
+
 //sourceProxiesServices.transformAllProxies(exportFolder, transformedFolder);
 %>
 </body>
