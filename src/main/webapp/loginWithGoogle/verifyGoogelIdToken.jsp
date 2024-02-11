@@ -1,5 +1,5 @@
 <%@page import="org.apache.tomcat.util.descriptor.web.LoginConfig"%>
-<%@page import="com.smartvalue.google.IdTokenVerifier"%>
+<%@page import="com.smartvalue.google.iam.IdTokenVerifier"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"   pageEncoding="ISO-8859-1"%>
 <%@page import = "com.smartvalue.apigee.configuration.infra.ManagementServer"%>
 <%@page import = "com.google.api.client.googleapis.auth.oauth2.GoogleIdToken" %>

@@ -18,7 +18,8 @@ RUN git clone https://github.com/shawkyGalal/Apigee-ResourceManagerWeb.git
 
 
 # Build your application (if necessary)
-WORKDIR /temp/SmartTool
+
+WORKDIR /temp/ResourceManagerWeb
 mvn clean package
 RUN jar -cvf /usr/local/tomcat/webapps/ResourceManagerWeb.war *
 # ...

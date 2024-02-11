@@ -1,4 +1,4 @@
-package com.smartvalue.google;
+package com.smartvalue.google.iam;
 
 import com.google.api.client.json.jackson2.JacksonFactory; 
 import com.google.api.client.http.javanet.NetHttpTransport ; 
@@ -21,7 +21,6 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload ;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier ; 
 
 public class IdTokenVerifier {
-
 	
 	public static GoogleIdToken verifyFromRequest(String m_client_id , HttpServletRequest request  ) throws IOException, GeneralSecurityException
 	{
