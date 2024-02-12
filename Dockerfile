@@ -11,17 +11,20 @@ RUN cp -r /usr/local/tomcat/webapps.dist/* /usr/local/tomcat/webapps
 
 WORKDIR /temp
 # Clone your GitHub repository
-RUN git clone https://github.com/shawkyGalal/Apigee-ResourceManagerWeb.git 
+RUN git clone https://github.com/shawkyGalal/Apigee-ResourceManager.git 
+WORKDIR /temp/Apigee-ResourceManager
+RUN git pull 
+RUN mvn clean install -DskipTests
 
-# RUN mkdir /usr/local/tomcat/webapps/ResourceManagerWeb
-# RUN cp -r /temp/WebContent/* /usr/local/tomcat/webapps/ResourceManagerWeb
+WORKDIR /temp
+RUN git clone https://github.com/shawkyGalal/Apigee-ResourceManagerWeb.git
+ 
+# Build ( Package )  application with maven 
+WORKDIR /temp/Apigee-ResourceManagerWeb
+RUN git pull
+RUN mvn package -DskipTests 
+RUN cp -r /temp/Apigee-ResourceManagerWeb/target/*.war /usr/local/tomcat/webapps
 
-
-# Build your application (if necessary)
-
-WORKDIR /temp/ResourceManagerWeb
-mvn clean package
-RUN jar -cvf /usr/local/tomcat/webapps/ResourceManagerWeb.war *
 # ...
 
 # The rest of your Dockerfile
