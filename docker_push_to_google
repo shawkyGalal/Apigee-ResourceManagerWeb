@@ -1,0 +1,3 @@
+#---- Push to Google Cloud Container Registry 
+docker tag apigee-resourcemanager-web gcr.io/apigee-moj-stage/apigee-resourcemanager-web
+docker push gcr.io/apigee-moj-stage/apigee-resourcemanager-web

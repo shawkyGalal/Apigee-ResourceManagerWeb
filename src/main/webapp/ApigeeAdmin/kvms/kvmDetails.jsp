@@ -23,7 +23,9 @@
 		%> <br>Apigee KVM  (<%=org %>)/ <%=env %>/<%=kvm %> Details <br> <br> <br> <%
 			
 		try {
-				KeyValueMap kvmObj  = ((KvmServices) ms.getKeyValueMapServices(org)).getKvmDetails(kvm) ;
+				KvmServices kvmServices = (KvmServices) ms.getKeyValueMapServices(org) ; 
+				kvmServices.setEnvName(env) ; 
+				KeyValueMap kvmObj  = kvmServices.getKvmDetails(kvm) ;
 				
 				out.print(Renderer.objectToHtmlTable(kvmObj)) ; 
 			}
