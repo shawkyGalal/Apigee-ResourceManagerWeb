@@ -24,6 +24,7 @@ public class ApplicationContextListener implements ServletContextListener {
 		ApigeeConfig ac = null ; 
 		try {
 			ac = (ApigeeConfig) apigeeConfigParser.getObject(inputStream , ApigeeConfig.class) ;
+			ac.setFileContent(apigeeConfigParser.getFileContent()) ; 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

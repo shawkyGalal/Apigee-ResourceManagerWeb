@@ -31,15 +31,11 @@
 <html>
 
 <%
-	ServletContext serveletContext = request.getServletContext();
-	InputStream inputStream = serveletContext.getResourceAsStream("/WEB-INF/classes/config-web.json");
-	//Type apigeeConfigType = (Type) ApigeeConfig.class ;
-	JsonParser apigeeConfigParser = new JsonParser( ) ; 
-	ApigeeConfig ac = (ApigeeConfig) apigeeConfigParser.getObject(inputStream , ApigeeConfig.class) ;
+	ApigeeConfig ac = (ApigeeConfig) application.getAttribute("appConfig"); //apigeeConfigParser.getObject(inputStream , ApigeeConfig.class) ; //
 	
 	if (request.getParameter("submit") == null)
 	{
-	  String jsonData = apigeeConfigParser.getFileContent();
+	  String jsonData = ac.getFileContent();
 	
 	%>
 	<script>

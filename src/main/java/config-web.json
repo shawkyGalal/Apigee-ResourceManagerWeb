@@ -1,4 +1,7 @@
 {
+	"proxyHost" : "10.179.8.20" , 
+	"proxyPort" : "8080" ,
+	
 	"Partners":[		
 	{	"Name" : "MasterWorks" , 
 		"Customers" : [

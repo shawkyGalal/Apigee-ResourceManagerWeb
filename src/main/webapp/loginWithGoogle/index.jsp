@@ -4,11 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title> Google Authentication </title>
 </head>
 <body>
-<h2> </h2><a href = "authenticate.jsp" > Authenticate</a></h2>
+<h2><a href = "authenticate.jsp" > Authenticate</a></h2>
 <h2> <a href = "authorize.jsp" > Authorize </a> </h2>
+
+<h2> <a href = "userInfo.jsp" > Loged User Info </a> </h2>
 
 </body>
 </html>
