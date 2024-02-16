@@ -141,14 +141,14 @@
 		String infraSelect = request.getParameter("infraSelect") ;
 		Partner partnr =  (Partner) ac.getPartnerByName(partnerSelect) ; 
 		Customer customer = partnr.getCustomerByName(customerSelect) ; 
-		Infra infra = customer.getInfraByName(infraSelect) ;
+		Infra infra = ac.getInfra(partnerSelect, customerSelect, infraSelect) ;
 		ManagementServer ms = null ; 
 		Region region0 = infra.getRegions().get(0) ; 
 		ms = infra.getManagementServer(region0.getName()); // ManagementServer(infra) ;
 		session.setAttribute("ms", ms) ;
 		session.setAttribute("infra", infra) ;
 		String accessTokenSource = infra.getAccessTokenSource() ; 
-		response.sendRedirect( (accessTokenSource !=null && accessTokenSource.equalsIgnoreCase(Infra.GoogleWebAppCredential)) ? "../loginWithGoogle/authorize.jsp":   "index.jsp" ) ;
+		response.sendRedirect( (accessTokenSource !=null && accessTokenSource.equalsIgnoreCase(ApigeeConfig.GoogleWebAppCredential)) ? "../loginWithGoogle/authorize.jsp":   "index.jsp" ) ;
 		
     }
     

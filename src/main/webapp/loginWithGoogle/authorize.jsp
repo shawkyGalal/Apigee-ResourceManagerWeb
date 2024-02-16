@@ -1,3 +1,4 @@
+<%@page import="com.smartvalue.apigee.configuration.ApigeeConfig"%>
 <%@page import="java.io.IOException"%>
 <%@page import="java.io.BufferedReader"%>
 <%@page import="java.io.InputStreamReader"%>
@@ -15,9 +16,10 @@
 
 <body>
 	<% 
-	String client_id= "455673897131-f610c9tau1i582tpk8nq2q5794qdb1oi.apps.googleusercontent.com" ; //"743562068929-2m0gujbpdcs9g3gebrroeaj4hbkelc3b.apps.googleusercontent.com" ;   
-	application.setAttribute("client_id", client_id) ; 
-	String callbackUrl = "https://apigeeadmin.moj.gov.sa:8443/ResourceManagerWeb/loginWithGoogle/authCodeHandler.jsp" ; 
+		ApigeeConfig ac = (ApigeeConfig)application.getAttribute("appConfig") ;
+		String clientId = ac.getGoogleWebAppCredential().getClient_id() ; //"455673897131-f610c9tau1i582tpk8nq2q5794qdb1oi.apps.googleusercontent.com" ; //"743562068929-2m0gujbpdcs9g3gebrroeaj4hbkelc3b.apps.googleusercontent.com" ;
+	    String contextPath = request.getContextPath(); 
+		String callbackUrl = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+contextPath+"/loginWithGoogle/authCodeHandler.jsp" ; 
 	%>
 	
 	Apigee Organization You Have Selected is configured as an Apigee X Google Cloud Project, You Need To Authorize Access to this Project
@@ -27,8 +29,8 @@
 	function requestCode()
 	{
 		const client = google.accounts.oauth2.initCodeClient({
-			  client_id: '<%=client_id %>',
-			  scope: 'https://www.googleapis.com/auth/calendar.readonly',
+			  client_id: '<%=clientId %>',
+			  scope: 'https://www.googleapis.com/auth/cloud-platform' ,
 			  ux_mode: 'redirect',
 			  redirect_uri: "<%=callbackUrl%>",
 			  state: "YOUR_BINDING_VALUE"

@@ -11,8 +11,11 @@
 </head>
 <body>
 <%
+
 	GoogleIdToken googleIdToken = (GoogleIdToken) session.getAttribute("GoogleIdToken");
-		
+	%>
+	<img alt="<%=googleIdToken.getPayload().get("name")%>" src="<%=googleIdToken.getPayload().get("picture")%>">
+	<%	
 	out.print(Renderer.objectToHtmlTable(googleIdToken.getPayload())); 
 %>
 

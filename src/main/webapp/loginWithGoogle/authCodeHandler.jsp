@@ -16,7 +16,8 @@
 <%
 	ManagementServer ms = (ManagementServer)session.getAttribute("ms"); 
 	String authCode = request.getParameter("code") ;
-	String redirectUri = "https://apigeeadmin.moj.gov.sa:8443/ResourceManagerWeb/loginWithGoogle/authCodeHandler.jsp" ; 
+	String contextPath = request.getContextPath(); 
+	String redirectUri = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+contextPath+"/loginWithGoogle/authCodeHandler.jsp" ; 
 	ms.webLogin(authCode, redirectUri) ; 
 	response.sendRedirect("../ApigeeAdmin/index.jsp"); 
 %>
