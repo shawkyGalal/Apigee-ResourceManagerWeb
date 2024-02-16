@@ -1,5 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"  pageEncoding="ISO-8859-1"%>
+<%@page import ="com.smartvalue.apigee.configuration.ApigeeConfig"%>
+<%@page import ="com.smartvalue.apigee.configuration.infra.googleWebAppCredential.GoogleWebAppCredential"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,19 +13,23 @@
 </head>
 <body>
 	<% 
-	String client_id= "455673897131-f610c9tau1i582tpk8nq2q5794qdb1oi.apps.googleusercontent.com" ; //"743562068929-2m0gujbpdcs9g3gebrroeaj4hbkelc3b.apps.googleusercontent.com" ;   
-	application.setAttribute("client_id", client_id) ; 
+	String contextPath = request.getContextPath(); 
+	ApigeeConfig ac = (ApigeeConfig) application.getAttribute("appConfig") ;
+	GoogleWebAppCredential googleWebAppCredential = ac.getGoogleWebAppCredential(); 
+	String data_login_uri = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+contextPath+"/loginWithGoogle/loginHandler.jsp" ; 
+	String client_id= googleWebAppCredential.getClient_id() ;    
+	 
 	%>
 	<!--  Google Sign in  Using  Google button --> 
 	<div id="g_id_onload"
 	     data-client_id="<%=client_id %>"
 	     data-context="signin"
 	     data-ux_mode="popup"
-	     data-login_uri="https://apigeeadmin.moj.gov.sa:8443/ResourceManagerWeb/loginWithGoogle/loginHandler.jsp"
+	     data-login_uri="<%=data_login_uri%>"
 	     data-auto_prompt="false">
 	</div>
 	
-		<div class="g_id_signin"
+	<div class="g_id_signin"
 	     data-type="standard"
 	     data-shape="rectangular"
 	     data-theme="filled_blue"
@@ -36,7 +43,7 @@
 	<div id="g_id_onload"
 	     data-client_id="<%=client_id %>"
 	     data-context="use"
-	     data-login_uri="https://apigeeadmin.moj.gov.sa:8443/ResourceManagerWeb/loginWithGoogle/loginHandler.jsp"
+	     data-login_uri="<%=data_login_uri%>"
 	     data-nonce=""
 	     data-itp_support="true">
 	</div>

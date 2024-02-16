@@ -13,20 +13,20 @@
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="moj-sdk-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/MOJ_SDK/MOJ_SDK">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-                                        
+                                                
+        
         
         
         
         <property name="java-output-path" value="/ResourceManagerWeb/build/classes"/>
         <property name="context-root" value="ResourceManagerWeb"/>
-                                    
+    
     
     
     
     </wb-module>
-                
+                    
+
 
 
 

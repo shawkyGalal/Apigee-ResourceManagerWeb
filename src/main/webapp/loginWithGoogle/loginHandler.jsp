@@ -1,6 +1,10 @@
 <%@page import = "com.smartvalue.apigee.configuration.infra.ManagementServer"%>
 <%@page import = "com.google.api.client.googleapis.auth.oauth2.GoogleIdToken" %>
 <%@page import = "com.smartvalue.google.iam.IdTokenVerifier" %>
+<%@page import ="com.smartvalue.apigee.configuration.ApigeeConfig"%>
+<%@page import ="com.smartvalue.apigee.configuration.infra.googleWebAppCredential.GoogleWebAppCredential"%>
+
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"  pageEncoding="ISO-8859-1"%>
 
 <!DOCTYPE html>
@@ -14,11 +18,9 @@
 <body>
 <%
 
-String client_id= (String) application.getAttribute("client_id") ; 
-	if (client_id == null )
-	{
-		application.setAttribute("client_id" , "743562068929-2m0gujbpdcs9g3gebrroeaj4hbkelc3b.apps.googleusercontent.com" ) ; 
-	}
+	ApigeeConfig ac = (ApigeeConfig) application.getAttribute("appConfig") ;
+	GoogleWebAppCredential googleWebAppCredential = ac.getGoogleWebAppCredential();
+	String client_id= googleWebAppCredential.getClient_id(); //(String) application.getAttribute("client_id") ; 
 		
 	GoogleIdToken googleIdToken = IdTokenVerifier.verifyFromRequest(client_id, (javax.servlet.http.HttpServletRequest)request) ; 
 	
