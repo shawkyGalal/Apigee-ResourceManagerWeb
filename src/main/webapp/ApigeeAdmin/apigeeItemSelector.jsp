@@ -1,26 +1,16 @@
 <%@page import="com.smartvalue.apigee.resourceManager.Renderer"%>
-<%@page import="com.smartvalue.apigee.configuration.ApigeeConfig"%>
+<%@page import="com.smartvalue.apigee.configuration.AppConfig"%>
 <%@page import="com.smartvalue.apigee.configuration.Partner"%>
 <%@page import="com.smartvalue.apigee.configuration.Customer"%>
 <%@page import="com.smartvalue.apigee.configuration.infra.*"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.environment.Environment"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.organization.Organization"%>
-<%@page import ="com.smartvalue.apigee.rest.schema.product.ProductsServices"%>
-<%@page import ="com.smartvalue.apigee.rest.schema.proxy.Proxy"%>
-<%@page import ="com.smartvalue.apigee.rest.schema.server.MPServer"%>
-<%@page import ="com.smartvalue.apigee.rest.schema.server.Postgres"%>
-<%@page import ="com.smartvalue.apigee.rest.schema.server.Router"%>
-<%@page import ="com.smartvalue.apigee.rest.schema.server.Server"%>
-<%@page import ="com.smartvalue.apigee.rest.schema.server.ServerServices"%>
-<%@page import ="com.smartvalue.apigee.rest.schema.sharedFlow.SharedFlow"%>
-<%@page import ="com.smartvalue.apigee.rest.schema.TargetServer"%>
-<%@page import ="com.smartvalue.apigee.rest.schema.virtualHost.VirtualHost"%>
+
 <%@page import ="com.smartvalue.apigee.configuration.infra.ManagementServer"%>
 <%@page import ="java.util.*"%>
 <%@page import ="java.io.InputStream"%>
 <%@page import ="java.lang.reflect.Type"%>
-<%@page import ="com.smartvalue.moj.clients.environments.JsonParser"%>
-<%@page import="com.smartvalue.apigee.configuration.ApigeeConfigFactory"%>
+
 <%@page import="com.smartvalue.apigee.configuration.infra.Infra"%>
 
 

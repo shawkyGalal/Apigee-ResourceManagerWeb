@@ -1,3 +1,4 @@
+<%@page import="com.smartvalue.apigee.rest.schema.server.MPServer"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.environment.Environment"%>
 <%@page import="com.smartvalue.apigee.resourceManager.Renderer"%>
 

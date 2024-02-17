@@ -1,3 +1,4 @@
+<%@page import="com.smartvalue.html.AppContext"%>
 <%@page import="com.smartvalue.apigee.rest.schema.targetServer.TargetServerServices"%>
 <%@page import="java.io.OutputStream"%>
 <%@page import="java.io.PrintStream"%>
@@ -6,7 +7,7 @@
 <%@page import ="com.smartvalue.moj.clients.environments.JsonParser"%>
 <%@page import ="com.smartvalue.apigee.configuration.infra.Infra"%>
 <%@page import ="com.smartvalue.apigee.configuration.infra.ManagementServer"%>
-<%@page import ="com.smartvalue.apigee.configuration.ApigeeConfig"%>
+<%@page import ="com.smartvalue.apigee.configuration.AppConfig"%>
 <%@page import ="java.io.InputStream"%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -19,11 +20,7 @@
 </head>
 <body>
 <%
-	ServletContext serveletContext = request.getServletContext();
-InputStream inputStream = serveletContext.getResourceAsStream("/WEB-INF/classes/config.json");
-
-JsonParser apigeeConfigParser = new JsonParser( ) ;
-ApigeeConfig ac = apigeeConfigParser.getObject(inputStream , ApigeeConfig.class) ; 
+	AppConfig ac = AppContext.getAppConfig(application);
 
 //----- ETL Starting Extraction ----  
 Infra sourceInfra = ac.getInfra("MasterWorks" , "MOJ" , "Stage") ;

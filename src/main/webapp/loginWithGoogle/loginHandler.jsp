@@ -1,7 +1,8 @@
+<%@page import="com.smartvalue.html.AppContext"%>
 <%@page import = "com.smartvalue.apigee.configuration.infra.ManagementServer"%>
 <%@page import = "com.google.api.client.googleapis.auth.oauth2.GoogleIdToken" %>
 <%@page import = "com.smartvalue.google.iam.IdTokenVerifier" %>
-<%@page import ="com.smartvalue.apigee.configuration.ApigeeConfig"%>
+<%@page import ="com.smartvalue.apigee.configuration.AppConfig"%>
 <%@page import ="com.smartvalue.apigee.configuration.infra.googleWebAppCredential.GoogleWebAppCredential"%>
 
 
@@ -17,8 +18,7 @@
 </head>
 <body>
 <%
-
-	ApigeeConfig ac = (ApigeeConfig) application.getAttribute("appConfig") ;
+	AppConfig ac = AppContext.getAppConfig(application); 
 	GoogleWebAppCredential googleWebAppCredential = ac.getGoogleWebAppCredential();
 	String client_id= googleWebAppCredential.getClient_id(); //(String) application.getAttribute("client_id") ; 
 		
@@ -27,10 +27,9 @@
 	if (googleIdToken != null )
 	{
 		out.print( googleIdToken.getPayload().getEmail()) ; 
-		session.setAttribute("GoogleIdToken", googleIdToken); 
+		session.setAttribute( AppContext.GOOGLE_ID_TOKEN_VAR_NAME, googleIdToken); 
 		response.sendRedirect("userInfo.jsp"); 
 	}
-
 %>
 
 </body>

@@ -1,5 +1,5 @@
 <%@page import="com.smartvalue.apigee.resourceManager.Renderer"%>
-<%@page import="com.smartvalue.apigee.configuration.ApigeeConfig"%>
+<%@page import="com.smartvalue.apigee.configuration.AppConfig"%>
 <%@page import="com.smartvalue.apigee.configuration.Partner"%>
 <%@page import="com.smartvalue.apigee.configuration.Customer"%>
 <%@page import="com.smartvalue.apigee.configuration.infra.*"%>

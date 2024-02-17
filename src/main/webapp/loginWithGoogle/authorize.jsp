@@ -1,4 +1,5 @@
-<%@page import="com.smartvalue.apigee.configuration.ApigeeConfig"%>
+<%@page import="com.smartvalue.html.AppContext"%>
+<%@page import="com.smartvalue.apigee.configuration.AppConfig"%>
 <%@page import="java.io.IOException"%>
 <%@page import="java.io.BufferedReader"%>
 <%@page import="java.io.InputStreamReader"%>
@@ -15,8 +16,7 @@
 
 
 <body>
-	<% 
-		ApigeeConfig ac = (ApigeeConfig)application.getAttribute("appConfig") ;
+	<% 	AppConfig ac = AppContext.getAppConfig(application);
 		String clientId = ac.getGoogleWebAppCredential().getClient_id() ; //"455673897131-f610c9tau1i582tpk8nq2q5794qdb1oi.apps.googleusercontent.com" ; //"743562068929-2m0gujbpdcs9g3gebrroeaj4hbkelc3b.apps.googleusercontent.com" ;
 	    String contextPath = request.getContextPath(); 
 		String callbackUrl = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+contextPath+"/loginWithGoogle/authCodeHandler.jsp" ; 

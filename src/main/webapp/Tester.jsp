@@ -1,8 +1,9 @@
+<%@page import="com.smartvalue.html.AppContext"%>
 <%@page import="com.smartvalue.apigee.rest.schema.proxy.ProxyServices"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
 <%@page import="com.smartvalue.apigee.resourceManager.Renderer"%>
-<%@page import="com.smartvalue.apigee.configuration.ApigeeConfig"%>
+<%@page import="com.smartvalue.apigee.configuration.AppConfig"%>
 <%@page import="com.smartvalue.apigee.configuration.infra.*"%>
 
 <%@page import ="com.smartvalue.apigee.rest.schema.environment.Environment"%>
@@ -18,7 +19,7 @@
 <%@page import ="com.smartvalue.apigee.rest.schema.TargetServer"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.virtualHost.VirtualHost"%>
 <%@page import ="com.smartvalue.apigee.configuration.infra.ManagementServer"%>
-<%@page import="com.smartvalue.apigee.configuration.ApigeeConfigFactory"%>
+<%@page import="com.smartvalue.apigee.configuration.AppConfigFactory"%>
 
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -31,10 +32,8 @@
 </head>
 <body>
 <%
-		ServletContext serveletContext = request.getServletContext();
 
-		java.io.InputStream inputStream = serveletContext.getResourceAsStream("/WEB-INF/classes/config.json");
-		ApigeeConfig ac = ApigeeConfigFactory.create(inputStream) ;		
+		AppConfig ac = AppContext.getAppConfig(application);		
 		Infra infra = ac.getInfra("MasterWorks" , "MOJ" , "Stage") ;
 		String orgName = "stg" ; 
 		String envName = "cert-protected" ; 
@@ -74,7 +73,6 @@
 		HashMap<String , List<Object>>  result =  ((ProxyServices)ms.getProxyServices(orgName)).getProxiesWithoutPolices(aa, true) ;
 		
 		out.print(Renderer.hashMapWithArraylisttoHtmlTable(result));
-		
 %>
 </body>
 </html>

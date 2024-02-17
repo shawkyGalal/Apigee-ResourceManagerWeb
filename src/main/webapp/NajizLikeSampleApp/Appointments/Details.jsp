@@ -43,7 +43,7 @@
 		for (Object req : requests)
 		{
 			out.print("<tr>"); 
-			LinkedTreeMap <String , String> ReqMap = (LinkedTreeMap) req ;
+			LinkedTreeMap <Object , String> ReqMap = (LinkedTreeMap) req ;
 			out.print(Renderer.hashMaptoHtmlTable(ReqMap));
 		}
 		

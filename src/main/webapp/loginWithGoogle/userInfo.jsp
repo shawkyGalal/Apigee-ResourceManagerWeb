@@ -1,3 +1,4 @@
+<%@page import="com.smartvalue.html.AppContext"%>
 <%@page import="com.smartvalue.apigee.resourceManager.Renderer"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -11,13 +12,14 @@
 </head>
 <body>
 <%
-
-	GoogleIdToken googleIdToken = (GoogleIdToken) session.getAttribute("GoogleIdToken");
+	GoogleIdToken googleIdToken = AppContext.getGoogleIdToken(session);
 	%>
 	<img alt="<%=googleIdToken.getPayload().get("name")%>" src="<%=googleIdToken.getPayload().get("picture")%>">
+	Google ID Token Details : 
 	<%	
 	out.print(Renderer.objectToHtmlTable(googleIdToken.getPayload())); 
 %>
+<a href = "../index.jsp">Home</a>
 
 </body>
 </html>

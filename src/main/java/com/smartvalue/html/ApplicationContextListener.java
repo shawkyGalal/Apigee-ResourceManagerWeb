@@ -8,7 +8,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
-import com.smartvalue.apigee.configuration.ApigeeConfig;
+import com.smartvalue.apigee.configuration.AppConfig;
 import com.smartvalue.moj.clients.environments.JsonParser;
 
 @WebListener
@@ -21,9 +21,9 @@ public class ApplicationContextListener implements ServletContextListener {
 		ServletContext sc = sce.getServletContext(); 
 		java.io.InputStream inputStream = sc.getResourceAsStream("/WEB-INF/classes/config-web.json");
 		JsonParser apigeeConfigParser = new JsonParser( ) ; 
-		ApigeeConfig ac = null ; 
+		AppConfig ac = null ; 
 		try {
-			ac = (ApigeeConfig) apigeeConfigParser.getObject(inputStream , ApigeeConfig.class) ;
+			ac = (AppConfig) apigeeConfigParser.getObject(inputStream , AppConfig.class) ;
 			ac.setFileContent(apigeeConfigParser.getFileContent()) ; 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -32,8 +32,9 @@ public class ApplicationContextListener implements ServletContextListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ac.setInternetProxy(); 
-		sc.setAttribute("appConfig", ac) ; 
+		ac.setInternetProxy();
+		
+		sc.setAttribute( AppContext.APP_CONFIG_VAR_NAME, ac) ; 
 	}
 	
 	public void contextDestroyed(ServletContextEvent sce) {

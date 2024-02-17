@@ -1,3 +1,4 @@
+<%@page import="com.smartvalue.html.AppContext"%>
 <%@page import="org.apache.tomcat.util.descriptor.web.LoginConfig"%>
 <%@page import="com.smartvalue.google.iam.IdTokenVerifier"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"   pageEncoding="ISO-8859-1"%>
@@ -14,8 +15,7 @@
 </head>
 <body>
 <% 
-	GoogleIdToken googleIdToken= (GoogleIdToken) session.getAttribute("GoogleIdToken") ; 
-
+		GoogleIdToken googleIdToken= AppContext.getGoogleIdToken(session);  
 		boolean isTimeValid = IdTokenVerifier.verifyTimingOnly(googleIdToken) ;
 		if ( ! isTimeValid )
 		{

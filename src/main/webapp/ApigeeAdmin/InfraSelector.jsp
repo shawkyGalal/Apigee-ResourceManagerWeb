@@ -1,5 +1,6 @@
+<%@page import="com.smartvalue.html.AppContext"%>
 <%@page import="com.smartvalue.apigee.resourceManager.Renderer"%>
-<%@page import="com.smartvalue.apigee.configuration.ApigeeConfig"%>
+<%@page import="com.smartvalue.apigee.configuration.AppConfig"%>
 <%@page import="com.smartvalue.apigee.configuration.Partner"%>
 <%@page import="com.smartvalue.apigee.configuration.Customer"%>
 <%@page import="com.smartvalue.apigee.configuration.infra.*"%>
@@ -21,7 +22,6 @@
 <%@page import ="java.io.InputStream"%>
 <%@page import ="java.lang.reflect.Type"%>
 <%@page import ="com.smartvalue.moj.clients.environments.JsonParser"%>
-<%@page import="com.smartvalue.apigee.configuration.ApigeeConfigFactory"%>
 <%@page import="com.smartvalue.apigee.configuration.infra.Infra"%>
 
 
@@ -31,7 +31,8 @@
 <html>
 
 <%
-	ApigeeConfig ac = (ApigeeConfig) application.getAttribute("appConfig"); //apigeeConfigParser.getObject(inputStream , ApigeeConfig.class) ; //
+ 
+	AppConfig ac = AppContext.getAppConfig(application);
 	
 	if (request.getParameter("submit") == null)
 	{
@@ -148,7 +149,7 @@
 		session.setAttribute("ms", ms) ;
 		session.setAttribute("infra", infra) ;
 		String accessTokenSource = infra.getAccessTokenSource() ; 
-		response.sendRedirect( (accessTokenSource !=null && accessTokenSource.equalsIgnoreCase(ApigeeConfig.GoogleWebAppCredential)) ? "../loginWithGoogle/authorize.jsp":   "index.jsp" ) ;
+		response.sendRedirect( (accessTokenSource !=null && accessTokenSource.equalsIgnoreCase(AppConfig.GoogleWebAppCredential)) ? "../loginWithGoogle/authorize.jsp":   "index.jsp" ) ;
 		
     }
     

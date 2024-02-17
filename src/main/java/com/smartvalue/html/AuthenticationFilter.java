@@ -37,7 +37,7 @@ public class AuthenticationFilter implements Filter
          {
 	         if (session != null)
 	         {
-	        	GoogleIdToken googleIdToken = (GoogleIdToken)session.getAttribute("GoogleIdToken"); 
+	        	GoogleIdToken googleIdToken = (GoogleIdToken)session.getAttribute(AppContext.GOOGLE_ID_TOKEN_VAR_NAME); 
 	        	
 		        if (googleIdToken == null)
 		     	{

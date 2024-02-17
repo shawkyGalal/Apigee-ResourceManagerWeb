@@ -20,7 +20,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%@include file="../..//intialize.jsp" %>
+<%@include file="../../intialize.jsp" %>
 
 		<br>Apigee Infrastructure (<%=ms.getInfraName()%>) <br> <br> <br> 
 		<%
@@ -34,7 +34,7 @@
 			OutputStream os = new org.apache.commons.io.output.WriterOutputStream(out);
 			PrintStream ps = new PrintStream(os);
 			orgObj.setPrintStream(ps); 
-			HashMap<String, Object> proxies = orgObj.getAllProxiesUsesTargetServer(targetServer , true ); 
+			HashMap<Object, Object> proxies = orgObj.getAllProxiesUsesTargetServer(targetServer , true ); 
 			out.print(Renderer.objectToHtmlTable(proxies)) ;
 			
 		%> 
