@@ -27,7 +27,7 @@
 	else
 	{
 		String contextPath = request.getContextPath(); 
-		AppConfig ac = (AppConfig) application.getAttribute(AppContext.APP_CONFIG_VAR_NAME) ;
+		AppConfig ac = AppContext.getAppConfig(application); // (AppConfig) application.getAttribute(AppContext.APP_CONFIG_VAR_NAME) ;
 		GoogleWebAppCredential googleWebAppCredential = ac.getGoogleWebAppCredential(); 
 		String data_login_uri = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+contextPath+"/loginWithGoogle/loginHandler.jsp" ; 
 		String client_id= googleWebAppCredential.getClient_id() ;    

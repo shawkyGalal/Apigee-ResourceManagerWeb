@@ -17,7 +17,7 @@ public class ApplicationContextListener implements ServletContextListener {
 	
 	public void contextInitialized(ServletContextEvent sce)
 	{
-		System.out.println("Web application is starting...");
+		System.out.println("Resource Manager Web application is starting...");
 		ServletContext sc = sce.getServletContext(); 
 		java.io.InputStream inputStream = sc.getResourceAsStream("/WEB-INF/classes/config-web.json");
 		JsonParser apigeeConfigParser = new JsonParser( ) ; 
@@ -26,10 +26,8 @@ public class ApplicationContextListener implements ServletContextListener {
 			ac = (AppConfig) apigeeConfigParser.getObject(inputStream , AppConfig.class) ;
 			ac.setFileContent(apigeeConfigParser.getFileContent()) ; 
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		ac.setInternetProxy();

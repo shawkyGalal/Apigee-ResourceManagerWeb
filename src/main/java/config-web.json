@@ -1,14 +1,15 @@
 {
-	"googleWebAppCredential":	{
-								"client_id":"455673897131-f610c9tau1i582tpk8nq2q5794qdb1oi.apps.googleusercontent.com"
-								,"project_id":"apigee-moj-stage"
-								,"auth_uri":"https://accounts.google.com/o/oauth2/auth"
-								,"token_uri":"https://oauth2.googleapis.com/token"
-								,"auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs"
-								,"client_secret":"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"
-								,"redirect_uris":["https://apigeeadmin.moj.gov.sa:8443/ResourceManagerWeb/loginWithGoogle/loginHandler.jsp"]
-								,"javascript_origins":["https://apigeeadmin.moj.gov.sa:8443"]
-							},	 
+	"googleWebAppCredential":	
+							{
+							"client_id":"598074804327-ugdo937csvp8sd7vckp03pemu31a4p4h.apps.googleusercontent.com"
+							,"project_id":"moj-prod-apigee"
+							,"auth_uri":"https://accounts.google.com/o/oauth2/auth"
+							,"token_uri":"https://oauth2.googleapis.com/token"
+							,"auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs"
+							,"client_secret":"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"
+							,"redirect_uris":["https://apigeeadmin.moj.gov.sa:8443/ResourceManagerWeb/loginWithGoogle/loginHandler.jsp","https://apigeeadmin.moj.gov.sa:8443/ResourceManagerWeb/loginWithGoogle/authCodeHandler.jsp"]
+							,"javascript_origins":["https://apigeeadmin.moj.gov.sa:8443"]
+							} , 
 	"Partners":[		
 	{	"Name" : "MasterWorks" , 
 		"Customers" : [
@@ -86,21 +87,12 @@
 						"Ansible_hosts_file" : "/etc/apigee/ansible/ansible_hosts/moj/stage/hosts"  , 
 						"DevPortal" : {"basePath" : "/var/www/html/moj-int" , "dataBaseName" :"moj_int"}
 					}, 
+					 
 					{	 
 						"Name" : "Gcloud(shawky.foda@gmail.com)" ,
 						"AuthType" : "OAuth" , 
 						"googleCloud" : "true",
 						"accessTokenSource" :"googleWebAppCredential",
-						"googleWebAppCredential":	{
-								"client_id":"455673897131-f610c9tau1i582tpk8nq2q5794qdb1oi.apps.googleusercontent.com"
-								,"project_id":"apigee-moj-stage"
-								,"auth_uri":"https://accounts.google.com/o/oauth2/auth"
-								,"token_uri":"https://oauth2.googleapis.com/token"
-								,"auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs"
-								,"client_secret":"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"
-								,"redirect_uris":["https://apigeeadmin.moj.gov.sa:8443/ResourceManagerWeb/loginWithGoogle/loginHandler.jsp"]
-								,"javascript_origins":["https://apigeeadmin.moj.gov.sa:8443"]
-							}, 
 						"regions" :		 [
 							{ "name" : "xxxxxx" ,  
 							"OauthMgmServerUrl" : "https://apigee.googleapis.com/" ,
@@ -109,7 +101,7 @@
 						]
 					}
 					
-					
+	
 				]
 			} ,
 			{	"Name" : "LEAN"  

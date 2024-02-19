@@ -2,6 +2,8 @@
 <%@page import="java.io.BufferedReader"%>
 <%@page import="java.io.InputStreamReader"%>
 <%@page import="java.io.InputStream"%>
+<%@page import="com.smartvalue.html.AppContext"%>
+<%@page import="com.smartvalue.apigee.configuration.AppConfig"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"  pageEncoding="ISO-8859-1"%>
 
 <!DOCTYPE html>
@@ -15,8 +17,8 @@
 
 <body>
 	<% 
-	String client_id= "455673897131-f610c9tau1i582tpk8nq2q5794qdb1oi.apps.googleusercontent.com" ; //"743562068929-2m0gujbpdcs9g3gebrroeaj4hbkelc3b.apps.googleusercontent.com" ;   
-	application.setAttribute("client_id", client_id) ; 
+	AppConfig ac = AppContext.getAppConfig(application);
+	String client_id=  ac.getGoogleWebAppCredential().getClient_id();
 	String callbackUrl = "https://apigeeadmin.moj.gov.sa:8443/ResourceManagerWeb/loginWithGoogle/loginHandler.jsp" ; 
 	%>
 	

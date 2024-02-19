@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@page import="com.smartvalue.html.AppContext"%>
+<%@page import="com.smartvalue.apigee.configuration.AppConfig"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,8 +13,9 @@
 </head>
 <body>
 	<% 
-	String client_id= "455673897131-f610c9tau1i582tpk8nq2q5794qdb1oi.apps.googleusercontent.com" ;   
-	application.setAttribute("client_id", client_id) ; 
+	AppConfig ac = AppContext.getAppConfig(application);
+	String client_id= ac.getGoogleWebAppCredential().getClient_id() ; // "455673897131-f610c9tau1i582tpk8nq2q5794qdb1oi.apps.googleusercontent.com" ;   
+
 	%>
 	<!--  Google Sign in  -->
 	<div id="g_id_onload"

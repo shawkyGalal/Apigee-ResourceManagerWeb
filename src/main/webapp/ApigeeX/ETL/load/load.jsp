@@ -21,7 +21,7 @@ AppConfig ac = AppContext.getAppConfig(application);
 
 //----- ETL Starting Loading ----
 Infra destInfra = ac.getInfra("MasterWorks" , "MOJ" , "Gcloud(shawky.foda@gmail.com)") ;
-String destOrgName = "apigee-moj-stage" ; 
+String destOrgName = "moj-prod-apigee" ; 
 String transformedFolder = "C:\\temp\\transformed\\proxies" ; 
 
 ManagementServer destMs = destInfra.getManagementServer(destInfra.getRegions().get(0).getName()) ;

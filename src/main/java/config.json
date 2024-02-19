@@ -120,45 +120,7 @@
 							}
 						]
 					}, 
-					{	 
-						"Name" : "Gcloud(shawky.foda@gmail.com)xxxxxxx" ,
-						"AuthType" : "OAuth" , 
-						"googleCloud" : "true",
-						"accessTokenSource" :"googleWebAppCredential",
-						"googleServiceAccount" : {
-							  "type": "service_account",
-							  "project_id": "apigee-moj-stage",
-							  "private_key_id": "8ffaa270d731dabeaaf3bbbbfb4c0d51910c510b",
-							  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCf2caENazLmqa4\nJJ16E92OnrFxhMMLZgPLEHTxoGX+c4btcybsOBx5hPBi4HvSuyIxawlbQzmYzWD5\nOq6xeQ6VmccVpNrlQMWupDgln6wB/c6c+IEZuayE0JhD6DC6MFM/waQ73PwCWuNz\nEhNP/F5/vjL5fh1VMFrA8UB5GRJtxLUwrDnbrww0gnfDSGyXWUf107KY3uySp/ru\nNfOsVC8GpnaNyHNHoXVbPC8BnBcQggSM99xq98dVhPSclRWdAko+YeyDLrTjXJBr\nk1WSSu3C6X8EfsN7dSTeLb2ZP7boAO7oJhAPeakDJM1gj1P8icx5cJMVJH51HDB9\nVuyybppzAgMBAAECggEAAhK/AmP308QzuVuwNy8exoTEZGaGaRVvoyiZe7DK4dv5\nugauUI4BwIm63G1w7bDDpsRuoKJkktjHEzRxo5egWsxdyqgStrp6VeOHXuWNQ5FZ\nJqwKcJz54dcawna2exO5YLBQQv6Avj8TiCCJ45WwXBPJcXbzRnGUG8CFR4zNsmK/\nd/Zl6OqiiVsU54YqO4nwZEGUXEWpsXW7HTWlOgMwv6iwgpjWA/5zaqfX4qH32lMx\n5xYAQ/UV2i66YJudPJAxMfKdsb0bS4qAF5s6pgl26Eu+uu8STOwadr7OM3xdMj3+\nxTAQRh4LVORhTV6O2WZs/83GErbdBcZNrFIw4/OBUQKBgQDg6ovG66UjLO4g/6I/\n+oU7T61hpv3e+4TNHnnmswEXj0aJAHlaDUndjRW7GLzMuCma/UqD5SpIlu+s1AsF\nWcJ0nlakdd8lO7QnbgPrAYb1JJ/3HSskzbXKR26QTcVfyW5JtUPYtRBFyYdU6AHS\nS8saJfQqYmgPNciAdeG4ExIgTQKBgQC18TwyFwcQL3MhkyOJdtQSAuuzxoCv4zUT\noIW1Iiiynhgyb2Nk39lGwblDk/wOn7W1X4SUxT7Ldrp1KOsW1csM/+AFFYCkis54\nBGP4VufT8muOUzUhZCOHgnyiEEbvVQcyZTrsm162EVgkN4pt00whFwST6610efVI\n1rVK3eMFvwKBgQCVQpHoPNGmela9h2hBVRu9tK63M38ez4PeK+9x7jE3VVnV6X6f\nCFqQsORO+aexpDXYKWeeCCL7cU81PrLhpiOqCLovAhpIN0rjL9thxe2uGdQexjiv\nf+S4jJcPJM1rN939BFI2KlLWPVuWOTGcQbhTbgSPbCbqkSKyPYjCA8XvsQKBgClj\n2LrYbD3tXXas32+9PZ9fVLmQFeRtfryZTvGW9MU1m/GVT3o6RlaHaZsLBlNZV+AL\n+8BQYumsd9yBU4HdXxT0/MSLULmd7jx1Wzy6oICh7H/zQ+n1uvNv5uSDaW+22y1G\nxDHhYplutqt+ixpS8EWy09LG0a3mtLs+RP3kHmpHAoGAJwbhMiuXjIg0Kbhv8/Qt\nZ6k8pdxPtslTDRdCYvMtTZImlJl6xmTe5XjYzvORO2SKiQi4c1HfJI/zh1Q37KAd\naZNIn/68dIcD14At3m3ZsNYacftVexn3r7A7DJhPYXMHNmDVq1r+81a0Gu2at2b9\nOCIE85Z6Q4ynQqAB6s3YucE=\n-----END PRIVATE KEY-----\n",
-							  "client_email": "apigee-admin-java@apigee-moj-stage.iam.gserviceaccount.com",
-							  "client_id": "112160657167770535394",
-							  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-							  "token_uri": "https://oauth2.googleapis.com/token",
-							  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-							  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/apigee-admin-java%40apigee-moj-stage.iam.gserviceaccount.com",
-							  "universe_domain": "googleapis.com"
-							},
-						"googleWebAppCredential":	{
-								"client_id":"455673897131-f610c9tau1i582tpk8nq2q5794qdb1oi.apps.googleusercontent.com"
-								,"project_id":"apigee-moj-stage"
-								,"auth_uri":"https://accounts.google.com/o/oauth2/auth"
-								,"token_uri":"https://oauth2.googleapis.com/token"
-								,"auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs"
-								,"client_secret":"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"
-								,"redirect_uris":["https://apigeeadmin.moj.gov.sa:8443/ResourceManagerWeb/loginWithGoogle/loginHandler.jsp"]
-								,"javascript_origins":["https://apigeeadmin.moj.gov.sa:8443"]
-							}, 
-						"regions" :		 [
-							{ "name" : "xxxxxx" ,  
-							"OauthMgmServerUrl" : "https://apigee.googleapis.com/" ,
-							"tokenUrl" : "http://10.162.3.3:9001/gcloudaccesstokengenerator"   
-							}
-						]
-					}
 					
-					
-				]
-			} ,
 			{	"Name" : "LEAN"  
 				,"Infras" : [
 					{
