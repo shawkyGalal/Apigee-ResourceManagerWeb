@@ -1,3 +1,4 @@
+<%@page import="com.smartvalue.apigee.configuration.infra.googleAccessToken.auto.GoogleAccessToken"%>
 <%@page import ="com.smartvalue.apigee.configuration.infra.ManagementServer"%>
 
 <%@page import="org.springframework.security.crypto.codec.Base64"%>
@@ -19,7 +20,11 @@
 	String contextPath = request.getContextPath(); 
 	String redirectUri = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+contextPath+"/loginWithGoogle/authCodeHandler.jsp" ; 
 	ms.webLogin(authCode, redirectUri) ; 
+	GoogleAccessToken googleAccessToken = (GoogleAccessToken) ms.getAccessToken() ;
+	//googleAccessToken.getJwtClaims() ;
+	
 	response.sendRedirect("../ApigeeAdmin/index.jsp"); 
+	
 %>
 </body>
 </html>

@@ -26,6 +26,7 @@
 	}
 	else
 	{
+		out.print("You Need To Login To Your Google Account ") ; 
 		String contextPath = request.getContextPath(); 
 		AppConfig ac = AppContext.getAppConfig(application); // (AppConfig) application.getAttribute(AppContext.APP_CONFIG_VAR_NAME) ;
 		GoogleWebAppCredential googleWebAppCredential = ac.getGoogleWebAppCredential(); 

@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <%@page import ="com.smartvalue.apigee.configuration.infra.ManagementServer"%>
+<%@page import="com.smartvalue.apigee.configuration.infra.googleAccessToken.auto.GoogleAccessToken"%>
 <html>
 <head>
 <meta charset="ISO-8859-1">
@@ -17,7 +18,13 @@
 	<a href = "InfraSelector.jsp">Select Apigee Infrastructure </a>
 	<% 
 		ManagementServer ms = (ManagementServer) session.getAttribute("ms") ;  
-		if (ms != null) { out.print ("Current Infra Name : " + ms.getInfraName() ) ; }
+		
+	
+		if (ms != null) {
+			out.print ("Current Infra Name : " + ms.getInfraName() ) ; 
+			GoogleAccessToken googleAccessToken = (GoogleAccessToken) ms.getAccessToken() ;
+			//googleAccessToken.getJwtClaims() ;
+		}
 		else {return ; }
 	%>
 	<h1> Apigee Operational Tasks </h1>
