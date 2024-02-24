@@ -18,8 +18,10 @@
 <body>
 	<% 	AppConfig ac = AppContext.getAppConfig(application);
 		String clientId = ac.getGoogleWebAppCredential().getClient_id() ; //"455673897131-f610c9tau1i582tpk8nq2q5794qdb1oi.apps.googleusercontent.com" ; //"743562068929-2m0gujbpdcs9g3gebrroeaj4hbkelc3b.apps.googleusercontent.com" ;
-	    String contextPath = request.getContextPath(); 
-		String callbackUrl = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+contextPath+"/loginWithGoogle/authCodeHandler.jsp" ; 
+	    String contextPath = request.getContextPath();
+	    String xx = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+contextPath ;
+		String callbackUrl = xx+"/loginWithGoogle/authCodeHandler.jsp" ;
+		String errorCallback = xx + "/loginWithGoogle/errorCallBack.jsp" ; 
 	%>
 	
 	Apigee Organization You Have Selected is configured as an Apigee X Google Cloud Project, You Need To Authorize Access to this Project
@@ -33,6 +35,7 @@
 			  scope: 'https://www.googleapis.com/auth/cloud-platform' ,
 			  ux_mode: 'redirect',
 			  redirect_uri: "<%=callbackUrl%>",
+			  error_callback : "<%=errorCallback%>",
 			  state: "YOUR_BINDING_VALUE"
 				});
 		client.requestCode(); 

@@ -20,7 +20,7 @@
 <%
 	AppConfig ac = AppContext.getAppConfig(application); 
 	GoogleWebAppCredential googleWebAppCredential = ac.getGoogleWebAppCredential();
-	String client_id= googleWebAppCredential.getClient_id(); //(String) application.getAttribute("client_id") ; 
+	String client_id= googleWebAppCredential.getClient_id();  
 		
 	GoogleIdToken googleIdToken = IdTokenVerifier.verifyFromRequest(client_id, (javax.servlet.http.HttpServletRequest)request) ; 
 	

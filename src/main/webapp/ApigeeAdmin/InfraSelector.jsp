@@ -146,7 +146,7 @@
 		ManagementServer ms = null ; 
 		Region region0 = infra.getRegions().get(0) ; 
 		ms = infra.getManagementServer(region0.getName()); // ManagementServer(infra) ;
-		session.setAttribute("ms", ms) ;
+		AppContext.setApigeeManagementServer(session, ms) ; 
 		session.setAttribute("infra", infra) ;
 		String accessTokenSource = infra.getAccessTokenSource() ; 
 		response.sendRedirect( (accessTokenSource !=null && accessTokenSource.equalsIgnoreCase(AppConfig.GoogleWebAppCredential)) ? "../loginWithGoogle/authorize.jsp":   "index.jsp" ) ;

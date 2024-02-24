@@ -1,9 +1,11 @@
+<%@page import="com.smartvalue.html.AppContext"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
    
 <%@page import ="com.smartvalue.apigee.rest.schema.application.Application"%>
 <%@page import ="com.smartvalue.apigee.configuration.infra.ManagementServer"%>
 <%@page import="com.smartvalue.apigee.resourceManager.Renderer"%>
+
     
 <!DOCTYPE html>
 <html>
@@ -12,8 +14,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
-		ManagementServer ms = (ManagementServer)session.getAttribute("ms"); 
+<%		 
+		ManagementServer ms = AppContext.getApigeeManagementServer(session);  
 		String org = request.getParameter("org") ; 		
 		String appId = request.getParameter("appId") ;
 		

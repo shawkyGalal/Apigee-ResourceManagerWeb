@@ -70,11 +70,19 @@ public class AuthenticationFilter implements Filter
     
     private static ArrayList<String> getNonAuthPaths()
     {
-    	String loginURI =  INDEX_PATH ;
-    	String otherURL = "/loginWithGoogle/loginHandler.jsp";
+    	String loginURI 	=  INDEX_PATH ;
+    	String loginHandler = "/loginWithGoogle/loginHandler.jsp";
+    	String loginIndex 	= "/loginWithGoogle/index.jsp";
+    	String authenticate = "/loginWithGoogle/authenticate.jsp";
+    	String authorize 	= "/loginWithGoogle/authorize.jsp";
+    	
     	ArrayList<String> nonAuthPaths = new ArrayList<String>(); 
     	nonAuthPaths.add(loginURI); 
-    	nonAuthPaths.add(otherURL);
+    	nonAuthPaths.add(loginHandler);
+    	nonAuthPaths.add(loginIndex);
+    	nonAuthPaths.add(authenticate);
+    	nonAuthPaths.add(authorize);
+    	
     	return nonAuthPaths ; 
     	
     }

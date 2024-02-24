@@ -1,8 +1,15 @@
+<%@page import="com.smartvalue.apigee.rest.schema.ApigeeAccessToken"%>
+<%@page import="org.apache.tools.ant.types.resources.selectors.InstanceOf"%>
+<%@page import="com.smartvalue.apigee.rest.schema.AccessToken"%>
+<%@page import="com.google.api.client.googleapis.auth.oauth2.GoogleIdToken"%>
+<%@page import="com.smartvalue.apigee.resourceManager.Renderer"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <%@page import ="com.smartvalue.apigee.configuration.infra.ManagementServer"%>
 <%@page import="com.smartvalue.apigee.configuration.infra.googleAccessToken.auto.GoogleAccessToken"%>
+<%@page import="com.smartvalue.html.AppContext"%>
 <html>
 <head>
 <meta charset="ISO-8859-1">
@@ -12,18 +19,32 @@
 </head>
 
 <body>
-
-
-    
-	<a href = "InfraSelector.jsp">Select Apigee Infrastructure </a>
-	<% 
-		ManagementServer ms = (ManagementServer) session.getAttribute("ms") ;  
-		
 	
-		if (ms != null) {
-			out.print ("Current Infra Name : " + ms.getInfraName() ) ; 
-			GoogleAccessToken googleAccessToken = (GoogleAccessToken) ms.getAccessToken() ;
-			//googleAccessToken.getJwtClaims() ;
+	<a href = "InfraSelector.jsp">Select Apigee Infrastructure </a>
+	
+	<% 
+		ManagementServer ms = AppContext.getApigeeManagementServer(session); 
+		if (ms != null  ) 
+		{
+			out.print ("Current Infra Name : " + ms.getInfraName() ) ;
+			AccessToken at = ms.getAccessToken() ; 
+			GoogleIdToken googleIdToken = null; 
+			ApigeeAccessToken apigeeAccessToken = null ; 
+			if (at instanceof GoogleAccessToken)
+			{
+				GoogleAccessToken googleAccessToken = (GoogleAccessToken) at ;
+				googleIdToken = googleAccessToken.getGoogleIdToken();
+			}
+			else if (at instanceof ApigeeAccessToken) 
+			{
+				googleIdToken = AppContext.getGoogleIdToken(session) ; 
+			}
+			
+			if ( googleIdToken != null)
+			{
+				out.print(Renderer.objectToHtmlTable(googleIdToken.getPayload()));
+			}
+ 		  	 
 		}
 		else {return ; }
 	%>

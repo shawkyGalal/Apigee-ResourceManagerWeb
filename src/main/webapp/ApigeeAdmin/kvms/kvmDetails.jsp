@@ -1,3 +1,4 @@
+<%@page import="com.smartvalue.html.AppContext"%>
 <%@page import="com.smartvalue.apigee.rest.schema.keyValueMap.KvmServices"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -15,7 +16,7 @@
 <body>
 
 		<%
-		ManagementServer ms = (ManagementServer)session.getAttribute("ms"); 
+		ManagementServer ms = AppContext.getApigeeManagementServer(session); 
 		String org = request.getParameter("org") ; 		
 		String env = request.getParameter("env") ;
 		String kvm = request.getParameter("kvm") ;

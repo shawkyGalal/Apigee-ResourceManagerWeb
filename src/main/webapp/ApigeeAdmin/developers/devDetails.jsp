@@ -1,3 +1,4 @@
+<%@page import="com.smartvalue.html.AppContext"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
    
@@ -13,7 +14,7 @@
 </head>
 <body>
 <%
-		ManagementServer ms = (ManagementServer)session.getAttribute("ms"); 
+		ManagementServer ms = AppContext.getApigeeManagementServer(session);  
 		String org = request.getParameter("org") ; 		
 		String developerId = request.getParameter("developerId") ;
 		
