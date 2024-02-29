@@ -1,4 +1,4 @@
-<%@page import="com.smartvalue.html.AppContext"%>
+<%@page import="com.smartvalue.web.AppContext"%>
 <%@page import="com.smartvalue.apigee.resourceManager.Renderer"%>
 <%@page import="com.smartvalue.apigee.configuration.AppConfig"%>
 <%@page import="com.smartvalue.apigee.configuration.Partner"%>

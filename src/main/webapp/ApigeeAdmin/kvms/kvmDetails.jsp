@@ -1,4 +1,4 @@
-<%@page import="com.smartvalue.html.AppContext"%>
+<%@page import="com.smartvalue.web.AppContext"%>
 <%@page import="com.smartvalue.apigee.rest.schema.keyValueMap.KvmServices"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>

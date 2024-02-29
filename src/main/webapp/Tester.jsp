@@ -1,4 +1,4 @@
-<%@page import="com.smartvalue.html.AppContext"%>
+<%@page import="com.smartvalue.web.AppContext"%>
 <%@page import="com.smartvalue.apigee.rest.schema.proxy.ProxyServices"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>

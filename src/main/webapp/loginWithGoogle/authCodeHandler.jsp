@@ -6,7 +6,7 @@
 <%@page import="java.nio.charset.Charset"%>
 <%@page import="com.mashape.unirest.http.HttpResponse"%>
 <%@page import="com.mashape.unirest.http.Unirest"%>
-<%@page import="com.smartvalue.html.AppContext"%>
+<%@page import="com.smartvalue.web.AppContext"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>

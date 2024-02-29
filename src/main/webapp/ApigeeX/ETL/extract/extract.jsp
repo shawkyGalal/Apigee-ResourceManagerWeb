@@ -1,4 +1,4 @@
-<%@page import="com.smartvalue.html.AppContext"%>
+<%@page import="com.smartvalue.web.AppContext"%>
 <%@page import="com.smartvalue.apigee.rest.schema.targetServer.TargetServerServices"%>
 <%@page import="java.io.OutputStream"%>
 <%@page import="java.io.PrintStream"%>

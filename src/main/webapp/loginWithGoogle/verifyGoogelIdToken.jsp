@@ -1,4 +1,4 @@
-<%@page import="com.smartvalue.html.AppContext"%>
+<%@page import="com.smartvalue.web.AppContext"%>
 <%@page import="org.apache.tomcat.util.descriptor.web.LoginConfig"%>
 <%@page import="com.smartvalue.google.iam.IdTokenVerifier"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"   pageEncoding="ISO-8859-1"%>

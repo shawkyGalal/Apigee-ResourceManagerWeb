@@ -1,7 +1,7 @@
 
 <%@page import ="com.smartvalue.apigee.configuration.infra.ManagementServer"%>
 <%@page import ="java.util.*"%>
-<%@page import="com.smartvalue.html.AppContext"%>
+<%@page import="com.smartvalue.web.AppContext"%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 

@@ -1,4 +1,4 @@
-package com.smartvalue.html;
+package com.smartvalue.web;
 
 import java.io.File;
 import java.io.FileInputStream;

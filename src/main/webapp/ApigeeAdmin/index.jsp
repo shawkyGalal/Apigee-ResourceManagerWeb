@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <%@page import ="com.smartvalue.apigee.configuration.infra.ManagementServer"%>
 <%@page import="com.smartvalue.apigee.configuration.infra.googleAccessToken.auto.GoogleAccessToken"%>
-<%@page import="com.smartvalue.html.AppContext"%>
+<%@page import="com.smartvalue.web.AppContext"%>
 <html>
 <head>
 <meta charset="ISO-8859-1">
