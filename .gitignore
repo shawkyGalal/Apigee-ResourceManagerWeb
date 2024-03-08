@@ -30,5 +30,5 @@ target/m2e-wtp/web-resources/META-INF/MANIFEST.MF
 target/m2e-wtp/web-resources/META-INF/maven/ResourceManagerWeb/ResourceManagerWeb/pom.xml
 /build/
 /target/
-src/main/java/moj-environments.json
-src/main/java/config-web.json
+src/main/resources/config-web.json
+src/main/resources/moj-environments.json
