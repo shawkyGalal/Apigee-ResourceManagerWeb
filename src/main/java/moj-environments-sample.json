@@ -34,8 +34,8 @@
 	 			"tokenUrl" : "https://api.moj.gov.sa/v1/authorize/access-token",
 				"credential" : 
 				{
-					"clientId" 		:  "sX868FkW9wgn6o1TQ59IZOujjn05bWSi" , 
-					"clientSecret" 	: "632Ht2d3FAxAuym1"
+					"clientId" 		:  "*************" , 
+					"clientSecret" 	: "*********************"
 				}
 				, 
 				"nafath" : 

@@ -1,0 +1,63 @@
+<html>
+<head>
+<title>NajizCallBack Page</title>
+</head>
+<body>
+	<script>
+		function getConfig()
+		{
+
+			fetch('./moj-environments.json') // Replace 'data.json' with your actual file name and path
+			.then(response => response.json()) // Parse the response as JSON
+			.then(data => {
+			  // Access and use the data object here
+			  console.log(data);
+			  // You can further process the data and display it on the page
+			  printToken(data) ;
+			})
+			.catch(error => {
+			  console.error('Error fetching data:', error);
+			});
+
+		}
+	
+	</script>
+
+
+<!--  Using Java Script XHR ---->
+	<script type="text/javascript">
+		function printToken(configData )
+		{
+			const queryString = window.location.search;
+			const params = new URLSearchParams(queryString);
+			const code = params.get('code');
+			
+			//WARNING: For POST requests, body is set to null by browsers.
+			var code_verifier = "51DjH53E565749WHnuCZfDcUail52lxGIKrlGPlHkBX49waodSIZk51Bi50GSKQcuXes5551wYV5450LqCYwQsY50HCWWVCXvPydh54vqMd52kdJKiHta50x" ;
+			var client_id = configData.Environments[1].credential.clientId ; 
+			var redirect_uri = configData.Environments[1].nafath.redirectUri ; 
+			var tokenUrl = configData.Environments[1].nafath.tokenWithPkceUrl ; 
+			
+			var data = "grant_type=authorization_code&code="+code+"&redirect_uri="+redirect_uri+"&code_verifier="+code_verifier+"&client_id="+client_id;
+			
+			var xhr = new XMLHttpRequest();
+			xhr.withCredentials = true;
+			
+			xhr.addEventListener("readystatechange", function() {
+			  if(this.readyState === 4) {
+			    console.log(this.responseText);
+			  }
+			});
+			
+			xhr.open("POST", tokenUrl+"?client_id="+client_id);
+			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			// WARNING: Cookies will be stripped away by the browser before sending the request.
+			//xhr.setRequestHeader("Cookie", "MOJe=2618077962.47873.0000; TS01e9a628=01b8fac0b0e82e196d4bbc17a4fa51099960dae4a011b3a9bce9f7832de6a1f337ef5faf094f868dc4a112402a3814250d8c63e8bb3be9afbdb131c16eb6389e1fd9e98d35");
+			
+			xhr.send(data);
+		}
+	</script>
+	Get Token  :  <input type="submit" onclick="getConfig()" value="Get Token "> 
+
+</body>
+</html>
