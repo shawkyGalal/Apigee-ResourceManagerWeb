@@ -1,4 +1,4 @@
-<%@page import="com.smartvalue.html.AppContext"%>
+<%@page import="com.smartvalue.web.AppContext"%>
 <%@page import="com.smartvalue.apigee.configuration.AppConfig"%>
 <%@page import="java.io.IOException"%>
 <%@page import="java.io.BufferedReader"%>

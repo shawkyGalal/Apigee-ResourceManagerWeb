@@ -1,4 +1,4 @@
-<%@page import="com.smartvalue.html.AppContext"%>
+<%@page import="com.smartvalue.web.AppContext"%>
 <%@page import="com.smartvalue.apigee.rest.schema.ApigeeService"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.proxy.*"%>

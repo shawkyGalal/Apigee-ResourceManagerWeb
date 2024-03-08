@@ -1,4 +1,4 @@
-<%@page import="com.smartvalue.html.AppContext"%>
+<%@page import="com.smartvalue.web.AppContext"%>
 <%@page import ="com.smartvalue.apigee.rest.schema.proxy.*"%>
 <%@page import ="com.smartvalue.moj.clients.environments.JsonParser"%>
 <%@page import ="com.smartvalue.apigee.configuration.infra.Infra"%>

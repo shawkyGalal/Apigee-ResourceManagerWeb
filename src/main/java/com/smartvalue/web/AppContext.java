@@ -1,4 +1,4 @@
-package com.smartvalue.html;
+package com.smartvalue.web;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
