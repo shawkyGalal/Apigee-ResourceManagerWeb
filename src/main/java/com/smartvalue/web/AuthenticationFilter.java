@@ -2,6 +2,7 @@ package com.smartvalue.web;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 
@@ -28,8 +29,8 @@ public class AuthenticationFilter implements Filter
          HttpSession session = request.getSession(false);
 
          String loginURI = request.getContextPath() + INDEX_PATH;
-         boolean authNotRequired = isAuthRequired(request ); 
-         if (authNotRequired)
+         boolean authRequired = isAuthRequired(request ); 
+         if (! authRequired)
          {
         	 chain.doFilter(request, response);
          }
@@ -65,23 +66,31 @@ public class AuthenticationFilter implements Filter
     
     private static boolean isAuthRequired(HttpServletRequest request)
     {
-    	return getNonAuthPaths().contains(request.getRequestURI().substring(request.getContextPath().length())) ;
+    	String requestPath = request.getRequestURI().substring(request.getContextPath().length()) ; 
+    	for (String regex : getNonAuthPaths()) {
+            Pattern pattern = Pattern.compile(regex);
+            if (pattern.matcher(requestPath).matches()) {
+                return false;
+            }
+        }
+        return true;
+    	//return getNonAuthPaths().contains(request.getRequestURI().substring(request.getContextPath().length())) ;
     }
     
+    static ArrayList<String> nonAuthPaths ;  
     private static ArrayList<String> getNonAuthPaths()
     {
-    	String loginURI 	=  INDEX_PATH ;
-    	String loginHandler = "/loginWithGoogle/loginHandler.jsp";
-    	String loginIndex 	= "/loginWithGoogle/index.jsp";
-    	String authenticate = "/loginWithGoogle/authenticate.jsp";
-    	String authorize 	= "/loginWithGoogle/authorize.jsp";
-    	
-    	ArrayList<String> nonAuthPaths = new ArrayList<String>(); 
-    	nonAuthPaths.add(loginURI); 
-    	nonAuthPaths.add(loginHandler);
-    	nonAuthPaths.add(loginIndex);
-    	nonAuthPaths.add(authenticate);
-    	nonAuthPaths.add(authorize);
+    	if (nonAuthPaths == null)
+    	{
+	    	String loginURI 	=  INDEX_PATH ;
+	    	String loginWithApigee = "^/loginWithGoogle/.*$";
+	    	String najizLikeApp    = "^/NajizLikeSampleApp/.*$";
+	    	
+	    	nonAuthPaths = new ArrayList<String>(); 
+	    	nonAuthPaths.add(loginURI); 
+	    	nonAuthPaths.add(loginWithApigee);
+	    	nonAuthPaths.add(najizLikeApp);
+    	}
     	
     	return nonAuthPaths ; 
     	

@@ -64,7 +64,8 @@
 	<%} %>
 
 	<h1> NajizLikeSample App </h1>
-		<h2><a href = "NajizLikeSampleApp/dashboard.jsp" target = "Najiz"> Najiz Sample Like Application Using Najiz SDK </a></h2>
+		<h2><a href = "NajizLikeSampleApp/index.jsp" target = "Najiz"> Najiz Sample Like Application Using Najiz SDK </a></h2>
+		<h2><a href = "NajizLikeSampleApp/js/index.html" target = "Najiz"> Najiz Sample Like Application (JavaScript ) Using Najiz SDK </a></h2>
 		<h2><a href = "SDK_Generator/InputParams.jsp" target = "SDK Generator"> SDK Generator </a></h2>
 	
 	<h1><a href = "ApigeeAdmin/index.jsp" target = "Najiz"> Apigee Administration </a></h1>
