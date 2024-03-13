@@ -21,8 +21,16 @@
 	AppConfig ac = AppContext.getAppConfig(application); 
 	GoogleWebAppCredential googleWebAppCredential = ac.getGoogleWebAppCredential();
 	String client_id= googleWebAppCredential.getClient_id();  
-		
-	GoogleIdToken googleIdToken = IdTokenVerifier.verifyFromRequest(client_id, (javax.servlet.http.HttpServletRequest)request) ; 
+	String issuer = "https://accounts.google.com" ; 	
+	GoogleIdToken googleIdToken = IdTokenVerifier.buildFromRequest((javax.servlet.http.HttpServletRequest)request ) ;
+	
+	googleIdToken = IdTokenVerifier.verifyBasicsOnly(googleIdToken, client_id, issuer); 
+	boolean verifyGoogleSignature = true ; 
+	
+	if (googleIdToken != null && verifyGoogleSignature ) 
+	{ 
+		googleIdToken = IdTokenVerifier.verifyGoogleSignature(googleIdToken, client_id, issuer) ;
+	}
 	
 	if (googleIdToken != null )
 	{

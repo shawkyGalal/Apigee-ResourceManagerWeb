@@ -14,6 +14,13 @@
 <title>MOJ Automation Services </title>
 </head>
 <body>
+
+
+	<h2><a href = "NajizLikeSampleApp/index.jsp" target = "Najiz"> Najiz Sample Like Application Using Najiz SDK </a></h2>
+	<h2><a href = "NajizLikeSampleApp/js/index.html" target = "Najiz"> Najiz Sample Like Application (JavaScript ) Using Najiz SDK </a></h2>
+	<h2><a href = "loginWithGoogle/index.jsp" target = "Google Login" >Login with Google</a></h2>
+	
+	
 	<% 
 	
 	GoogleIdToken googleIdToken =  AppContext.getGoogleIdToken(session); //(GoogleIdToken)session.getAttribute( AppContext.GOOGLE_ID_TOKEN_VAR_NAME); 
@@ -26,7 +33,7 @@
 	}
 	else
 	{
-		out.print("You Need To Login To Your Google Account ") ; 
+		out.print("You Need To Login To Your Google Account To Access the following Systems") ; 
 		String contextPath = request.getContextPath(); 
 		AppConfig ac = AppContext.getAppConfig(application); // (AppConfig) application.getAttribute(AppContext.APP_CONFIG_VAR_NAME) ;
 		GoogleWebAppCredential googleWebAppCredential = ac.getGoogleWebAppCredential(); 
@@ -62,17 +69,9 @@
 		     data-itp_support="true">
 		</div>
 	<%} %>
-
-	<h1> NajizLikeSample App </h1>
-		<h2><a href = "NajizLikeSampleApp/index.jsp" target = "Najiz"> Najiz Sample Like Application Using Najiz SDK </a></h2>
-		<h2><a href = "NajizLikeSampleApp/js/index.html" target = "Najiz"> Najiz Sample Like Application (JavaScript ) Using Najiz SDK </a></h2>
-		<h2><a href = "SDK_Generator/InputParams.jsp" target = "SDK Generator"> SDK Generator </a></h2>
-	
 	<h1><a href = "ApigeeAdmin/index.jsp" target = "Najiz"> Apigee Administration </a></h1>
-
 	<h1><a href = "ApigeeX/index.jsp" target = "Apigee X"> Apigee X </a></h1>
-	
-	<h1><a href="loginWithGoogle/index.jsp" target = "Google Login" >Login with Google</a></h1>
+	<h1><a href = "SDK_Generator/InputParams.jsp" target = "SDK Generator"> SDK Generator </a></h1>
 	
 </body>
 </html>
