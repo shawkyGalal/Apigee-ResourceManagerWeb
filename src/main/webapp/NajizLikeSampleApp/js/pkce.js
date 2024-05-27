@@ -50,7 +50,7 @@
 
 
 	// --2- For Getting AccessToken End point -----------
-	function getTokenWithPKCE(m_infraIndex)
+	function getTokenWithPKCE(m_infraIndex , elementId)
 	{
 		fetch(configPath) // Replace 'data.json' with your actual file name and path
 		.then(response => response.json()) // Parse the response as JSON
@@ -58,14 +58,16 @@
 		  // Access and use the data object here
 		  console.log(data);
 		  // You can further process the data and display it on the page
-		  printTokenUsingPKCE(data.Environments[m_infraIndex]) ;
+		  printTokenUsingPKCE(data.Environments[m_infraIndex] , elementId) ;
 		})
 		.catch(error => {
 		  console.error('Error fetching data:', error);
 		});
-	}
+	} ; 
 	
-	function printTokenUsingPKCE(infra )
+	
+	
+	function printTokenUsingPKCE(infra , elementId )
 	{
 		const queryString = window.location.search;
 		const params = new URLSearchParams(queryString);
@@ -92,9 +94,9 @@
 		    localStorage.setItem('accessToken' , xhr.responseText) ;
 		    var retAccessToken = localStorage.getItem('accessToken') ;  
 		    console.log(JSON.parse(retAccessToken)); 
-		    document.getElementById('table-container').innerHTML = retAccessToken ; 
+		    document.getElementById(elementId).innerHTML = retAccessToken ; 
 		  } else {
-			document.getElementById('table-container').innerHTML = xhr.responseText 
+			document.getElementById(elementId).innerHTML = xhr.responseText 
 		    console.error(xhr.statusText);
 		  }
 		};
@@ -105,6 +107,32 @@
 
 	}		
 
+//--- Building logout Request
+	function buildLogoutReq(infraIndex ,   m_anchorObjectId , userId , sessionIndex )
+	{
+		fetch(configPath) // Replace 'data.json' with your actual file name and path
+		.then(response => response.json()) // Parse the response as JSON
+		.then(data => {
+		var result ; 
+		m_infra = data.Environments[infraIndex] 
+		logoutUrl = m_infra.nafath.logoutUrl  ; 
+		clientId = m_infra.credential.clientId ; 
+		var state = generateRandom(8) ; 
+		var nonce = generateRandom(8) ;  
+		var result = logoutUrl + '?client_id=' + clientId 
+					+'&state=' + state
+					+'&nonce=' + nonce 
+					+'userId=' + userId
+					+'sessionIndex=' +sessionIndex; 
+		// Get the anchor element by its ID
+		const myLink = document.getElementById(m_anchorObjectId);
+		// Update the href attribute
+		myLink.href = result;
+		})
+		.catch(error => {
+		  console.error('Error fetching data:', error);
+		});
+	}
 
  // Function to generate a random string for the code verifier
 function generateCodeVerifier() {

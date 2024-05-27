@@ -33,7 +33,7 @@
  		int counter = 0 ;
  %>
 				<table border = 1 > 
-				<tr><td> <%=counter%><td>App Name </td>  <td>Developer</td> <td>Details</td> <td>credentials</td> <td>Edge Details</td> </tr>
+				<tr><td> <%=counter%><td>App Name </td>  <td>Developer</td> <td>Details</td> <td>ProductsCount</td> <td>Edge Details</td> </tr>
 				<%
 					for (Application app  : apps)
 						{ 
