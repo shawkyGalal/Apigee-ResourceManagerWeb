@@ -32,7 +32,7 @@
  		int counter = 0 ;
  %>
 				<table border = 1 > 
-				<tr><td> <%=counter%><td>App Name </td>  <td>BasePaths</td> <td>Details</td></tr>
+				<tr><td> <%=counter%><td>Proxy Name </td>  <td>BasePaths</td> <td>Details</td></tr>
 				<%
 					for (String proxyName  : proxiesNames)
 						{ 

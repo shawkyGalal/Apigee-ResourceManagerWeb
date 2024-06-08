@@ -19,7 +19,7 @@
 	<% 
 	AppConfig ac = AppContext.getAppConfig(application);
 	String client_id=  ac.getGoogleWebAppCredential().getClient_id();
-	String callbackUrl = "https://apigeeadmin.moj.gov.sa:8443/ResourceManagerWeb/loginWithGoogle/loginHandler.jsp" ; 
+	String callbackUrl = "https://apigeeadmin.moj.gov.sa:8553/ResourceManagerWeb/loginWithGoogle/loginHandler.jsp" ; 
 	%>
 	
 
