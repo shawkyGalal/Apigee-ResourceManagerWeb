@@ -1,5 +1,6 @@
 <%@page import="com.smartvalue.web.AppContext"%>
 <%@page import="com.smartvalue.apigee.configuration.AppConfig"%>
+<%@page import ="com.smartvalue.apigee.configuration.infra.ManagementServer"%>
 <%@page import="java.io.IOException"%>
 <%@page import="java.io.BufferedReader"%>
 <%@page import="java.io.InputStreamReader"%>
@@ -22,9 +23,16 @@
 	    String xx = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+contextPath ;
 		String callbackUrl = xx+"/loginWithGoogle/authCodeHandler.jsp" ;
 		String errorCallback = xx + "/loginWithGoogle/errorCallBack.jsp" ; 
+		
+		boolean googleCloud = request.getParameter("googleCloud")!= null ; 
+		if ( AppContext.getApigeeManagementServer(session) == null && googleCloud  )
+		{
+			ManagementServer ms = new ManagementServer(ac); 
+			AppContext.setApigeeManagementServer(session, ms) ;
+		}
 	%>
 	
-	Apigee Organization You Have Selected is configured as an Apigee X Google Cloud Project, You Need To Authorize Access to this Project
+	You Need To Authorize Access to Your Google Cloud Account from this Web Application
 	<br>   
 	
 	<script>

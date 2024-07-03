@@ -130,6 +130,8 @@
 	    <input type="hidden" id="targetPage" name="targetPage" value="<%=request.getParameter("targetPage")%>">
 	    
 	    <button type="submit" name= "submit" id = "submit">Submit</button>
+	    <br> OR 
+	    <br> <a href= "../loginWithGoogle/authorize.jsp?googleCloud=true" >Access Your Apigee Orgs in Google Cloud</a>
 	</form>
     
     
