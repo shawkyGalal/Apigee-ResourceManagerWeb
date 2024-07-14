@@ -82,11 +82,17 @@
 					+"&redirect_uri="+redirect_uri
 					+"&code_verifier="+code_verifier
 					+"&client_id="+client_id;
-			
-		var xhr = new XMLHttpRequest();
+		sendPostRequest( tokenUrl+"?client_id="+client_id , data , elementId ) 
+	}		
+
+
+
+function sendPostRequest( url , data , elementId )
+{
+	var xhr = new XMLHttpRequest();
 		//xhr.withCredentials = true;
 				
-		xhr.open("POST", tokenUrl+"?client_id="+client_id );
+		xhr.open("POST", url);
 		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		xhr.send(data);
 		xhr.onload = function() {
@@ -96,7 +102,8 @@
 		    console.log(JSON.parse(retAccessToken)); 
 		    document.getElementById(elementId).innerHTML = retAccessToken ; 
 		  } else {
-			document.getElementById(elementId).innerHTML = xhr.responseText 
+			document.getElementById(elementId).innerHTML = "" ; 
+			document.getElementById("error-container").innerHTML = xhr.responseText 
 		    console.error(xhr.statusText);
 		  }
 		};
@@ -104,8 +111,36 @@
 		xhr.onerror = function(error) {
 		  console.error(error);
 		};
+}
 
-	}		
+function sendGetRequest( url , elementId  )
+{
+	var xhr = new XMLHttpRequest();
+		//xhr.withCredentials = true;
+				
+		xhr.open("GET", url);
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		var at = localStorage.getItem('accessToken')
+		accessToken = JSON.parse(at) ; 
+		xhr.setRequestHeader("Authorization" , "Bearer " + accessToken.access_token  ) ; 
+		xhr.send();
+		xhr.onload = function() {
+		  if (xhr.status === 200) {
+		    localStorage.setItem('response' , xhr.responseText) ;
+		    document.getElementById(elementId).innerHTML = xhr.responseText ; 
+		  } else {
+			document.getElementById(elementId).innerHTML = "" ; 
+			document.getElementById("error-container").innerHTML = xhr.responseText 
+		  }
+		};
+		
+		xhr.onerror = function(error) {
+		document.getElementById("error-container").innerHTML = error ; 
+		console.error(error);
+		};
+}
+
+
 
 //--- Building logout Request
 	function buildLogoutReq(infraIndex ,   m_anchorObjectId , userId , sessionIndex )
