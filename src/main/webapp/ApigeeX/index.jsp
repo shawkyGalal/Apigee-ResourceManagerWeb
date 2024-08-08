@@ -35,14 +35,15 @@
 	</div>
 
 	<h1> Build Apigee X Environments  </h1>
-		<h2><a href = "Environments/create.jsp" target = "Najiz"> 01- Create Environments  </a></h2>
-		<h2><a href = "Environments/create.jsp" target = "Najiz"> 02- Delete Environments  </a></h2>
+		<h2><a href = "Environments/Create.jsp" target = "Najiz"> 01- Create Environments  </a></h2>
+		<h2><a href = "Environments/Delete.jsp" target = "Najiz"> 02- Delete Environments  </a></h2>
 	We Will Use ETL ( Extract , Transform and Load ) Model 
 	<h1><a href = "ETL/extract/targetServers.jsp" target = "TargetServer"> Extract Apigee TargetServers from Staging  </a></h1>
 	<h1><a href = "ETL/extract/proxies.jsp" target = "Proxies"> Extract Apigee Proxies from Staging  </a></h1>
 	
 	<h1><a href = "ETL/transform/transform.jsp" target = "Najiz"> Transform Objects to Match ApigeeX requirments </a></h1>
-	<h1><a href = "ETL/load/load.jsp" target = "load" >Load Apigee Objects to Apigee X Cloud </a></h1>
+	<h1><a href = "ETL/load/load.jsp" target = "load" >Load Apigee Proxies to Apigee X Cloud </a></h1>
+	<h1><a href = "ETL/load/delete.jsp" target = "delete" >Delete Apigee Proxies from Apigee X Cloud </a></h1>
 	
 	
 </body>

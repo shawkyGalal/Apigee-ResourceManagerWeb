@@ -13,19 +13,17 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Delete Apigee Objects </title>
 </head>
 <body>
 <%
 AppConfig ac = AppContext.getAppConfig(application);
 
 //----- ETL Starting Loading ----
-Infra destInfra = ac.getInfra("MasterWorks" , "MOJ" , "Gcloud(shawky.foda@gmail.com)") ;
+ManagementServer ms = AppContext.getApigeeManagementServer(session); 
 String destOrgName = "moj-prod-apigee" ; 
-String transformedFolder = "C:\\temp\\transformed\\proxies" ; 
 
-ManagementServer destMs = destInfra.getManagementServer(destInfra.getRegions().get(0).getName()) ;
-ProxyServices proxiesServices =(ProxyServices) destMs.getProxyServices(destOrgName); 
+ProxyServices proxiesServices =(ProxyServices) ms.getProxyServices(destOrgName); 
 GoogleProxiesList proxiesList= proxiesServices.getAllProxiesList(GoogleProxiesList.class); 
 proxiesServices.deleteAll(proxiesList) ;
 %>
