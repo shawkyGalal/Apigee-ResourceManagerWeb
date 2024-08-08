@@ -3,7 +3,7 @@
 <%@page import = "com.google.api.client.googleapis.auth.oauth2.GoogleIdToken" %>
 <%@page import = "com.smartvalue.google.iam.IdTokenVerifier" %>
 <%@page import ="com.smartvalue.apigee.configuration.AppConfig"%>
-<%@page import ="com.smartvalue.apigee.configuration.infra.googleWebAppCredential.GoogleWebAppCredential"%>
+<%@page import ="com.smartvalue.google.iam.GoogleWebAppCredential"%>
 
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"  pageEncoding="ISO-8859-1"%>

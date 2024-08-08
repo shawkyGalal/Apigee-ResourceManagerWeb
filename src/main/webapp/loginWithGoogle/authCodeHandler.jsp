@@ -1,5 +1,5 @@
 <%@page import="com.google.api.client.googleapis.auth.oauth2.GoogleIdToken"%>
-<%@page import="com.smartvalue.apigee.configuration.infra.googleAccessToken.auto.GoogleAccessToken"%>
+<%@page import="com.smartvalue.google.iam.auto.GoogleAccessToken"%>
 <%@page import ="com.smartvalue.apigee.configuration.infra.ManagementServer"%>
 
 <%@page import="org.springframework.security.crypto.codec.Base64"%>
